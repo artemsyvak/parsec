@@ -1,0 +1,41 @@
+@import '../../../../styles/variables.scss';
+
+.navigationLinks{
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    li{
+        list-style: none;
+        margin-right: 45px;
+        cursor: pointer;
+
+        &:last-child{            
+            margin-right: 0;
+
+            a{
+                padding: 12px 40px;
+                border-radius: 36px;
+                border: 1px solid $white;
+
+                &:hover{
+                    border-color: $purple-dark;
+                }
+            }
+        }
+
+        & > a{
+            font-family: $gilroy-regular;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            color: $white;
+    
+            &:hover{
+                color: $purple-dark;
+            }
+        }
+    }
+}

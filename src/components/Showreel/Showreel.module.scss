@@ -1,0 +1,141 @@
+@import '../../../styles/variables.scss';
+
+.showreel{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: url('/showreel-baner.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+
+
+    .shadow{
+        position: absolute;
+        top: 0;
+        left: 0;        
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.55);
+    }    
+
+    h1{      
+        text-transform: uppercase;  
+        z-index: 1;
+        color: $white;        
+    }
+
+    .footer{
+        z-index: 4;
+        position: absolute;
+        bottom: 80px;
+        padding: 0 80px;
+        width: 100vw;
+        height: 115px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        p{
+            max-width: 413px;
+            color: $white;
+            font-family: $gilroy-regular;
+            font-size: 18px;
+        }
+
+        .tags {
+            display: flex;
+            list-style: none;
+
+            li{
+                margin-right: 10px;
+
+                &:last-child{
+                    margin-right: 0;
+                }
+            }
+
+            li>a{
+                height: 40px;
+                padding: 11px 38px;
+                color: $white;
+                font-family: $gilroy-regular;
+                font-size: 16px;
+                border-radius: 36px;
+                backdrop-filter: blur(30px);
+                background: rgba(255, 255, 255, 0.1);
+            }
+        }
+
+    }
+
+}
+
+.skipButton{
+    padding: 0 30px;
+    position: relative;
+    width: 2px;
+    height: 60px;
+    cursor: pointer;
+    overflow: hidden;
+
+    &::before{
+        content: '';
+        position: absolute;
+        width: 2px;
+        top: 0;
+        opacity: 0;
+        height: 100%;        
+        background-color: $white;
+        animation: skipDown 3s cubic-bezier(.25,0,.25,1) infinite forwards;
+    }
+
+    &::after{
+        content: '';
+        position: absolute;
+        width: 2px;
+        top: 0;
+        opacity: 0;
+        height: 100%;        
+        background-color: $white;
+        animation: skipUp 3s cubic-bezier(.25,0,.25,1) 1.5s infinite forwards ;
+    }
+
+}
+
+@keyframes skipDown {
+    0%{      
+        opacity: 1; 
+        transform: translateY(-60px);        
+    }
+    50%{
+        opacity: 1;
+        transform: translateY(0px); 
+    }
+    51%{
+        opacity: 0;
+    }
+}
+
+@keyframes skipUp {
+    0%{      
+        opacity: 0; 
+        transform: translateY(0px);        
+    }
+    49%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    51%{
+        transform: translateY(0px);
+    }    
+    100%{
+        opacity: 1;
+        transform: translateY(60px); 
+    }
+}
+
