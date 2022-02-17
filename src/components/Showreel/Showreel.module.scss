@@ -11,6 +11,10 @@
     background-size: cover;
     background-repeat: no-repeat;
 
+    &Logo{
+        z-index: 1;
+        width: 400px;
+    }
 
     .shadow{
         position: absolute;
@@ -30,8 +34,7 @@
     .footer{
         z-index: 4;
         position: absolute;
-        bottom: 80px;
-        padding: 0 80px;
+        bottom: $showreel-y-space;       
         width: 100vw;
         height: 115px;
         display: flex;
@@ -39,13 +42,16 @@
         justify-content: space-between;
 
         p{
-            max-width: 413px;
-            color: $white;
-            font-family: $gilroy-regular;
+            max-width: 500px;
+            color: $white;           
+            font-family: $font-Kharkiv;
             font-size: 18px;
+            letter-spacing: 1px;
         }
 
         .tags {
+            padding: 0;
+            max-width: 500px;
             display: flex;
             list-style: none;
 
@@ -59,9 +65,10 @@
 
             li>a{
                 height: 40px;
-                padding: 11px 38px;
+                padding: 10px 30px;               
+                letter-spacing: 1px;
                 color: $white;
-                font-family: $gilroy-regular;
+                font-family: $font-Kharkiv;
                 font-size: 16px;
                 border-radius: 36px;
                 backdrop-filter: blur(30px);
@@ -77,7 +84,7 @@
     padding: 0 30px;
     position: relative;
     width: 2px;
-    height: 60px;
+    height: 40px;
     cursor: pointer;
     overflow: hidden;
 
