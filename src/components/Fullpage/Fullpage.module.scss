@@ -1,0 +1,8 @@
+.fullpageContainer{
+    overflow-y: scroll;
+    max-height: 100vh;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+
