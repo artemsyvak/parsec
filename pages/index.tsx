@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Showreel from '../src/components/Showreel'
 import Fullpage from '../src/components/Fullpage';
+import ReactFullpage from '@fullpage/react-fullpage';
 
 const Page = (props: any) => (
-  <div className="fp-section" id={props.id} style={props.style}>
+  <div className="section" id={props.id} style={props.style}>
     {props.children}
   </div>
 )
@@ -23,14 +24,14 @@ const Home: NextPage = () => {
           <Page id="first">
             <Showreel />
           </Page>
-          <Page id="second" style={{backgroundColor: 'red'}}>
+          <Page id="second" style={{ backgroundColor: 'red' }}>
             <div>PRIVET RAZ</div>
           </Page>
-          <Page id="third" style={{backgroundColor: 'yellow'}}>
+          <Page id="third" style={{ backgroundColor: 'yellow' }}>
             <div>PRIVET DVA</div>
           </Page>
-          <Page id="sasat" style={{backgroundColor: 'green'}}>
-            <div>SASAT` NAHUY!!!!!!!</div>
+          <Page id="sasat" style={{ backgroundColor: 'green' }}>
+            <div>AZAZAZAZAZ!!!!!!!</div>
           </Page>
         </Fullpage>
       </main>

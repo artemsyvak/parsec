@@ -6,9 +6,12 @@ body {
   padding: 0;
   margin: 0;
   font-family: $font-Regular;
-  overflow-y: hidden;
-}
+  overflow-x: hidden;
 
+  &::-webkit-scrollbar{
+    display: none;
+  }
+}
 main{
   display: flex;
   justify-content: center;
@@ -45,13 +48,12 @@ p, ul{
   margin-bottom: 0;
 }
 
-
-.fp-section{
+.section{
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-	scroll-snap-align: start;
+	// scroll-snap-align: start;
   // scroll-behavior: smooth;
 }
