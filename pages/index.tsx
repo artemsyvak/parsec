@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Showreel from '../src/components/Showreel'
 import Fullpage from '../src/components/Fullpage';
-import ReactFullpage from '@fullpage/react-fullpage';
 
 const Page = (props: any) => (
   <div className="section" id={props.id} style={props.style}>
