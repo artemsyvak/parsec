@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
+import Context from "../services/Context";
 
 export const useEventListener = (
     target: EventTarget | undefined, 
@@ -37,3 +38,8 @@ export const useDebounce = (value: any, delay: number) => {
 
   return debouncedValue;
 };
+
+export const useCustomContext = (contextKey: string) => {
+  const [value, setValue] = useContext(Context)[contextKey]
+  return [value, setValue]
+}

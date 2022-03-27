@@ -1,41 +1,66 @@
-import React, { useEffect } from "react";
+import React, { useEffect, createContext } from "react";
 import { useState, useRef } from "react";
 import ReactScrollWheelHandler from "react-scroll-wheel-handler";
-
+import Context from "../../services/Context";
+import { CONTEXT_KEYS } from "../../enum";
+import { SHOWREEL_SLIDES } from "../../constants";
 
 import styles from './Fullpage.module.scss'
+
+
 
 const Fullpage = (props: any) => {
 
     const container = useRef(null)
-    const [currentIndex, setCurrentIndex] = useState(0)
+    const [currentPage, setCurrentPage] = useState(0)
+    const [currentSlide, setCurrentSlide] = useState(-1)
+
+
+    // TODO: handle reload page => return to first page
 
     useEffect(() => {
-        container.current.style.transform = `translateY(-${100 * currentIndex}vh)` 
-    }, [currentIndex])
+        container.current.style.transform = `translateY(-${100 * currentPage}vh)`
+    }, [currentPage])
 
+    useEffect(() => {
+        if (currentPage === 1) {
+            setCurrentSlide(0)
+            setCurrentSlide(-1)
+        }
+    }, [currentPage])
 
     const moveUp = () => {
-        if(currentIndex !== 0){
-            setCurrentIndex(currentIndex - 1)
+        if (currentPage !== 0) {
+            setCurrentPage(currentPage - 1)
+        }
+        if (currentPage === 0 && currentSlide <= SHOWREEL_SLIDES && currentSlide !== -1) {
+            setCurrentSlide(currentSlide - 1)
         }
     }
 
     const moveDown = () => {
-        if(currentIndex < props.children.length - 1){
-            setCurrentIndex(currentIndex + 1)
+        if (currentPage === 0 && currentSlide < SHOWREEL_SLIDES) {
+            setCurrentSlide(currentSlide + 1)
+        } else if (currentPage < props.children.length - 1) {
+            setCurrentPage(currentPage + 1)
         }
     }
 
     return (
         <div className={styles.fullpageContainer} ref={container}>
-            <ReactScrollWheelHandler
-                upHandler={moveUp}
-                downHandler={moveDown}
-                timeout={700}
+            <Context.Provider value={{
+                [CONTEXT_KEYS.PAGE]: [currentPage, setCurrentPage],
+                [CONTEXT_KEYS.SLIDE]: [currentSlide, setCurrentSlide]
+            }}
             >
-                {props.children}
-            </ReactScrollWheelHandler>
+                <ReactScrollWheelHandler
+                    upHandler={moveUp}
+                    downHandler={moveDown}
+                    timeout={700}
+                >
+                    {props.children}
+                </ReactScrollWheelHandler>
+            </Context.Provider>
         </div>
     )
 }
