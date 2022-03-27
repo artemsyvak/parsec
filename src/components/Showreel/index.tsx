@@ -20,7 +20,7 @@ const sliderSettings = {
     adaptiveHeight: true,
     centerPadding: "25%",
     autoplay: false,
-    speed: 800,
+    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
 }
