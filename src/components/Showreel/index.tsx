@@ -80,7 +80,7 @@ const Showreel = () => {
 
     useEffect(() => {
 
-        const sliderRef = sliderContainer.current.props.children().props.children.ref.current;
+        const sliderRef = sliderContainer.current.props.children().props.children[1].ref.current;
 
         if (!sliderRef) {
             return
@@ -131,6 +131,7 @@ const Showreel = () => {
                                     // @ts-ignore
                                     ...transitionSliderContainerStyles[state],
                                 }}>
+                                    <span className={styles.DNAtitle}>наш днк</span>
                                     <Slider ref={slider} {...sliderSettings} >
                                         {DNA_LIST.map((dna, index) => (
                                             <ShowreelDNA key={`${dna.title}`} {...dna} index={index + 1} />

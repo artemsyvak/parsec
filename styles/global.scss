@@ -79,6 +79,15 @@ p, ul{
   transition: .25s ease-in;
 }
 
+.slick-slide[data-index="0"]{
+  margin-left: 120px;
+}
+
+.slick-slide[data-index="1"],
+.slick-slide[data-index="2"]{
+  margin-left: 110px;
+}
+
 // hide last cloned
 .slick-slide[data-index="3"]{
   opacity: 0!important;
