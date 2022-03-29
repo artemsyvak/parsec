@@ -37,8 +37,13 @@ const Fullpage = (props: any) => {
 
     useEffect(() => {
         if (currentPage === 1) {
-            setCurrentSlide(0)
-            setCurrentSlide(-1)
+            let timemout
+            
+            clearTimeout(timemout)
+            timemout = setTimeout(() => {
+                setCurrentSlide(0)
+                setCurrentSlide(-1)
+            }, 500)
         }
     }, [currentPage])
 
@@ -69,7 +74,7 @@ const Fullpage = (props: any) => {
                 <ReactScrollWheelHandler
                     upHandler={moveUp}
                     downHandler={moveDown}
-                    timeout={1000}
+                    timeout={800}
                 >
                     {props.children}
                 </ReactScrollWheelHandler>
