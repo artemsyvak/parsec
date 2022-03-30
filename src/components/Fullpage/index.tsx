@@ -1,4 +1,4 @@
-import React, { useEffect, createContext } from "react";
+import React, { useEffect } from "react";
 import { useState, useRef } from "react";
 import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 import Context from "../../services/Context";

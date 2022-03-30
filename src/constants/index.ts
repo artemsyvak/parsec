@@ -2,7 +2,6 @@ import { DNA_ITEM } from "../types"
 
 const SHOWREEL_SLIDES = 3
 
-
 const DNA_LIST :DNA_ITEM[] = [
     {
         title: 'КРЕАТИВНІСТЬ',

@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Showreel from '../src/components/Showreel'
+import Showreel from '../src/sections/Showreel'
+import Services from '../src/sections/Services'
 import Fullpage from '../src/components/Fullpage';
 import { Container } from 'react-bootstrap';
 
@@ -21,11 +22,11 @@ const Home: NextPage = () => {
       <main>
         <Container className="px-0">
           <Fullpage>
-            <Page id="first">
+            <Page id="showreel">
               <Showreel />
             </Page>
-            <Page id="second" style={{ backgroundColor: '#bbded6' }}>
-              <div>PRIVET RAZ</div>
+            <Page id="services" style={{ backgroundColor: '#bbded6' }}>
+              <Services />
             </Page>
             <Page id="third" style={{ backgroundColor: 'yellow' }}>
               <div>PRIVET DVA</div>

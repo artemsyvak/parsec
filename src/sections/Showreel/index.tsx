@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Header from '../Header';
-import Button from '../Button';
+import React, { useEffect, useRef } from 'react';
+import Header from '../../components/Header';
+import Button from '../../components/Button';
 import Slider from "react-slick";
 import Context from '../../services/Context';
 import { useCustomContext } from '../../hooks';
