@@ -1,0 +1,81 @@
+@import '../../../styles/variables.scss';
+
+.sectionTitleContainer{
+    position: relative;
+    padding: 70px 0;    
+
+    h2{
+        height: 90px;
+        position: relative;
+        font-size: 96px;
+        width: fit-content;
+        z-index: 1;
+
+        .topLine{
+            position: absolute;
+            height: 1px;
+            width: 200px;
+            left: 0;
+            top: -24px;
+        }   
+
+        .bottomLine{
+            position: absolute;
+            height: 1px;
+            width: 20px;
+            right: -30px;
+            bottom: -24px;
+        }
+
+        .index{
+            font-size: 14px;
+            position: absolute;
+            font-family: $font-Kharkiv;
+            width: 20px;
+            right: -30px;
+            top: -24px;
+        }
+
+        .topCircle{
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            left: 0;
+            bottom: -24px;
+        }
+
+        .bottomCircle{
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            left: 15px;
+            bottom: -24px;
+        }
+
+        .topCircle,
+        .bottomCircle{
+            &:before{
+                position: absolute;
+                content: '';
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                left: 0px;
+                bottom: -15px;
+            }
+        }
+
+    }
+
+    .subtitle{
+        font-family: $font-Kharkiv;
+        font-weight: 400;
+        font-size: 250px;
+        line-height: 93.5%;               
+        position: absolute;
+        right: -50%;
+        transform: translateY(-55%);       
+    }
+}
