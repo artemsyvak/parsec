@@ -3,9 +3,8 @@
 
 .service{
     position: relative;
-    width: 100%;
-    // 238 - heigh of section title element
-    height: calc((100vh - 238px) / 3);    
+    width: 100%;    
+    height: calc((100vh - $section-title-height) / 3);    
     display: flex;
     flex-direction: column;
     justify-content: space-between;

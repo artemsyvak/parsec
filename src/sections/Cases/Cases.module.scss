@@ -1,0 +1,59 @@
+@import '../../../styles/variables.scss';
+
+.casesContainer{
+    height: calc(100vh - $section-title-height);
+
+
+    .video{
+        position: absolute;
+        width: 100vw;
+        height: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 0;
+
+
+        &:before{   
+            content: '';     
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);        
+            width: 100vw;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.55); 
+            z-index: 1;  
+        }
+    }
+
+    .casesList{
+        height: 100%;
+        position: relative;
+        
+        .caseItem{
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            border-left: 1px solid rgba(255, 255, 255, 0.5);            
+            height: 100%;
+
+            &:last-child{
+                border-right: 1px solid rgba(255, 255, 255, 0.5);
+            }
+
+            h4,p{
+                opacity: .5;
+                color: $white;
+                transition: .25s linear;
+            }
+
+            &:hover{
+                h4,p{
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

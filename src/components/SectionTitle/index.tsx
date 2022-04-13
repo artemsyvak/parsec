@@ -20,10 +20,9 @@ const SectionTitle = ({
                 <span className={styles.index}>{index}</span>
                 <span className={styles.bottomLine}></span>
                 <span className={styles.topCircle}></span>
-                <span className={styles.bottomCircle}></span>                
+                <span className={styles.bottomCircle}></span> 
+                <span className={styles.subtitle}>{subtitle}</span>               
             </h2>
-            <span className={styles.subtitle}>{subtitle}</span>
-           
         </div>
     )
 }
