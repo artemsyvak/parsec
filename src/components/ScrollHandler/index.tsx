@@ -4,6 +4,8 @@ import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 import Context from "../../services/Context";
 import { CONTEXT_KEYS } from "../../enum";
 import { SHOWREEL_SLIDES } from "../../constants";
+import Sanity from "../../sanity";
+import SANITY_QUERY from "../../constants/queries";
 
 import styles from './ScrollHandler.module.scss'
 
@@ -47,7 +49,6 @@ const ScrollHandler = (props: any) => {
     const resetInitialPositionOfShowreelSlider = () => {
         if (currentPage === 1) {
             let timemout
-            
             clearTimeout(timemout)
             timemout = setTimeout(() => {
                 setCurrentSlide(0)
@@ -60,43 +61,62 @@ const ScrollHandler = (props: any) => {
         let timeout;
         clearTimeout(timeout)
 
-        timeout = setTimeout(() => { 
+        timeout = setTimeout(() => {
             // calculate current section depending on window height and scroll after page reload.    
             const windowHeight = window.innerHeight;
             const scrollY = window.scrollY
-            const sectionNumber = scrollY / windowHeight                        
-    
-            if(scrollY >= windowHeight && sectionNumber !== 0){ 
+            const sectionNumber = scrollY / windowHeight
+
+            if (scrollY >= windowHeight && sectionNumber !== 0) {
                 // enable body scrolling
                 document.body.style.overflow = 'scroll'
-                
+
                 // scroll page to first page
-                window.scroll(0, -windowHeight * sectionNumber)  
-                document.body.style.overflow = 'hidden'               
-                
+                window.scroll(0, -windowHeight * sectionNumber)
+                document.body.style.overflow = 'hidden'
+
                 let setCurrentPageTimeout
                 clearTimeout(setCurrentPageTimeout)
-                
+
                 // scroll page to section that was before reload
                 setCurrentPageTimeout = setTimeout(() => {
                     document.body.style.overflow = 'hidden'
-                    setCurrentPage(sectionNumber)  
+                    setCurrentPage(sectionNumber)
                 }, 0)
             }
-                
-        }, 150)
+
+        }, 100)
     }
+
+    const [awsMedia, setAwsMedia] = useState<any>([])
+    useEffect(() => {
+
+        async function fetchAwsMedia() {
+            try {
+                const data = await Sanity.fetch(SANITY_QUERY.GET_AWS_MEDIA)
+                setAwsMedia(data)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        fetchAwsMedia()
+
+    }, [])
 
     return (
         <div className={styles.fullpageContainer} ref={container}>
             <Context.Provider value={{
                 [CONTEXT_KEYS.PAGE]: [currentPage, setCurrentPage],
-                [CONTEXT_KEYS.SLIDE]: [currentSlide, setCurrentSlide]
+                [CONTEXT_KEYS.SLIDE]: [currentSlide, setCurrentSlide],
+                [CONTEXT_KEYS.AWS_MEDIA]: [awsMedia, setAwsMedia]
             }}
             >
                 <ReactScrollWheelHandler
+                    disableSwipe
                     upHandler={moveUp}
                     downHandler={moveDown}
+                    preventScroll
                     timeout={800}
                 >
                     {props.children}

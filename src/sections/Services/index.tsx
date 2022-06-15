@@ -28,8 +28,7 @@ const Services = () => {
             }
         }
 
-        fetchServices()
-
+        // fetchServices()
     }, [])
 
     return (
