@@ -4,6 +4,8 @@ import Sanity from '../../sanity'
 import Service from '../../components/Service'
 import { Container } from 'react-bootstrap'
 import Context from '../../services/Context'
+import { useCustomContext } from '../../hooks'
+import { CONTEXT_KEYS, SECTION_NUMBER } from '../../enum'
 
 import styles from './Services.module.scss'
 
@@ -14,7 +16,7 @@ type ServiceItem = {
 }
 
 const Services = () => {
-
+    const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
     const [services, setServices] = useState<ServiceItem[]>([])
 
     useEffect(() => {
@@ -28,8 +30,10 @@ const Services = () => {
             }
         }
 
-        // fetchServices()
-    }, [])
+        if(currentPage === SECTION_NUMBER.SERVICES){
+            fetchServices()
+        }
+    }, [currentPage])
 
     return (
         <Context.Consumer>
