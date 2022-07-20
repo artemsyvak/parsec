@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 import Slider from "react-slick";
@@ -10,10 +10,9 @@ import ShowreelDNA from './ShowreelDNA';
 import { DNA_LIST } from '../../constants';
 import { Transition } from 'react-transition-group';
 import VideoPlayer from '../../components/VideoPlayer';
-import Sanity from '../../sanity';
 
 import styles from './Showreel.module.scss';
-import SANITY_QUERY from '../../constants/queries';
+import { getShowreelSource } from '../../services/SanityDataProvider';
 
 const sliderSettings = {
     dots: false,
@@ -79,9 +78,9 @@ const Showreel = () => {
         return 'hello';
     }
 
-    const [showreel, setShowreel] = useState<string>('')
     const [currentPage, setCurrentPage] = useCustomContext(CONTEXT_KEYS.PAGE)
     const [currentSlide,] = useCustomContext(CONTEXT_KEYS.SLIDE)
+    const showreel = getShowreelSource(useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].awsMedia)
 
     useEffect(() => {
 
@@ -104,32 +103,15 @@ const Showreel = () => {
 
     }, [currentSlide])
 
-    // useEffect(() => {
-
-    //     async function fetchShowreel() {
-    //         try {
-    //             const data = await Sanity.fetch(SANITY_QUERY.GET_AWS_MEDIA)
-    //             // console.log(data)
-    //             // setShowreel(data[0].videoSource)                
-    //         } catch (error) {
-    //             console.error(error)
-    //         }
-    //     }
-
-    //     fetchShowreel()
-
-    // }, [])
-
     return (
         <Context.Consumer>
             {() => {
                 return (
                     <div className={`${styles.showreel} DNASlider`}>
                         <Header />
-                        <span className={styles.showreelBackground}>
-                            {/* ADD showreel property check */}
-                            {currentPage === 0 && (
-                                <VideoPlayer source={'https://s3.eu-central-1.amazonaws.com/parsec-studio/2022-05-06T16-05-23.195Z-01.mov'}/>
+                        <span className={styles.showreelBackground}>                            
+                            {currentPage === 0 && showreel && (
+                                <VideoPlayer source={showreel?.fileURL}/>
                             )}
                         </span>
                         <span className={styles.shadow}></span>

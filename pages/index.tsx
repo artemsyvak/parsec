@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useEffect, useState, useRef, useMemo } from 'react'
 import Showreel from '../src/sections/Showreel'
 import Services from '../src/sections/Services'
 import ScrollHandler from '../src/components/ScrollHandler';
@@ -9,40 +8,34 @@ import { SECTION_BACKGROUND } from '../src/enum';
 import { SECTION_TITLES } from '../src/constants/sectionTitles';
 import Page from '../src/components/Page';
 import Cases from '../src/sections/Cases';
-import { motion, motionValue, useTransform, useViewportScroll } from "framer-motion"
+import Clients from '../src/sections/Clients';
+import Sanity from '../src/sanity'
+import SANITY_QUERY from '../src/constants/queries';
+import Context from '../src/services/Context'
 
 
-// preventing context menu || devtools
-// window.oncontextmenu = function () {
-//   return false;
-// };
+export async function getServerSideProps() {
+  const fetchAwsMedia = Sanity.fetch(SANITY_QUERY.GET_AWS_MEDIA)
+  const fetchServices = Sanity.fetch(SANITY_QUERY.GET_SERVICES)
+  const fetchProjects = Sanity.fetch(SANITY_QUERY.GET_PROJECTS)
+  const fetchClients = Sanity.fetch(SANITY_QUERY.GET_CLIENTS)
 
-// document.addEventListener("keydown", function(event){
-//     var key = event.key || event.keyCode;
+  const [awsMedia, services, projects, clients] = await Promise.all([
+    fetchAwsMedia,
+    fetchServices,
+    fetchProjects,
+    fetchClients
+  ]);
+  return { props: { awsMedia, services, projects, clients } };
+}
 
-//     if (key == 123) {
-//         return false;
-//     } else if ((event.ctrlKey && event.shiftKey && key == 73) || (event.ctrlKey && event.shiftKey && key == 74)) {
-//         return false;
-//     }
-// }, false);
 
-
-// You can't copy any text.
-// <br/>
-// <textarea>You can't copy any text.</textarea>
-// <script>
-// document.body.addEventListener("copy", function(e){
-//  e.preventDefault();
-//  e.stopPropagation();
-// });
-// document.body.addEventListener("cut", function(e){
-//  e.preventDefault();
-//  e.stopPropagation();
-// });
-// </script>
-
-const Home: NextPage = () => {
+const Home: NextPage = ({
+  awsMedia,
+  services,
+  projects,
+  clients,
+}: any) => {
 
   return (
     <div>
@@ -53,19 +46,29 @@ const Home: NextPage = () => {
       </Head>
       <main>
         <Container fluid className="px-0">
-          <ScrollHandler>
-            <Page id="showreel" fluid={false}>
-              <Showreel />
-            </Page>
-            <Page id="services" sectionTitle={SECTION_TITLES.SERVICES} background={SECTION_BACKGROUND.BLACK}>
-              <Services />
-            </Page>
-            <Page id="cases" sectionTitle={SECTION_TITLES.CASES} background={SECTION_BACKGROUND.WHITE}>
-              <Cases />
-            </Page>
-            <Page id="clients" sectionTitle={SECTION_TITLES.CLIENTS} background={SECTION_BACKGROUND.BLACK}>             
-            </Page>
-          </ScrollHandler>
+          <Context.Provider value={{
+            awsMedia,
+            services,
+            projects,
+            clients,
+          }}>
+            <ScrollHandler>
+              <Page id="showreel" fluid={false}>
+                <Showreel />
+              </Page>
+              <Page id="services" sectionTitle={SECTION_TITLES.SERVICES} background={SECTION_BACKGROUND.BLACK}>
+                <Services />
+              </Page>
+              <Page id="cases" sectionTitle={SECTION_TITLES.CASES} background={SECTION_BACKGROUND.WHITE}>
+                <Cases />
+              </Page>
+              <Page id="clients" withGridBackground sectionTitle={SECTION_TITLES.CLIENTS} background={SECTION_BACKGROUND.BLACK}>
+                <Clients />
+              </Page>
+              <Page id="feedbacks" sectionTitle={SECTION_TITLES.FEEDBACKS} background={SECTION_BACKGROUND.WHITE}>
+              </Page>
+            </ScrollHandler>
+          </Context.Provider>
         </Container>
       </main>
     </div>

@@ -38,23 +38,14 @@
         }
     }
 
-    .screenSlider{
-        margin-top: 30px;
+    .sliderImageContainer{
+        width: 630px!important;
+        height: 315px;
+        background-color:black;
+        color: $white;
 
-
-        .slick-slide{
-            width: max-content!important;
-        }
-
-        .sliderImageContainer{
-            width: 630px!important;
-            height: 315px;
-            background-color:black;
-            color: $white;
-
-            img{
-                max-width: 100%;
-            }
+        img{
+            max-width: 100%;
         }
     }
 

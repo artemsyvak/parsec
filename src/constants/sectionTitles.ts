@@ -1,10 +1,4 @@
-enum SECTION_NAMES {
-    SERVICES = 'SERVICES',
-    CASES = 'CASES',
-    CLIENTS = 'CLIENTS',
-}
-
-// type SECTION_NAMES = 'SERVICES' | 'CASES'
+import { SECTION_NAMES } from '../enum'
 
 type SectionTitle = {
     id: string,
@@ -26,6 +20,9 @@ const SECTION_TITLES: SectionTitles = {
     },
     [SECTION_NAMES.CLIENTS]: {
         id: 'clients-title', title: 'Клієнти', index: '03', subtitle: 'Clients'
+    },
+    [SECTION_NAMES.FEEDBACKS]: {
+        id: 'feedbacks-title', title: 'Відгуки', index: '04', subtitle: 'Reviews'
     },
 }
 

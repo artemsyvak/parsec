@@ -28,7 +28,7 @@ const Service = ({
             <div className={styles.video}>
                 {
                     currentPage === 1 && (
-                        <VideoPlayer source={'./animation_reel.mov'}/>                
+                        <VideoPlayer source={videoSource}/>                
                     )
                 }
             </div> 

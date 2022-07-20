@@ -1,7 +1,14 @@
 enum CONTEXT_KEYS {
     PAGE = 'page',
     SLIDE = 'slide',
-    AWS_MEDIA= 'aws_media'
+    SANITY_DATA = 'sanity_data',
+}
+
+enum SECTION_NAMES {
+    SERVICES = 'SERVICES',
+    CASES = 'CASES',
+    CLIENTS = 'CLIENTS',
+    FEEDBACKS = 'FEEDBACKS'
 }
 
 enum SECTION_BACKGROUND {
@@ -16,6 +23,7 @@ enum SECTION_NUMBER {
 }
 
 export {
+    SECTION_NAMES,
     SECTION_NUMBER,
     CONTEXT_KEYS,
     SECTION_BACKGROUND

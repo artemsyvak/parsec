@@ -1,11 +1,10 @@
-import { useEffect, useState, memo } from 'react'
-import SANITY_QUERY from '../../constants/queries'
-import Sanity from '../../sanity'
+import { memo } from 'react'
 import Service from '../../components/Service'
 import { Container } from 'react-bootstrap'
 import Context from '../../services/Context'
 import { useCustomContext } from '../../hooks'
-import { CONTEXT_KEYS, SECTION_NUMBER } from '../../enum'
+import { CONTEXT_KEYS } from '../../enum'
+import { getServiceSources } from '../../services/SanityDataProvider'
 
 import styles from './Services.module.scss'
 
@@ -16,24 +15,14 @@ type ServiceItem = {
 }
 
 const Services = () => {
-    const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
-    const [services, setServices] = useState<ServiceItem[]>([])
-
-    useEffect(() => {
-
-        async function fetchServices() {
-            try {
-                const data = await Sanity.fetch(SANITY_QUERY.GET_SERVICES)
-                setServices(data)
-            } catch (error) {
-                console.error(error)
-            }
+    const serviceSources = getServiceSources(useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].awsMedia)
+    let services = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].services
+    services = services.map((service: ServiceItem) => {
+        return {
+            ...service,
+            videoSource: serviceSources.find(source => source.title === service.title).fileURL
         }
-
-        if(currentPage === SECTION_NUMBER.SERVICES){
-            fetchServices()
-        }
-    }, [currentPage])
+    })
 
     return (
         <Context.Consumer>

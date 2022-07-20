@@ -1,0 +1,15 @@
+@import "../../../styles/variables.scss";
+
+.clientsContainer{    
+    height: calc(100vh - $section-title-height);
+
+    .client{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+        // border: 1px solid $grey-dark;
+    }
+}

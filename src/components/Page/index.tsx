@@ -1,8 +1,8 @@
-import { FunctionComponent, useRef } from "react"
 import { SECTION_BACKGROUND } from "../../enum"
-import { Container } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import SectionTitle from '../SectionTitle'
 import { InView } from "react-intersection-observer";
+import styles from './Page.module.scss';
 
 type SectionTitleProps = {
     id: string
@@ -16,7 +16,8 @@ type Props = React.FC<{
     style?: any;
     fluid?: boolean
     sectionTitle?: SectionTitleProps | undefined,
-    background?: SECTION_BACKGROUND
+    background?: SECTION_BACKGROUND,
+    withGridBackground?: boolean
 }>
 
 const Page: Props = ({
@@ -25,16 +26,24 @@ const Page: Props = ({
     style,
     background = SECTION_BACKGROUND.WHITE,
     fluid = true,
-    sectionTitle
+    sectionTitle,
+    withGridBackground = false
 }) => (
     <InView threshold={1}>
         {({ inView, ref, entry }) => (
             <div
-                ref={ref} 
+                ref={ref}
                 id={id}
                 className={`section ${background} ${inView ? 'active' : ''}`}
                 style={style}>
                 <Container className="px-0 h-100 position-relative" fluid={fluid}>
+                    {withGridBackground && (
+                        <Row className={`${styles.backgroundGridContainer} px-0 mx-0 container`}>
+                            {[1, 2, 3, 4].map((_, index) => (
+                                <Col xl={3} key={index} className={styles.gridItem}></Col>
+                            ))}
+                        </Row>
+                    )}
                     {sectionTitle && (
                         <Container className="px-0" id={sectionTitle.id}>
                             <SectionTitle {...sectionTitle} />
