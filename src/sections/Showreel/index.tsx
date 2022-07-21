@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 import Slider from "react-slick";
@@ -9,8 +9,11 @@ import { SHOWREEL_SLIDES } from '../../constants';
 import ShowreelDNA from './ShowreelDNA';
 import { DNA_LIST } from '../../constants';
 import { Transition } from 'react-transition-group';
+import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
+import Sanity from '../../sanity';
 
 import styles from './Showreel.module.scss';
+import SANITY_QUERY from '../../constants/queries';
 
 const sliderSettings = {
     className: 'DNASlider',
@@ -77,6 +80,7 @@ const Showreel = () => {
         return 'hello';
     }
 
+    const [showreel, setShowreel] = useState<string>('')
     const [currentPage, setCurrentPage] = useCustomContext(CONTEXT_KEYS.PAGE)
     const [currentSlide,] = useCustomContext(CONTEXT_KEYS.SLIDE)
 
@@ -101,13 +105,32 @@ const Showreel = () => {
 
     }, [currentSlide])
 
+    useEffect(() => {
+
+        async function fetchShowreel() {
+            try {
+                const data = await Sanity.fetch(SANITY_QUERY.GET_SHOWREEL)
+                setShowreel(data[0].videoSource)                
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+        fetchShowreel()
+
+    }, [])
+
     return (
         <Context.Consumer>
             {() => {
                 return (
                     <div className={styles.showreel}>
                         <Header />
-                        <span className={styles.showreelBackground}></span>
+                        <span className={styles.showreelBackground}>
+                            {showreel && (
+                                <VideoPlayer source={showreel}/>
+                            )}
+                        </span>
                         <span className={styles.shadow}></span>
 
                         <Transition in={currentSlide < 0} timeout={0}>

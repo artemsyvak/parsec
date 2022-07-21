@@ -4,10 +4,45 @@ import Showreel from '../src/sections/Showreel'
 import Services from '../src/sections/Services'
 import Fullpage from '../src/components/Fullpage';
 import { Container } from 'react-bootstrap';
+import SectionTitle from '../src/components/SectionTitle';
 
-const Page = (props: any) => (
-  <div className="section" id={props.id} style={props.style}>
-    {props.children}
+enum SectionBackground {
+  WHITE = 'white',
+  BLACK = 'black'
+}
+
+type SectionTitleProps = {
+  title: string
+  subtitle: string
+  index: string
+}
+
+type PageProps = {
+  children: any;
+  id: string;
+  style?: any;
+  fluid?: boolean
+  sectionTitle?: SectionTitleProps | undefined,
+  background?: SectionBackground
+}
+
+const Page = ({
+  children,
+  id,
+  style,
+  background = SectionBackground.WHITE,
+  fluid = true,
+  sectionTitle
+}: PageProps) => (
+  <div className={`section ${background}`} id={id} style={style}>
+    <Container className="px-0 h-100 position-relative" fluid={fluid}>
+      {sectionTitle && (
+        <Container className="px-0">
+          <SectionTitle {...sectionTitle} />
+        </Container>
+      )}
+      {children}
+    </Container>
   </div>
 )
 
@@ -20,16 +55,16 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Container className="px-0">
+        <Container fluid className="px-0">
           <Fullpage>
-            <Page id="showreel">
+            <Page id="showreel" fluid={false}>
               <Showreel />
             </Page>
-            <Page id="services" style={{ backgroundColor: '#bbded6' }}>
+            <Page id="services" sectionTitle={{ title: 'Наші послуги', index: '01', subtitle: 'Services' }} background={SectionBackground.BLACK}>
               <Services />
             </Page>
             <Page id="third" style={{ backgroundColor: 'yellow' }}>
-              <div>PRIVET DVA</div>
+              hello
             </Page>
             <Page id="sasat" style={{ backgroundColor: 'green' }}>
               <div>AZAZAZAZAZ!!!!!!!</div>
