@@ -14,7 +14,6 @@ export const useEventListener = (
     });
 };
 
-
 export const usePrevious = <T>(value: T): T | undefined => {
     const ref = useRef<T>();
     useEffect(() => {
@@ -38,4 +37,3 @@ export const useDebounce = (value: any, delay: number) => {
 
   return debouncedValue;
 };
-
