@@ -7,19 +7,19 @@ interface LinkType{
 
 const Links: LinkType[] = [
     {
-        url: '#',
+        url: '#first',
         label: 'Про Нас'
     },
     {
-        url: '#',
+        url: '#second',
         label: 'Роботи'
     },
     {
-        url: '#',
+        url: '#third',
         label: 'Послуги'
     },
     {
-        url: '#',
+        url: '#sasat',
         label: 'Контакти'
     },
     {
