@@ -1,52 +1,17 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
 import Showreel from '../src/sections/Showreel'
 import Services from '../src/sections/Services'
-import Fullpage from '../src/components/Fullpage';
+import ScrollHandler from '../src/components/ScrollHandler';
 import { Container } from 'react-bootstrap';
-import SectionTitle from '../src/components/SectionTitle';
-
-enum SectionBackground {
-  WHITE = 'white',
-  BLACK = 'black'
-}
-
-type SectionTitleProps = {
-  title: string
-  subtitle: string
-  index: string
-}
-
-type PageProps = {
-  children: any;
-  id: string;
-  style?: any;
-  fluid?: boolean
-  sectionTitle?: SectionTitleProps | undefined,
-  background?: SectionBackground
-}
-
-const Page = ({
-  children,
-  id,
-  style,
-  background = SectionBackground.WHITE,
-  fluid = true,
-  sectionTitle
-}: PageProps) => (
-  <div className={`section ${background}`} id={id} style={style}>
-    <Container className="px-0 h-100 position-relative" fluid={fluid}>
-      {sectionTitle && (
-        <Container className="px-0">
-          <SectionTitle {...sectionTitle} />
-        </Container>
-      )}
-      {children}
-    </Container>
-  </div>
-)
+import { SECTION_BACKGROUND } from '../src/enum';
+import { SECTION_TITLES } from '../src/constants/sectionTitles';
+import Page from '../src/components/Page';
+import Cases from '../src/sections/Cases';
 
 const Home: NextPage = () => {
+
   return (
     <div>
       <Head>
@@ -56,20 +21,17 @@ const Home: NextPage = () => {
       </Head>
       <main>
         <Container fluid className="px-0">
-          <Fullpage>
+          <ScrollHandler>
             <Page id="showreel" fluid={false}>
               <Showreel />
             </Page>
-            <Page id="services" sectionTitle={{ title: 'Наші послуги', index: '01', subtitle: 'Services' }} background={SectionBackground.BLACK}>
+            <Page id="services" sectionTitle={SECTION_TITLES.SERVICES} background={SECTION_BACKGROUND.BLACK}>
               <Services />
             </Page>
-            <Page id="third" style={{ backgroundColor: 'yellow' }}>
-              hello
+            <Page id="cases" sectionTitle={SECTION_TITLES.CASES} background={SECTION_BACKGROUND.WHITE}>
+              <Cases />
             </Page>
-            <Page id="sasat" style={{ backgroundColor: 'green' }}>
-              <div>AZAZAZAZAZ!!!!!!!</div>
-            </Page>
-          </Fullpage>
+          </ScrollHandler>
         </Container>
       </main>
     </div>

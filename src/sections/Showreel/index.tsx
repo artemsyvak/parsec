@@ -9,7 +9,7 @@ import { SHOWREEL_SLIDES } from '../../constants';
 import ShowreelDNA from './ShowreelDNA';
 import { DNA_LIST } from '../../constants';
 import { Transition } from 'react-transition-group';
-import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
+import VideoPlayer from '../../components/VideoPlayer';
 import Sanity from '../../sanity';
 
 import styles from './Showreel.module.scss';
@@ -105,20 +105,20 @@ const Showreel = () => {
 
     }, [currentSlide])
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        async function fetchShowreel() {
-            try {
-                const data = await Sanity.fetch(SANITY_QUERY.GET_SHOWREEL)
-                setShowreel(data[0].videoSource)                
-            } catch (error) {
-                console.error(error)
-            }
-        }
+    //     async function fetchShowreel() {
+    //         try {
+    //             const data = await Sanity.fetch(SANITY_QUERY.GET_SHOWREEL)
+    //             setShowreel(data[0].videoSource)                
+    //         } catch (error) {
+    //             console.error(error)
+    //         }
+    //     }
 
-        fetchShowreel()
+    //     fetchShowreel()
 
-    }, [])
+    // }, [])
 
     return (
         <Context.Consumer>
@@ -127,8 +127,8 @@ const Showreel = () => {
                     <div className={styles.showreel}>
                         <Header />
                         <span className={styles.showreelBackground}>
-                            {showreel && (
-                                <VideoPlayer source={showreel}/>
+                            {showreel &&  currentPage === 0 && (
+                                <VideoPlayer source={'./animation_reel.mov'}/>
                             )}
                         </span>
                         <span className={styles.shadow}></span>
