@@ -120,6 +120,11 @@
         width: 0;  
         opacity: 0;
     }
+
+    100%{ 
+        width: 0;  
+        opacity: 0;
+    }
 }
 
 @keyframes skipUp {
@@ -140,6 +145,7 @@
         transform: translateY(0px);
     }    
     100%{
+        width: 2px;
         opacity: 1;
         transform: translateY(60px); 
     }
