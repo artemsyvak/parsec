@@ -1,6 +1,7 @@
 import styles from './SectionTitle.module.scss'
 
 type Props = {
+    id: string
     title: string
     subtitle: string
     index: string

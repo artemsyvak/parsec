@@ -1,0 +1,25 @@
+@mixin link-hover-effect{
+    &::after{
+        content: "";
+        display: block;
+        position: relative;
+        bottom: 15px;
+        height: 5px;
+        width: 0;
+        background: $purple-dark;
+        z-index: 1;
+        opacity: .7;
+        right: -120%;               
+        transition: all .5s cubic-bezier(0,0,.2,1);
+    }
+
+    &:hover{                                    
+        &::after{
+            width: 100%;
+            left: 0;
+            right: 0;
+            -webkit-transition: all .35s cubic-bezier(1,0,0,1);
+            transition: all .35s cubic-bezier(1,0,0,1);
+        }              
+    }
+}

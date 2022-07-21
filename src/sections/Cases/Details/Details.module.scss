@@ -1,0 +1,82 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+.projectDetails{
+    padding-top: 50px;
+    position: absolute;
+    z-index: 10;
+    width: 100vw;
+    height: 100vw;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $white;
+    color: black;
+
+    .closeButton{
+        position: absolute;
+        background-color: transparent;
+        outline: none;
+        box-shadow: none;
+        border: none;
+        cursor: pointer;
+        top: 50px;
+        right: 50px;
+    }
+
+    .title{
+        font-family: $font-neue-Regular;
+        font-size: 36px;
+    }
+
+    .descriptionContainer{
+        flex-direction: column;
+
+        p{
+            padding-top: 15px;
+            font-family: $font-Regular;
+        }
+    }
+
+    .screenSlider{
+        margin-top: 30px;
+
+
+        .slick-slide{
+            width: max-content!important;
+        }
+
+        .sliderImageContainer{
+            width: 630px!important;
+            height: 315px;
+            background-color:black;
+            color: $white;
+
+            img{
+                max-width: 100%;
+            }
+        }
+    }
+
+    .bottomNavigation{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 50px;
+
+        button{
+            background: none;
+            border: none;
+            font-family: $font-Kharkiv;
+            font-size: 36px;
+            transition: $default-hover-transition;
+
+            @include link-hover-effect;
+
+            &::after{
+                bottom: 30px;
+            }
+        }
+    }
+    
+}

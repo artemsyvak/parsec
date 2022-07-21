@@ -112,15 +112,15 @@ p, ul{
   }
 }
 
-.slick-slider{
+.DNASlider .slick-slider{
   width: 100%;
 }
 
-.slick-list{
+.DNASlider .slick-list{
   width: 100%;
 }
 
-.slick-initialized .slick-slide{
+.DNASlider .slick-initialized .slick-slide{
   display: flex;
   justify-content: center;
   width: 550px!important;
@@ -129,22 +129,99 @@ p, ul{
   transition: .25s ease-out;
 }
 
-.slick-slide.slick-active,
-.slick-slide.slick-active ~ .slick-slide{
+.DNASlider .slick-slide.slick-active,
+.DNASlider .slick-slide.slick-active ~ .slick-slide{
   opacity: 1;
   transition: .25s ease-in;
 }
 
-.slick-slide[data-index="0"]{
+.DNASlider .slick-slide[data-index="0"]{
   margin-left: 120px;
 }
 
-.slick-slide[data-index="1"],
-.slick-slide[data-index="2"]{
+.DNASlider .slick-slide[data-index="1"],
+.DNASlider .slick-slide[data-index="2"]{
   margin-left: 110px;
 }
 
 // hide last cloned
-.slick-slide[data-index="3"]{
+.DNASlider .slick-slide[data-index="3"]{
   opacity: 0!important;
+}
+
+.screenSlider .slick-arrow{
+  background-color: black;
+
+  &::before{
+    color: white;
+  }
+}
+
+.slick-initialized .slick-slide{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slick-arrow{
+  display: block;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid $black;
+  transition: border-color $default-hover-transition;
+
+  &:hover{
+    transition: border-color $default-hover-transition;
+    border-color: $purple-dark;
+
+    &:before, &:after{
+      transition: background-color $default-hover-transition;
+      background-color: $purple-dark;
+    }
+  }
+
+  &.slick-prev{
+    left: -40px;
+  }
+
+  &.slick-next{
+    right: -40px;
+    transform-origin: center;
+    transform: rotate(180deg);
+  }
+
+  &:before, &:after{
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 1px;
+    background-color: $black;
+    transition: background-color $default-hover-transition;
+  }
+
+
+  &:before{
+    top: 50%;
+    left: 50%;
+    transform-origin: left;
+    transform: translate(-50%, -50%) rotate(-45deg)
+  }
+
+  &:after{
+    top: 50%;
+    left: 50%;
+    transform-origin: left;
+    transform: translate(-50%, -50%) rotate(45deg)
+  }
+
+}
+
+
+.slick-dots{
+  bottom: -50px;
+ 
+  li{
+    margin: 0;
+  }
 }
