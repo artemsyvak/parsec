@@ -128,7 +128,6 @@ const VideoPlayer = ({
             clearTimeout(playerTimeout)
             clearTimeout(durationTimeout)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [source])
 
     useEffect(() => {
