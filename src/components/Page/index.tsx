@@ -5,6 +5,7 @@ import SectionTitle from '../SectionTitle'
 import { InView } from "react-intersection-observer";
 
 type SectionTitleProps = {
+    id: string
     title: string
     subtitle: string
     index: string
@@ -35,7 +36,7 @@ const Page: Props = ({
                 style={style}>
                 <Container className="px-0 h-100 position-relative" fluid={fluid}>
                     {sectionTitle && (
-                        <Container className="px-0">
+                        <Container className="px-0" id={sectionTitle.id}>
                             <SectionTitle {...sectionTitle} />
                         </Container>
                     )}

@@ -63,6 +63,8 @@ const Home: NextPage = () => {
             <Page id="cases" sectionTitle={SECTION_TITLES.CASES} background={SECTION_BACKGROUND.WHITE}>
               <Cases />
             </Page>
+            <Page id="clients" sectionTitle={SECTION_TITLES.CLIENTS} background={SECTION_BACKGROUND.BLACK}>             
+            </Page>
           </ScrollHandler>
         </Container>
       </main>

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import styles from './VideoPlayer.module.scss'
 import { Transition } from 'react-transition-group'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import Controls from './Controls'
 
 
@@ -8,7 +10,10 @@ type Props = {
     loop?: boolean,
     controls?: boolean,
     source: string,
-    type?: string
+    type?: string,
+    onCloseFullProject?: () => void,
+    onDetailedInfoOpen?: () => void,
+    isFullProjectOpen?: boolean,
 }
 
 const transitionStylesVideo = {
@@ -49,17 +54,18 @@ const VideoPlayer = ({
     loop = true,
     controls = false,
     source,
-    type = 'video/mp4'
+    type = 'video/mp4',
+    onCloseFullProject,
+    onDetailedInfoOpen,
+    isFullProjectOpen,
 }: Props) => {
     const [isPlaying, setIsPlaying] = useState<boolean>(true)
     const [currentTime, setCurrentTime] = useState<number>(0)
     const [currentProgress, setCurrentProgress] = useState<number>(0)
-    const [isFullScreen, setIsFullScreen] = useState<boolean>(false)
-    const [isMuted, setIsMuted] = useState<boolean>(false)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [volumeBar, setVolumeBar] = useState<number>(0)
+    const [isFullScreen, setIsFullScreen] = useState<boolean>(false)    
     const [totalDuration, setTotalDuration] = useState<number>(0)
     const [volume, setVolume] = useState<number>(0)
+    const [isControlsHidden, setIsControlsHidden] = useState(false)
 
     const player = useRef<any>(null)
     const [isSourceChanged, setIsSourceChanged] = useState<boolean>(true)
@@ -68,7 +74,7 @@ const VideoPlayer = ({
         const volume = e.target.value
         setVolume(e.target.value)
         // @ts-ignore
-        // player.current.volume = volume
+        player.current.volume = volume
     }
 
     const onProgressChange = (e: any) => {
@@ -81,31 +87,39 @@ const VideoPlayer = ({
 
     const onPlayToggle = () => {
         setIsPlaying(!isPlaying)
-        if(!isPlaying){
+        if (!isPlaying) {
             player.current.play()
-        }else{
+        } else {
             player.current.pause()
+        }
+    }
+
+    const onMuteToogle = () => {
+        if (volume > 0) {
+            setVolume(0)
+        } else {
+            setVolume(.5)
         }
     }
 
     useEffect(() => {
         let playerTimeout: any = null
-        // clearTimeout(playerTimeout)
+        clearTimeout(playerTimeout)
 
         playerTimeout = setTimeout(() => {
             setIsSourceChanged(false)
             player?.current.pause()
-            player?.current.load()           
+            player?.current.load()
             player?.current.play()
             console.log(player?.current.duration)
         }, 0)
-      
+
         let durationTimeout: any = null
-        // clearTimeout(durationTimeout)
+        clearTimeout(durationTimeout)
 
         durationTimeout = setTimeout(() => {
             setTotalDuration(player?.current?.duration)
-            if(player?.current){
+            if (player?.current) {
                 player.current.volume = volume
             }
             setIsSourceChanged(true)
@@ -120,22 +134,76 @@ const VideoPlayer = ({
 
     useEffect(() => {
         let playerUpdateInterval: any = null;
+
         if (controls && isPlaying) {
             playerUpdateInterval = setInterval(() => {
-                setCurrentTime(player.current?.currentTime);               
-                setCurrentProgress((player.current?.currentTime / player?.current.duration) * 100);                
+                setCurrentTime(player.current?.currentTime);
+                setCurrentProgress((player.current?.currentTime / player?.current.duration) * 100);
             }, 0);
         }
+
         return () => {
             clearInterval(playerUpdateInterval);
         }
     }, [isPlaying, controls])
 
+    useEffect(() => {
+        if (controls) {
+            let volumeTimeout = null
+            clearTimeout(volumeTimeout)
+
+            volumeTimeout = setTimeout(() => {
+                setVolume(.5)
+            }, 0)
+        } else {
+            setVolume(0)
+        }
+    }, [controls])
+
+
+    useEffect(() => {
+        player.current.volume = volume
+    }, [volume])
+
+    // useEffect(() => {
+    //     let closeControlsTimeout: any = null
+    //     if (isFullProjectOpen && !isControlsHidden) {
+    //         clearTimeout(closeControlsTimeout)
+    //         closeControlsTimeout = setTimeout(() => {
+    //             setIsControlsHidden(true)
+    //         }, 2000)
+    //     }
+    //     return () => {
+    //         clearTimeout(closeControlsTimeout)
+    //     }
+    // }, [isFullProjectOpen, isControlsHidden])
+
+
     return (
         <Transition in={isSourceChanged} timeout={0}>
             {(state) => {
                 return (
-                    <div className={styles.videoPlayer}>
+                    <div
+                        className={
+                            `${styles.videoPlayer} 
+                            ${controls && !isControlsHidden
+                                ? `${styles.controls}`
+                                : ''}`}
+                        onMouseMove={() => setIsControlsHidden(false)}
+                    >
+                        {controls && !isControlsHidden && (
+                            <>
+                            <button className={styles.backButton} onClick={onCloseFullProject}>
+                                back to projects
+                                <FontAwesomeIcon icon={faXmark} size="lg" />
+                            </button>
+                            <button className={styles.openDetailsButton} onClick={onDetailedInfoOpen}>
+                                more about project
+                                <span className={styles.arrows}></span>
+                            </button>
+                            </>                           
+                        )}
+                        
                         <div
                             className={styles.changeBackgroundContainer}
                             // @ts-ignore
@@ -158,9 +226,9 @@ const VideoPlayer = ({
                         >
                             <source src={source} type={type} />
                         </video>
-                        {controls && (
+                        {controls && !isControlsHidden && (
                             <Controls
-                                isMuted={isMuted || volume === 0}
+                                isMuted={volume === 0}
                                 isPlaying={isPlaying}
                                 isFullScreen={isFullScreen}
                                 currentTime={currentTime}
@@ -168,13 +236,12 @@ const VideoPlayer = ({
                                 totalDuration={totalDuration}
                                 onPlayToggle={onPlayToggle}
                                 onFullScreen={() => setIsFullScreen(!isFullScreen)}
-                                onMute={() => setIsMuted(!isMuted)}
+                                onMuteToogle={onMuteToogle}
                                 onProgressChange={onProgressChange}
                                 onVolumeChange={onVolumeChange}
                                 volume={volume}
                             />
                         )}
-
                     </div>
                 )
             }}

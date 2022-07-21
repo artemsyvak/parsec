@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faPause, faVolumeHigh, faVolumeLow, faVolumeUp, faVolumeTimes, faVolumeDown, faVolumeXmark } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faPause, faVolumeHigh, faVolumeLow, faVolumeXmark } from '@fortawesome/free-solid-svg-icons'
 import styles from './Controls.module.scss'
 
 
@@ -15,7 +15,7 @@ type Props = {
     onPlayToggle: () => void,
     onProgressChange: (e: any) => void,
     onFullScreen: () => void,
-    onMute: () => void,
+    onMuteToogle: () => void,
     onVolumeChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
@@ -30,17 +30,15 @@ const Controls = ({
     onPlayToggle,
     onProgressChange,
     onFullScreen,
-    onMute,
+    onMuteToogle,
     onVolumeChange,
 }: Props) => {
 
     const volumeIcon = useMemo(() => {
         if (volume == 0) {
             return faVolumeXmark
-        } else if (volume > .75) {
+        } else if (volume > .55) {
             return faVolumeHigh
-        } else if (volume > .5) {
-            return faVolumeDown
         } else if (volume > 0) {
             return faVolumeLow
         }
@@ -71,7 +69,7 @@ const Controls = ({
                     />
                 </div>
                 <div className={styles.volume}>
-                    <FontAwesomeIcon icon={volumeIcon} />
+                    <FontAwesomeIcon size="sm" icon={volumeIcon}  onClick={onMuteToogle}/>
                     <div className={styles.progress} style={{ width: `${volume * 100}%` }}></div>
                     <input
                         type="range"

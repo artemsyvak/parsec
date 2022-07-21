@@ -16,7 +16,6 @@ import styles from './Showreel.module.scss';
 import SANITY_QUERY from '../../constants/queries';
 
 const sliderSettings = {
-    className: 'DNASlider',
     dots: false,
     arrows: false,
     centerMode: true,
@@ -125,7 +124,7 @@ const Showreel = () => {
         <Context.Consumer>
             {() => {
                 return (
-                    <div className={styles.showreel}>
+                    <div className={`${styles.showreel} DNASlider`}>
                         <Header />
                         <span className={styles.showreelBackground}>
                             {/* ADD showreel property check */}
