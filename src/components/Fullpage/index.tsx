@@ -56,7 +56,7 @@ const Fullpage = (props: any) => {
                 <ReactScrollWheelHandler
                     upHandler={moveUp}
                     downHandler={moveDown}
-                    timeout={700}
+                    timeout={800}
                 >
                     {props.children}
                 </ReactScrollWheelHandler>
