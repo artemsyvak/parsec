@@ -1,0 +1,109 @@
+.videoPlayerControls{
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0px;
+    height: 100px;
+    z-index: 2;
+    
+    .buttons{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .button{
+        background: transparent;
+        box-shadow: none;
+        outline: none!important;
+        border: none;
+    }
+
+    .videoProgress{
+        position: relative;
+        width: 70vw;
+        height: 1px;
+        background-color: grey;
+        margin: 0 5px;
+        cursor: pointer;
+
+        .videoProgressInput{
+            position: absolute;
+            width: 100%;
+            opacity: 0; 
+            margin-top: -10px;
+            cursor: pointer;
+
+            // &:hover{
+            //     & + .currentProgress{
+            //         &:before{
+            //             background-color: white;
+            //             transition: .3s linear;
+            //         }
+            //     }
+            // }
+        }
+
+        .currentProgress{
+            height: 100%;
+            background-color: white;
+            position: relative;
+            transition: .1s linear;
+
+            &:before{
+                content: '';
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 0;
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background-color: white;
+                transition: .3s linear;
+            }
+
+        }
+
+        
+    }
+
+    .volume{
+        position: relative;
+        width: 70px;
+        cursor: pointer;
+
+        .progress{
+            position: relative;
+            height: 2px;            
+            right: -30px;
+            background-color: white;
+
+            &:before{
+                content: '';
+                position: absolute;
+                width: 70px;
+                background-color: grey;
+                height: 2px;
+                z-index: 0;
+                opacity: .3;
+            }
+        }
+
+        input{
+            height: 30px;
+            position: absolute;      
+            top: -15px;    
+            right: -30px;
+            width: 100%;  
+            // opacity: 0;  
+            cursor: pointer;
+        }
+    }
+   
+
+    *{
+        color: white;
+    }
+}

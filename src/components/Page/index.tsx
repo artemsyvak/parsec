@@ -1,7 +1,8 @@
-import { FunctionComponent } from "react"
+import { FunctionComponent, useRef } from "react"
 import { SECTION_BACKGROUND } from "../../enum"
 import { Container } from 'react-bootstrap'
 import SectionTitle from '../SectionTitle'
+import { InView } from "react-intersection-observer";
 
 type SectionTitleProps = {
     title: string
@@ -9,7 +10,7 @@ type SectionTitleProps = {
     index: string
 }
 
-type Props = FunctionComponent<{    
+type Props = React.FC<{
     id: string;
     style?: any;
     fluid?: boolean
@@ -25,16 +26,24 @@ const Page: Props = ({
     fluid = true,
     sectionTitle
 }) => (
-    <div className={`section ${background}`} id={id} style={style}>
-        <Container className="px-0 h-100 position-relative" fluid={fluid}>
-            {sectionTitle && (
-                <Container className="px-0">
-                    <SectionTitle {...sectionTitle} />
+    <InView threshold={1}>
+        {({ inView, ref, entry }) => (
+            <div
+                ref={ref} 
+                id={id}
+                className={`section ${background} ${inView ? 'active' : ''}`}
+                style={style}>
+                <Container className="px-0 h-100 position-relative" fluid={fluid}>
+                    {sectionTitle && (
+                        <Container className="px-0">
+                            <SectionTitle {...sectionTitle} />
+                        </Container>
+                    )}
+                    {children}
                 </Container>
-            )}
-            {children}
-        </Container>
-    </div>
+            </div>
+        )}
+    </InView>
 )
 
 export default Page

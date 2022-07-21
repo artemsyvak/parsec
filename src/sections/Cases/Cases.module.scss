@@ -1,6 +1,7 @@
 @import '../../../styles/variables.scss';
 
 .casesContainer{
+    position: relative;
     height: calc(100vh - $section-title-height);
 
 
@@ -10,7 +11,8 @@
         height: 100%;
         left: 50%;
         transform: translateX(-50%);
-        z-index: 0;
+        z-index: 1;
+        // background-color: $black;
 
 
         &:before{   
@@ -47,11 +49,14 @@
                 opacity: .5;
                 color: $white;
                 transition: .25s linear;
-            }
+            }    
 
+            &.active,          
             &:hover{
+                border-color: $white;
                 h4,p{
-                    opacity: 1;
+                    opacity: 1!important;
+                    transition: .25s linear;
                 }
             }
         }

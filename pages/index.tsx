@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useMemo } from 'react'
 import Showreel from '../src/sections/Showreel'
 import Services from '../src/sections/Services'
 import ScrollHandler from '../src/components/ScrollHandler';
@@ -9,6 +9,38 @@ import { SECTION_BACKGROUND } from '../src/enum';
 import { SECTION_TITLES } from '../src/constants/sectionTitles';
 import Page from '../src/components/Page';
 import Cases from '../src/sections/Cases';
+import { motion, motionValue, useTransform, useViewportScroll } from "framer-motion"
+
+
+// preventing context menu || devtools
+// window.oncontextmenu = function () {
+//   return false;
+// };
+
+// document.addEventListener("keydown", function(event){
+//     var key = event.key || event.keyCode;
+
+//     if (key == 123) {
+//         return false;
+//     } else if ((event.ctrlKey && event.shiftKey && key == 73) || (event.ctrlKey && event.shiftKey && key == 74)) {
+//         return false;
+//     }
+// }, false);
+
+
+// You can't copy any text.
+// <br/>
+// <textarea>You can't copy any text.</textarea>
+// <script>
+// document.body.addEventListener("copy", function(e){
+//  e.preventDefault();
+//  e.stopPropagation();
+// });
+// document.body.addEventListener("cut", function(e){
+//  e.preventDefault();
+//  e.stopPropagation();
+// });
+// </script>
 
 const Home: NextPage = () => {
 
