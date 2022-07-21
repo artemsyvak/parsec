@@ -106,28 +106,34 @@
 }
 
 @keyframes skipDown {
-    0%{      
+    0%{  
+        width: 2px;    
         opacity: 1; 
         transform: translateY(-60px);        
     }
     50%{
+        width: 2px;
         opacity: 1;
         transform: translateY(0px); 
     }
-    51%{
+    51%{ 
+        width: 0;  
         opacity: 0;
     }
 }
 
 @keyframes skipUp {
-    0%{      
-        opacity: 0; 
+    0%{    
+        width: 0;    
+        opacity: 0;        
         transform: translateY(0px);        
     }
-    49%{
+    49%{ 
+        width: 0;      
         opacity: 0;
     }
     50%{
+        width: 2px;
         opacity: 1;
     }
     51%{
