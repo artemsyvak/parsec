@@ -100,7 +100,7 @@
         opacity: 0;
         height: 100%;        
         background-color: $white;
-        animation: skipUp 3s cubic-bezier(.25,0,.25,1) 1.5s infinite forwards ;
+        animation: skipUp 3s cubic-bezier(.25,0,.25,1) infinite forwards ;
     }
 
 }
