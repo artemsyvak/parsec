@@ -67,7 +67,7 @@ const VideoPlayer = ({
     const [volume, setVolume] = useState<number>(0)
     const [isControlsHidden, setIsControlsHidden] = useState(false)
 
-    const player = useRef<any>(null)
+    const player = useRef<HTMLVideoElement>(null)
     const [isSourceChanged, setIsSourceChanged] = useState<boolean>(true)
 
     const onVolumeChange = (e: any) => {
@@ -110,8 +110,7 @@ const VideoPlayer = ({
             setIsSourceChanged(false)
             player?.current.pause()
             player?.current.load()
-            player?.current.play()
-            console.log(player?.current.duration)
+            player?.current.play()           
         }, 0)
 
         let durationTimeout: any = null

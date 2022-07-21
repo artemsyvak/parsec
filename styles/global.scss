@@ -149,14 +149,6 @@ p, ul{
   opacity: 0!important;
 }
 
-.screenSlider .slick-arrow{
-  background-color: black;
-
-  &::before{
-    color: white;
-  }
-}
-
 .slick-initialized .slick-slide{
   display: flex;
   align-items: center;
@@ -217,11 +209,18 @@ p, ul{
 
 }
 
-
 .slick-dots{
   bottom: -50px;
  
   li{
     margin: 0;
+
+    &.slick-active {
+      button{
+        &:before{
+          color: $purple-dark;
+        }
+      }
+    }
   }
 }

@@ -12,3 +12,7 @@ export type Project = {
     screenshots: any,
     videoUrl: any,
 }
+
+export type Client = {
+    images: string[]
+}

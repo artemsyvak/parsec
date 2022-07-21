@@ -1,0 +1,9 @@
+@import "../../../styles/variables.scss";
+
+.screenSlider{
+    margin-top: 30px;
+
+    .slick-slide{
+        width: max-content!important;
+    }
+}
