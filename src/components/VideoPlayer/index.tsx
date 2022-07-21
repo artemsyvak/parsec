@@ -110,8 +110,7 @@ const VideoPlayer = ({
             setIsSourceChanged(false)
             player?.current.pause()
             player?.current.load()
-            player?.current.play()
-            console.log(player?.current.duration)
+            player?.current.play()           
         }, 0)
 
         let durationTimeout: any = null

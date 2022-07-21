@@ -1,11 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState, useRef } from "react";
 import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 import Context from "../../services/Context";
 import { CONTEXT_KEYS } from "../../enum";
 import { SHOWREEL_SLIDES } from "../../constants";
-import Sanity from "../../sanity";
-import SANITY_QUERY from "../../constants/queries";
 
 import styles from './ScrollHandler.module.scss'
 
@@ -14,6 +12,8 @@ const ScrollHandler = (props: any) => {
     const container = useRef(null)
     const [currentPage, setCurrentPage] = useState(0)
     const [currentSlide, setCurrentSlide] = useState(-1)
+
+    const sanityData = useContext(Context)
 
     useEffect(() => {
         // move page container by transforming Y positioning
@@ -88,28 +88,12 @@ const ScrollHandler = (props: any) => {
         }, 100)
     }
 
-    const [awsMedia, setAwsMedia] = useState<any>([])
-    useEffect(() => {
-
-        async function fetchAwsMedia() {
-            try {
-                const data = await Sanity.fetch(SANITY_QUERY.GET_AWS_MEDIA)
-                setAwsMedia(data)
-            } catch (error) {
-                console.error(error)
-            }
-        }
-
-        fetchAwsMedia()
-
-    }, [])
-
     return (
         <div className={styles.fullpageContainer} ref={container}>
             <Context.Provider value={{
                 [CONTEXT_KEYS.PAGE]: [currentPage, setCurrentPage],
                 [CONTEXT_KEYS.SLIDE]: [currentSlide, setCurrentSlide],
-                [CONTEXT_KEYS.AWS_MEDIA]: [awsMedia, setAwsMedia]
+                [CONTEXT_KEYS.SANITY_DATA]: [sanityData, () => {}]
             }}
             >
                 <ReactScrollWheelHandler

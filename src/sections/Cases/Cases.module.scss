@@ -2,8 +2,6 @@
 
 .casesContainer{
     position: relative;
-    // height: calc(100vh - $section-title-height);
-
 
     .video{
         position: absolute;
@@ -12,8 +10,6 @@
         left: 50%;
         transform: translateX(-50%);
         z-index: 1;
-        // background-color: $black;
-
 
         &:before{   
             content: '';     
