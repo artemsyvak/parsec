@@ -6,7 +6,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: $font-Regular;
-  overflow-x: hidden;
+  overflow: hidden;
 
   &::-webkit-scrollbar{
     display: none;
@@ -54,6 +54,4 @@ p, ul{
   justify-content: center;
   align-items: center;
   height: 100vh;
-	// scroll-snap-align: start;
-  // scroll-behavior: smooth;
 }
