@@ -75,7 +75,9 @@
         font-size: 250px;
         line-height: 93.5%;               
         position: absolute;
-        right: -50%;
-        transform: translateY(-55%);       
+        top: 50%;
+        transform: translateY(-35%);    
+        left: 83%;
+        z-index: -1;      
     }
 }
