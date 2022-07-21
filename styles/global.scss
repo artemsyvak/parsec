@@ -54,6 +54,62 @@ p, ul{
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  &.black{
+    background-color: $black;
+    div[class*='sectionTitleContainer']{
+      h2{
+        color: $white;
+
+        span[class*='topLine'],
+        span[class*='bottomLine']{
+          background-color: $white;
+        }
+
+        span[class*='topCircle'], 
+        span[class*='bottomCircle']{
+          background-color: $white;
+
+          &:before{
+            background-color: $white;
+          }
+        }
+      }
+
+      span[class*='subtitle']{
+        color: $section-subtitle-dark;
+      }
+
+    }
+  }
+
+  &.white{
+    background-color: $white;
+    div[class*='sectionTitleContainer']{
+      h2{
+        color: $black;
+
+        span[class*='topLine'], 
+        span[class*='bottomLine']{
+          background-color: $black;
+        }
+
+        span[class*='topCircle'], 
+        span[class*='bottomCircle']{
+          background-color: $black;
+
+          &:before{
+            background-color: $black;
+          }
+        }
+      }
+
+      span[class*='subtitle']{
+        color: $section-subtitle-white;
+      }
+
+    }
+  }
 }
 
 .slick-slider{

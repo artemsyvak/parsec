@@ -1,15 +1,20 @@
 import { useEffect, useState, memo } from 'react'
 import SANITY_QUERY from '../../constants/queries'
 import Sanity from '../../sanity'
+import Service from '../../components/Service'
+import { Container } from 'react-bootstrap'
+
+import styles from './Services.module.scss'
 
 type ServiceItem = {
     title: string,
-    description: string
+    description: string,
+    videoSource: string
 }
 
 const Services = () => {
 
-    const [services, setServices] = useState<ServiceItem[]>([])  
+    const [services, setServices] = useState<ServiceItem[]>([])
 
     useEffect(() => {
 
@@ -27,16 +32,15 @@ const Services = () => {
     }, [])
 
     return (
-        <>
-            {services && services.length > 0 && (
-                services.map(({ title, description }: ServiceItem) => (
-                    <div key={title}>
-                        <h2>{title}</h2>
-                        <p>{description}</p>
-                    </div>
-                ))
-            )}
-        </>
+        <div className={styles.services}>
+            <Container className="px-0">
+                {services && services.length > 0 && (
+                    services.map((service: ServiceItem, index: number) => (
+                        <Service key={service.title} {...service} index={index + 1} />
+                    ))
+                )}
+            </Container>
+        </div>
     )
 }
 
