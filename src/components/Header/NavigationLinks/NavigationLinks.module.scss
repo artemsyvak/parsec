@@ -9,32 +9,89 @@
 
     li{
         list-style: none;
-        margin-right: 45px;
+        margin-right: 35px;
         cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         &:last-child{            
             margin-right: 0;
 
-            a{
-                padding: 12px 40px;
-                border-radius: 36px;
-                border: 1px solid $white;
+            a{     
+                position: relative;   
+                
+                &::before, &:after{
+                    content: '';
+                    position: absolute;
+                    width: 70%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+
+                &::after{
+                    background-color: transparent;
+                    height: 100%;
+                    border-bottom: 1px solid $white;
+                    bottom: 0;                    
+                    transition: transform 0.2s ease;
+                }
+
+                &::before{                    
+                    height: 0%;
+                    border-top: 1px solid $white;
+                    bottom: 0;                    
+                    transition: height .3s ease;
+                }
 
                 &:hover{
-                    border-color: $purple-dark;
+                    &::after{
+                        width: 70%;
+                        left: 50%;
+                        transform: translateX(-50%) scale(1.08);
+                        transition: all 0.4s ease;
+                    }
+                    &::before{
+                        height: 130%;
+                        transform: translateX(-50%) scale(1.08);
+                        transition: all 0.3s ease;
+                    }                  
                 }
             }
         }
 
-        & > a{
-            font-family: $gilroy-regular;
+        & > a{ 
+            height: 30px;          
+            text-transform: uppercase;
+            font-family: $font-Kharkiv;
             font-style: normal;
             font-weight: normal;
             font-size: 16px;
             color: $white;
+
+
+            &::after{
+                content: "";
+                display: block;
+                position: relative;
+                bottom: 15px;
+                height: 5px;
+                width: 0;
+                background: $purple-dark;
+                z-index: 1;
+                opacity: .7;
+                right: -120%;               
+                transition: all .5s cubic-bezier(0,0,.2,1);
+            }
     
-            &:hover{
-                color: $purple-dark;
+            &:hover{                                    
+                &::after{
+                    width: 100%;
+                    left: 0;
+                    right: 0;
+                    -webkit-transition: all .35s cubic-bezier(1,0,0,1);
+                    transition: all .35s cubic-bezier(1,0,0,1);
+                }              
             }
         }
     }

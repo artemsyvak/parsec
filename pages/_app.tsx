@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/global.scss'
 import type { AppProps } from 'next/app'
 
