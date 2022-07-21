@@ -43,7 +43,7 @@ const Fullpage = (props: any) => {
         }
     }
 
-    // back to initial state of showreel screen after currentPage became is next which is 1
+    // back to initial state of showreel screen after leave from it
     const resetInitialPositionOfShowreelSlider = () => {
         if (currentPage === 1) {
             let timemout
@@ -67,28 +67,24 @@ const Fullpage = (props: any) => {
             const sectionNumber = scrollY / windowHeight                        
     
             if(scrollY >= windowHeight && sectionNumber !== 0){ 
-                
                 // enable body scrolling
                 document.body.style.overflow = 'scroll'
                 
                 // scroll page to first page
-                window.scrollBy({
-                    top: -window.innerHeight * sectionNumber,
-                    left: 0,
-                    behavior: 'auto'
-                })                    
-
+                window.scroll(0, -windowHeight * sectionNumber)  
+                document.body.style.overflow = 'hidden'               
+                
                 let setCurrentPageTimeout
                 clearTimeout(setCurrentPageTimeout)
-
+                
                 // scroll page to section that was before reload
                 setCurrentPageTimeout = setTimeout(() => {
+                    document.body.style.overflow = 'hidden'
                     setCurrentPage(sectionNumber)  
-                }, 1000)
-
-                document.body.style.overflow = 'hidden'
+                }, 0)
             }
-        }, 250)
+                
+        }, 150)
     }
 
     return (
