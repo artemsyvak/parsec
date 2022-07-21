@@ -109,8 +109,9 @@ const Showreel = () => {
 
     //     async function fetchShowreel() {
     //         try {
-    //             const data = await Sanity.fetch(SANITY_QUERY.GET_SHOWREEL)
-    //             setShowreel(data[0].videoSource)                
+    //             const data = await Sanity.fetch(SANITY_QUERY.GET_AWS_MEDIA)
+    //             // console.log(data)
+    //             // setShowreel(data[0].videoSource)                
     //         } catch (error) {
     //             console.error(error)
     //         }
@@ -127,8 +128,9 @@ const Showreel = () => {
                     <div className={styles.showreel}>
                         <Header />
                         <span className={styles.showreelBackground}>
-                            {showreel &&  currentPage === 0 && (
-                                <VideoPlayer source={'./animation_reel.mov'}/>
+                            {/* ADD showreel property check */}
+                            {currentPage === 0 && (
+                                <VideoPlayer source={'https://s3.eu-central-1.amazonaws.com/parsec-studio/2022-05-06T16-05-23.195Z-01.mov'}/>
                             )}
                         </span>
                         <span className={styles.shadow}></span>
