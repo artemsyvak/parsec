@@ -13,7 +13,7 @@ const ShowreelDNA = ({
 }: Props) => {
     return (
         <div className={styles.DNASliderItem}>
-            <h3>// {title}</h3>
+            <h3>{`\\\\ ${title}`}</h3>
             <p>{description}</p>
         </div>
     )
