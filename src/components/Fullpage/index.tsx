@@ -7,45 +7,24 @@ import { SHOWREEL_SLIDES } from "../../constants";
 
 import styles from './Fullpage.module.scss'
 
-
-
 const Fullpage = (props: any) => {
 
     const container = useRef(null)
     const [currentPage, setCurrentPage] = useState(0)
     const [currentSlide, setCurrentSlide] = useState(-1)
 
-
-    // TODO: handle reload page => return to first page
-    // useEffect(() => {
-
-    //     setTimeout(() => {
-    //         const windowHeight = window.innerHeight;
-    //         const scrollY = window.scrollY
-    //         console.log(windowHeight, scrollY)
-    
-    //         if(scrollY >= windowHeight){
-    //             setCurrentPage(scrollY / windowHeight)  
-    //         }
-    //     }, 0)
-       
-    // }, [])
-
     useEffect(() => {
+        // move page container by transforming Y positioning
         container.current.style.transform = `translateY(-${100 * currentPage}vh)`
     }, [currentPage])
 
     useEffect(() => {
-        if (currentPage === 1) {
-            let timemout
-            
-            clearTimeout(timemout)
-            timemout = setTimeout(() => {
-                setCurrentSlide(0)
-                setCurrentSlide(-1)
-            }, 500)
-        }
+        resetInitialPositionOfShowreelSlider()
     }, [currentPage])
+
+    useEffect(() => {
+        scrollBackAfterPageReload()
+    }, [])
 
     const moveUp = () => {
         if (currentPage !== 0) {
@@ -62,6 +41,54 @@ const Fullpage = (props: any) => {
         } else if (currentPage < props.children.length - 1) {
             setCurrentPage(currentPage + 1)
         }
+    }
+
+    // back to initial state of showreel screen after currentPage became is next which is 1
+    const resetInitialPositionOfShowreelSlider = () => {
+        if (currentPage === 1) {
+            let timemout
+            
+            clearTimeout(timemout)
+            timemout = setTimeout(() => {
+                setCurrentSlide(0)
+                setCurrentSlide(-1)
+            }, 500)
+        }
+    }
+
+    const scrollBackAfterPageReload = () => {
+        let timeout;
+        clearTimeout(timeout)
+
+        timeout = setTimeout(() => { 
+            // calculate current section depending on window height and scroll after page reload.    
+            const windowHeight = window.innerHeight;
+            const scrollY = window.scrollY
+            const sectionNumber = scrollY / windowHeight                        
+    
+            if(scrollY >= windowHeight && sectionNumber !== 0){ 
+                
+                // enable body scrolling
+                document.body.style.overflow = 'scroll'
+                
+                // scroll page to first page
+                window.scrollBy({
+                    top: -window.innerHeight * sectionNumber,
+                    left: 0,
+                    behavior: 'auto'
+                })                    
+
+                let setCurrentPageTimeout
+                clearTimeout(setCurrentPageTimeout)
+
+                // scroll page to section that was before reload
+                setCurrentPageTimeout = setTimeout(() => {
+                    setCurrentPage(sectionNumber)  
+                }, 1000)
+
+                document.body.style.overflow = 'hidden'
+            }
+        }, 250)
     }
 
     return (
