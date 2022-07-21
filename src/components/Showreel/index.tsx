@@ -11,9 +11,9 @@ const Showreel = () => {
     return (
         <div className={styles.showreel}>
             <span className={styles.shadow}></span>
-            <img src="/showreel-logo.svg" className={styles.showreelLogo} alt="" />
+            <img style={{ marginLeft: '32px' }} src="/showreel-logo.svg" className={styles.showreelLogo} alt="" />
             <Button
-                style={{ marginTop: '20px' }}
+                style={{ margin: '20px 0 0 35px' }}
                 icon="/play-icon.svg"
                 label='Watch showreel'
                 onClick={playShowreel}
