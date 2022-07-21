@@ -14,6 +14,7 @@ const ShowreelDNA = ({
     return (
         <div className={styles.DNASliderItem}>
             <h3>{`\\\\ ${title}`}</h3>
+            <span>[0{index}]</span>   
             <p>{description}</p>
         </div>
     )

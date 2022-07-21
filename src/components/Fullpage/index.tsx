@@ -17,6 +17,19 @@ const Fullpage = (props: any) => {
 
 
     // TODO: handle reload page => return to first page
+    // useEffect(() => {
+
+    //     setTimeout(() => {
+    //         const windowHeight = window.innerHeight;
+    //         const scrollY = window.scrollY
+    //         console.log(windowHeight, scrollY)
+    
+    //         if(scrollY >= windowHeight){
+    //             setCurrentPage(scrollY / windowHeight)  
+    //         }
+    //     }, 0)
+       
+    // }, [])
 
     useEffect(() => {
         container.current.style.transform = `translateY(-${100 * currentPage}vh)`
@@ -56,7 +69,8 @@ const Fullpage = (props: any) => {
                 <ReactScrollWheelHandler
                     upHandler={moveUp}
                     downHandler={moveDown}
-                    timeout={800}
+                    timeout={1000}
+                    wheelConfig={[15, 120, 0.05, 0]}
                 >
                     {props.children}
                 </ReactScrollWheelHandler>
