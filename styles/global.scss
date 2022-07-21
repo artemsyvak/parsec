@@ -1,16 +1,17 @@
 @import './variables.scss';
-@import url('http://fonts.cdnfonts.com/css/gilroy-bold');
-@font-face {
-  font-family: 'Kharkiv Tone';
-  src: local('Kharkiv Tone'), url(../src/fonts/DIMASIK.ttf) format('opentype');
-}
-
+@import './fonts.scss';
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Gilroy-Regular', sans-serif;
+  font-family: $font-Regular;
+}
+
+main{
+  display: flex;
+  justify-content: center;
+
 }
 
 * {
@@ -20,7 +21,7 @@ body {
 
 a, button {
   color: inherit;
-  text-decoration: none;
+  text-decoration: none!important;
   transition: .2s linear;
 }
 
@@ -30,10 +31,14 @@ a:hover, button:hover{
 
 h1{
   font-size: 54px;
-  font-family: 'Kharkiv Tone';
+  font-family: $font-neue-Light;
 }
 
 h2{
   font-size: 54px;
-  font-family: $gilroy-medium;
+  font-family: $font-Kharkiv;
+}
+
+p, ul{
+  margin-bottom: 0;
 }
