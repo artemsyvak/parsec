@@ -4,13 +4,17 @@ import Context from "../services/Context";
 export const useEventListener = (
   target: EventTarget | undefined,
   event: string,
-  listener: EventListenerOrEventListenerObject,
+  listener: any,
   trigger = true
 ): void => {
   useEffect(() => {
     const t = target || window
-    t.addEventListener(event, listener);
-    trigger && t.dispatchEvent(new Event(event));
+    if(event === 'keydown' || event === 'touchstart'){
+      t.addEventListener(event, listener);
+    }else{
+      t.addEventListener(event, listener, { passive: false });
+    }
+    // trigger && t.dispatchEvent(new Event(event));
     return () => t.removeEventListener(event, listener);
   });
 };
@@ -50,8 +54,8 @@ export const useThrottle = <T>(value: T, interval = 500): T => {
       lastExecuted.current = Date.now()
       setThrottledValue(value)
     } else {
-      let timeout: any = null 
-      // clearTimeout(timeout)
+      let timeout: any = null
+      clearTimeout(timeout)
       timeout = setTimeout(() => {
         lastExecuted.current = Date.now()
         setThrottledValue(value)
@@ -110,7 +114,7 @@ export const useScroll = () => {
     setLastScrollTop(-bodyOffset.top)
   }
 
-  useEffect(() => {    
+  useEffect(() => {
     window.addEventListener("scroll", listener)
     return () => {
       window.removeEventListener("scroll", listener)

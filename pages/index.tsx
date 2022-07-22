@@ -89,6 +89,10 @@ const Home: NextPage = ({
               </Page>
               <Page id="feedbacks" sectionTitle={SECTION_TITLES.FEEDBACKS} background={SECTION_BACKGROUND.WHITE}>
               </Page>
+              <Page id="team" sectionTitle={SECTION_TITLES.TEAM} background={SECTION_BACKGROUND.WHITE}>
+              </Page>  
+              <Page id="contact-us" sectionTitle={SECTION_TITLES.CONTACT_US} background={SECTION_BACKGROUND.BLACK}>
+              </Page>              
             </ScrollHandler>
           </Context.Provider>
         </Container>
