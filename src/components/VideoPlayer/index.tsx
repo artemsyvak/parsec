@@ -4,6 +4,7 @@ import { Transition } from 'react-transition-group'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import Controls from './Controls'
+import { fetchAndCache } from '../../services/VideoPrecache'
 
 
 type Props = {
@@ -62,12 +63,13 @@ const VideoPlayer = ({
     const [isPlaying, setIsPlaying] = useState<boolean>(true)
     const [currentTime, setCurrentTime] = useState<number>(0)
     const [currentProgress, setCurrentProgress] = useState<number>(0)
-    const [isFullScreen, setIsFullScreen] = useState<boolean>(false)    
+    const [isFullScreen, setIsFullScreen] = useState<boolean>(false)
     const [totalDuration, setTotalDuration] = useState<number>(0)
     const [volume, setVolume] = useState<number>(0)
     const [isControlsHidden, setIsControlsHidden] = useState(false)
 
     const player = useRef<HTMLVideoElement>(null)
+    const playerSrc = useRef<HTMLSourceElement>(null)
     const [isSourceChanged, setIsSourceChanged] = useState<boolean>(true)
 
     const onVolumeChange = (e: any) => {
@@ -110,7 +112,37 @@ const VideoPlayer = ({
             setIsSourceChanged(false)
             player?.current.pause()
             player?.current.load()
-            player?.current.play()           
+            player?.current.play() 
+
+
+            // player?.current.pause()
+            // player?.current.load()
+            // window.caches.open('prefetch-cache-v2')
+            //     .then((cache: Cache) => fetchAndCache(source, cache))
+            //     .then(response => response.arrayBuffer())
+            //     .then(buffer => {
+            //         console.log(buffer)
+            //         const mediaSource = new MediaSource();
+            //         playerSrc.current.src = URL.createObjectURL(mediaSource);
+            //         console.log(player.current.src)
+            //         mediaSource.addEventListener('sourceopen', sourceOpen, { once: true });
+
+            //         function sourceOpen() {         
+            //             URL.revokeObjectURL(playerSrc.current.src);
+
+            //             //   'video/webm; codecs="vp09.00.10.08"'
+            //             // 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+            //             const sourceBuffer = mediaSource.addSourceBuffer('video/quicktime');
+            //             sourceBuffer.appendBuffer(buffer);
+
+            //             player?.current.play().then(() => {
+            //                 console.log('played!')
+            //                 // TODO: Fetch the rest of the video when user starts playing video.
+            //             });
+            //         }
+            //     });
+
+
         }, 0)
 
         let durationTimeout: any = null
@@ -191,17 +223,17 @@ const VideoPlayer = ({
                     >
                         {controls && !isControlsHidden && (
                             <>
-                            <button className={styles.backButton} onClick={onCloseFullProject}>
-                                back to projects
-                                <FontAwesomeIcon icon={faXmark} size="lg" />
-                            </button>
-                            <button className={styles.openDetailsButton} onClick={onDetailedInfoOpen}>
-                                more about project
-                                <span className={styles.arrows}></span>
-                            </button>
-                            </>                           
+                                <button className={styles.backButton} onClick={onCloseFullProject}>
+                                    back to projects
+                                    <FontAwesomeIcon icon={faXmark} size="lg" />
+                                </button>
+                                <button className={styles.openDetailsButton} onClick={onDetailedInfoOpen}>
+                                    more about project
+                                    <span className={styles.arrows}></span>
+                                </button>
+                            </>
                         )}
-                        
+
                         <div
                             className={styles.changeBackgroundContainer}
                             // @ts-ignore
@@ -210,7 +242,7 @@ const VideoPlayer = ({
                         <video
                             ref={player}
                             loop={loop}
-                            autoPlay={isPlaying}
+                            // autoPlay={isPlaying}                            
                             style=
                             {{
                                 width: '100%',
@@ -222,7 +254,7 @@ const VideoPlayer = ({
                             }}
                             muted={volume === 0}
                         >
-                            <source src={source} type={type} />
+                            <source ref={playerSrc} src={source} type={type} />
                         </video>
                         {controls && !isControlsHidden && (
                             <Controls
