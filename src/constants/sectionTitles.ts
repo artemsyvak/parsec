@@ -24,6 +24,12 @@ const SECTION_TITLES: SectionTitles = {
     [SECTION_NAMES.FEEDBACKS]: {
         id: 'feedbacks-title', title: 'Відгуки', index: '04', subtitle: 'Reviews'
     },
+    [SECTION_NAMES.TEAM]: {
+        id: 'team-title', title: 'Команда', index: '05', subtitle: 'Team'
+    },
+    [SECTION_NAMES.CONTACT_US]: {
+        id: 'contact-us-title', title: 'Contact Us', index: '06', subtitle: 'Collaborate'
+    },
 }
 
 export { 

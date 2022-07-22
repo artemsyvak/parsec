@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { useEffect } from 'react'
 import Showreel from '../src/sections/Showreel'
 import Services from '../src/sections/Services'
 import ScrollHandler from '../src/components/ScrollHandler';
@@ -12,6 +13,7 @@ import Clients from '../src/sections/Clients';
 import Sanity from '../src/sanity'
 import SANITY_QUERY from '../src/constants/queries';
 import Context from '../src/services/Context'
+import { cacheVideoUrls } from '../src/services/VideoPrecache'
 
 
 export async function getServerSideProps() {
@@ -36,6 +38,26 @@ const Home: NextPage = ({
   projects,
   clients,
 }: any) => {
+
+
+  // TODO: Implement video caching & servise worker for that.
+  // useEffect(() => {
+  //   async function registerServiceWorker() {
+  //     if ('serviceWorker' in navigator) {
+  //       try {
+  //         await navigator.serviceWorker.register('/sw.js');
+  //         console.log('Service worker registered successfully');
+  //       } catch (e) {
+  //         console.error('Error registering service worker', e);
+  //       }
+  //     } else {
+  //       console.error('Browser doesn\'t support service workers');
+  //     }
+  //   }
+  //   cacheVideoUrls(awsMedia.map((media: any) => media.fileURL))
+  //   registerServiceWorker()
+  // }, [])
+
 
   return (
     <div>
@@ -67,6 +89,10 @@ const Home: NextPage = ({
               </Page>
               <Page id="feedbacks" sectionTitle={SECTION_TITLES.FEEDBACKS} background={SECTION_BACKGROUND.WHITE}>
               </Page>
+              <Page id="team" sectionTitle={SECTION_TITLES.TEAM} background={SECTION_BACKGROUND.WHITE}>
+              </Page>  
+              <Page id="contact-us" sectionTitle={SECTION_TITLES.CONTACT_US} background={SECTION_BACKGROUND.BLACK}>
+              </Page>              
             </ScrollHandler>
           </Context.Provider>
         </Container>
