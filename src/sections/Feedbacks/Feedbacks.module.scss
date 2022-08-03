@@ -1,0 +1,102 @@
+@import '../../../styles/variables.scss';
+
+.feedbacksContainer {
+    .feedbackContainer {
+        width: 415px !important;
+        height: 400px;
+        background-color: $feedback-bg;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: $black;
+
+        .feedbackText {
+            display: inline-block;
+            max-height: 270px;
+            overflow-y: scroll;
+            padding-right: 7px;
+
+            &::-webkit-scrollbar-thumb {
+                opacity: 0;
+            }
+
+            &:hover{
+                &::-webkit-scrollbar-thumb {
+                    opacity: 1;
+                    background: $purple-light;
+                    border-radius: 5px;
+                }
+            }
+            
+            &::-webkit-scrollbar {
+                width: 3px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+
+            /* Handle on hover */
+            &::-webkit-scrollbar-thumb:hover {
+                background: $purple-dark;
+            }
+
+            p {
+                color: $grey-dark;
+                font-size: 18px;
+                line-height: 24px;
+                font-family: $font-Light;
+                white-space: break-spaces;
+            }
+        }
+
+        .feedbackFooter{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            height: calc(100% - 270px);
+
+            img {
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+
+                &.avatar{
+                    left: 0px;
+                    z-index: 1;
+                }
+
+                &.company_avatar{
+                    left: 56px;
+                    z-index: 2;
+                }
+            }
+    
+            .name {
+                font-family: $font-Regular;
+                font-size: 24px;
+                line-height: 24px;
+                margin: 10px 0;
+                color: $black;
+                letter-spacing: .5px;
+            }
+    
+            .position {
+                color: $grey-darkness;
+                font-size: 18px;
+                line-height: 18px;
+                font-family: $font-Thin;
+                letter-spacing: .5px;
+            }
+        }
+
+        
+
+    }
+}
