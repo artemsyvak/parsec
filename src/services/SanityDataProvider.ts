@@ -1,4 +1,4 @@
-import { Project } from "../types"
+import { Project, Teammate, Feedback } from "../types"
 
 type AWS_DATA_ITEM = {
     title: string,
@@ -14,7 +14,10 @@ type SanityData = {
     awsMedia: AWS_DATA_ITEM[],
     services: SERVICE[],
     projects: Project[],
-    clients: any[]
+    clients: any[],
+    team: Teammate[],
+    feedbacks: Feedback[],
+
 }
 
 type dataKeyType = keyof SanityData

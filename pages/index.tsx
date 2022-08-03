@@ -10,10 +10,12 @@ import { SECTION_TITLES } from '../src/constants/sectionTitles';
 import Page from '../src/components/Page';
 import Cases from '../src/sections/Cases';
 import Clients from '../src/sections/Clients';
+import Team from '../src/sections/Team'
 import Sanity from '../src/sanity'
-import SANITY_QUERY from '../src/constants/queries';
+import SANITY_QUERY from '../src/sanity/queries';
 import Context from '../src/services/Context'
 import { cacheVideoUrls } from '../src/services/VideoPrecache'
+import Feedbacks from '../src/sections/Feedbacks'
 
 
 export async function getServerSideProps() {
@@ -21,14 +23,18 @@ export async function getServerSideProps() {
   const fetchServices = Sanity.fetch(SANITY_QUERY.GET_SERVICES)
   const fetchProjects = Sanity.fetch(SANITY_QUERY.GET_PROJECTS)
   const fetchClients = Sanity.fetch(SANITY_QUERY.GET_CLIENTS)
+  const fetchTeam = Sanity.fetch(SANITY_QUERY.GET_TEAM)
+  const fetchFeedbacks = Sanity.fetch(SANITY_QUERY.GET_FEEDBACKS)
 
-  const [awsMedia, services, projects, clients] = await Promise.all([
+  const [awsMedia, services, projects, clients, team, feedbacks] = await Promise.all([
     fetchAwsMedia,
     fetchServices,
     fetchProjects,
-    fetchClients
+    fetchClients,
+    fetchTeam,
+    fetchFeedbacks
   ]);
-  return { props: { awsMedia, services, projects, clients } };
+  return { props: { awsMedia, services, projects, clients, team, feedbacks } };
 }
 
 
@@ -37,6 +43,8 @@ const Home: NextPage = ({
   services,
   projects,
   clients,
+  team,
+  feedbacks
 }: any) => {
 
 
@@ -73,6 +81,8 @@ const Home: NextPage = ({
             services,
             projects,
             clients,
+            feedbacks,
+            team,
           }}>
             <ScrollHandler>
               <Page id="showreel" fluid={false}>
@@ -88,11 +98,13 @@ const Home: NextPage = ({
                 <Clients />
               </Page>
               <Page id="feedbacks" sectionTitle={SECTION_TITLES.FEEDBACKS} background={SECTION_BACKGROUND.WHITE}>
+                <Feedbacks />
               </Page>
               <Page id="team" sectionTitle={SECTION_TITLES.TEAM} background={SECTION_BACKGROUND.WHITE}>
-              </Page>  
+                <Team />
+              </Page>
               <Page id="contact-us" sectionTitle={SECTION_TITLES.CONTACT_US} background={SECTION_BACKGROUND.BLACK}>
-              </Page>              
+              </Page>
             </ScrollHandler>
           </Context.Provider>
         </Container>

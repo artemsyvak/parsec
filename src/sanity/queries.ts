@@ -8,7 +8,15 @@ const SANITY_QUERY = {
         'detailedInfoDescription': detailedInfoDescription[].children[].text,
         'screenshots': screenshots[].asset->url
     }`,
-    GET_CLIENTS: `*[_type == "clients"] | order(_createdAt asc) {'images': images[].asset->url}`
+    GET_CLIENTS: `*[_type == "clients"] | order(_createdAt asc) {'images': images[].asset->url}`,
+    GET_TEAM: `*[_type == "team"] | order(_createdAt asc) {name, position, 'avatar': avatar.asset->url}`,
+    GET_FEEDBACKS: `*[_type == "feedbacks"] | order(_createdAt asc) {
+        name,
+        position,
+        'avatar': avatar.asset->url,
+        'company_avatar': avatar.asset->url,
+        'feedbackText': feedbackText[].children[].text
+        }`
 }
 
 export default SANITY_QUERY

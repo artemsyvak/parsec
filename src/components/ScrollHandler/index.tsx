@@ -95,16 +95,19 @@ const ScrollHandler = (props: any) => {
         }, 100)
     }
 
-    const handleMouseWheel = (event: WheelEvent) => {
-        event.preventDefault()
+    const handleMouseWheel = (event: WheelEvent) => {                
         // @ts-ignore
-        const delta = event.wheelDelta || -event.deltaY;
-        if (!block.current) {
-            if (Math.abs(prevWheelDelta.current) < Math.abs(delta) || delta % 120 === 0) {
-                updateCurrentPage(delta < 0);
+        if(event.target.classList.value !== 'feedback-data__text'){
+            event.preventDefault()
+             // @ts-ignore
+            const delta = event.wheelDelta || -event.deltaY;
+            if (!block.current) {
+                if (Math.abs(prevWheelDelta.current) < Math.abs(delta) || delta % 120 === 0) {
+                    updateCurrentPage(delta < 0);
+                }
             }
-        }
-        prevWheelDelta.current = delta;
+            prevWheelDelta.current = delta;
+        }       
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {        
