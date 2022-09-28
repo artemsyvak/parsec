@@ -25,7 +25,7 @@ const ScrollHandler = (props: any) => {
         clearTimeout(timeout)
         timeout = setTimeout(() => {
             block.current = false
-        }, 700)
+        }, 1000)
 
         return () => clearTimeout(timeout)
     }, [currentSlide])

@@ -16,6 +16,7 @@ import SANITY_QUERY from '../src/sanity/queries';
 import Context from '../src/services/Context'
 import { cacheVideoUrls } from '../src/services/VideoPrecache'
 import Feedbacks from '../src/sections/Feedbacks'
+import Contact from '../src/sections/Contact'
 
 
 export async function getServerSideProps() {
@@ -104,6 +105,7 @@ const Home: NextPage = ({
                 <Team />
               </Page>
               <Page id="contact-us" sectionTitle={SECTION_TITLES.CONTACT_US} background={SECTION_BACKGROUND.BLACK}>
+               <Contact />
               </Page>
             </ScrollHandler>
           </Context.Provider>

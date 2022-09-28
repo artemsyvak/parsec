@@ -57,4 +57,27 @@
             }
         }
     }
+
+    .projectArrows{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);       
+        color: $white;
+        z-index: 1;            
+        width: 100vw;
+
+        button{
+            position: absolute;
+            background: none;
+            border: none;            
+
+            &.prev{
+                left: 30px;
+            }
+            &.next{
+                right: 30px;
+            }
+        }
+    }
 }

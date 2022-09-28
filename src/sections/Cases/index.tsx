@@ -4,12 +4,15 @@ import VideoPlayer from '../../components/VideoPlayer'
 import Context from '../../services/Context'
 import { useCustomContext } from '../../hooks'
 import { CONTEXT_KEYS, SECTION_NUMBER } from '../../enum'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { SECTION_TITLES, SECTION_NAMES } from '../../constants/sectionTitles'
 import Details from './Details'
 import { Project } from '../../types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 const sectionTitleHeight = '238px'
+const PROJECTS_PER_PAGE = 4
 
 const Cases = () => {
     const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
@@ -24,7 +27,7 @@ const Cases = () => {
     const [currentSlide, setCurrentSlide] = useState<number>(0)
     const [selectedProject, setSelectedProject] = useState<Project>(projects[0])
     const [isFullProjectOpen, setIsFullProjectOpen] = useState<boolean>(false)
-    const [isDetailsOpen, setIsDetailsOpen] = useState<boolean>(false)    
+    const [isDetailsOpen, setIsDetailsOpen] = useState<boolean>(false)
 
     const casesContainerHeight = useMemo(() => {
         return isFullProjectOpen ? '100vh' : `calc(100vh - ${sectionTitleHeight})`
@@ -45,14 +48,28 @@ const Cases = () => {
 
     const onProjectChange = (nextProjectIndex: number) => {
         const currentProjectIndex = projects.findIndex((project: Project) => project.title === selectedProject.title)
-        if(currentProjectIndex + nextProjectIndex < 0){
+        if (currentProjectIndex + nextProjectIndex < 0) {
             setSelectedProject(projects[projects.length - 1])
-        }else if(currentProjectIndex + nextProjectIndex > (projects.length - 1)){
+        } else if (currentProjectIndex + nextProjectIndex > (projects.length - 1)) {
             setSelectedProject(projects[0])
-        }else{
+        } else {
             setSelectedProject(projects[currentProjectIndex + nextProjectIndex])
         }
     }
+
+    const onPrevSlide = () => {
+        if (currentSlide === 0 || (currentSlide - PROJECTS_PER_PAGE) < 0) return
+        setCurrentSlide(currentSlide - PROJECTS_PER_PAGE)
+    }
+
+    const onNextSlide = () => {
+        if (currentSlide === projects.length || (currentSlide + PROJECTS_PER_PAGE) > (projects.length - 1)) return
+        setCurrentSlide(currentSlide + PROJECTS_PER_PAGE)
+    }
+
+    useEffect(() => {
+        setSelectedProject(projects[currentSlide])
+    }, [currentSlide])
 
     return (
         <Context.Consumer>
@@ -76,21 +93,44 @@ const Cases = () => {
                     }
 
                     <Row className={`${styles.casesList}`}>
-                        {projects.length > 0 && projects.slice(0, 4).map((project: Project) => (
-                            <Col
-                                key={project.title}
-                                xl={3}
-                                style={{ zIndex: isFullProjectOpen ? 0 : 1 }}
-                                className={`${styles.caseItem} ${selectedProject?.title === project.title ? styles.active : ''}`}
-                                onClick={() => openFullProject(project)}
-                                onMouseEnter={() => setSelectedProject(project)}
-                            >
-                                <h4>{project.title}</h4>
-                                <p>{project.projectType}</p>
-                            </Col>
-                        )
-                        )}
+                        {projects.length > 0 &&
+                            projects
+                                .slice(currentSlide, currentSlide + PROJECTS_PER_PAGE)
+                                .map((project: Project) => (
+                                    <Col
+                                        key={project.title}
+                                        xl={3}
+                                        style={{ zIndex: isFullProjectOpen ? 0 : 1 }}
+                                        className={`${styles.caseItem} ${selectedProject?.title === project.title ? styles.active : ''}`}
+                                        onClick={() => openFullProject(project)}
+                                        onMouseEnter={() => setSelectedProject(project)}
+                                    >
+                                        <h4>{project.title}</h4>
+                                        <p>{project.projectType}</p>
+                                    </Col>
+                                )
+                                )}
                     </Row>
+                    <div className={styles.projectArrows}>
+                        {currentSlide !== 0 && (
+                            <button
+                                className={styles.prev}
+                                onClick={onPrevSlide}
+                            >
+                                 <FontAwesomeIcon icon={faChevronLeft} />
+                            </button>
+                        )}
+
+                        {currentSlide !== (projects.length - 1) && (
+                            <button
+                                className={styles.next}
+                                onClick={onNextSlide}
+                            >
+                                <FontAwesomeIcon icon={faChevronRight} />
+                            </button>
+                        )}
+
+                    </div>
                 </Container>
             )}
         </Context.Consumer>
