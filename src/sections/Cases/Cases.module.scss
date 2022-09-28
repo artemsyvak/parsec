@@ -70,7 +70,9 @@
         button{
             position: absolute;
             background: none;
-            border: none;            
+            border: none;  
+            width: 25px;
+            height: 25px;          
 
             &.prev{
                 left: 30px;
