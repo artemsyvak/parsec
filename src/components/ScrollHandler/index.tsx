@@ -100,48 +100,48 @@ const ScrollHandler = (props: any) => {
         }, 100)
     }
 
-    const handleMouseWheel = (event: WheelEvent) => {
-        // @ts-ignore
-        if (event.target.classList.value !== 'feedback-data__text') {
-            event.preventDefault()
-            // @ts-ignore
-            const delta = event.wheelDelta || -event.deltaY;
-            if (!block.current) {
-                if (Math.abs(prevWheelDelta.current) < Math.abs(delta) || delta % 120 === 0) {
-                    updateCurrentPage(delta < 0);
-                }
-            }
-            prevWheelDelta.current = delta;
-        }
-    }
+    // const handleMouseWheel = (event: WheelEvent) => {
+    //     // @ts-ignore
+    //     if (event.target.classList.value !== 'feedback-data__text') {
+    //         event.preventDefault()
+    //         // @ts-ignore
+    //         const delta = event.wheelDelta || -event.deltaY;
+    //         if (!block.current) {
+    //             if (Math.abs(prevWheelDelta.current) < Math.abs(delta) || delta % 120 === 0) {
+    //                 updateCurrentPage(delta < 0);
+    //             }
+    //         }
+    //         prevWheelDelta.current = delta;
+    //     }
+    // }
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-        if (!block.current) {
-            switch (event.key) {
-                case "ArrowUp":
-                    updateCurrentPage(false);
-                    break;
-                case "ArrowDown":
-                    updateCurrentPage(true);
-                    break;
-            }
-        }
-    }
+    // const handleKeyDown = (event: KeyboardEvent) => {
+    //     if (!block.current) {
+    //         switch (event.key) {
+    //             case "ArrowUp":
+    //                 updateCurrentPage(false);
+    //                 break;
+    //             case "ArrowDown":
+    //                 updateCurrentPage(true);
+    //                 break;
+    //         }
+    //     }
+    // }
 
     const handleTouchStart = (event: any) => {
         touchStart.current = event.touches[0].pageY;
     }
 
-    const handleTouchMove = (event: any) => {
-        event.preventDefault();
-        if (!block.current) {
-            const touchDelta = event.touches[0].pageY - touchStart.current;
-            if (Math.abs(touchDelta) > 30) {
-                updateCurrentPage(touchDelta < 0);
-                touchStart.current = event.touches[0].pageY;
-            }
-        }
-    }
+    // const handleTouchMove = (event: any) => {
+    //     event.preventDefault();
+    //     if (!block.current) {
+    //         const touchDelta = event.touches[0].pageY - touchStart.current;
+    //         if (Math.abs(touchDelta) > 30) {
+    //             updateCurrentPage(touchDelta < 0);
+    //             touchStart.current = event.touches[0].pageY;
+    //         }
+    //     }
+    // }
 
     const updateCurrentPage = (direction: 1 | -1) => {
         switch (direction) {
