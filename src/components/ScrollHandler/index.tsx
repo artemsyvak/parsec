@@ -4,6 +4,7 @@ import Context from "../../services/Context";
 import { CONTEXT_KEYS } from "../../enum";
 import { SHOWREEL_SLIDES } from "../../constants";
 import { useEventListener } from "../../hooks";
+// @ts-ignore
 import { useWheel } from '@use-gesture/react'
 // @ts-ignore
 import { Lethargy } from 'lethargy'
