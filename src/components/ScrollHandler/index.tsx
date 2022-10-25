@@ -179,6 +179,7 @@ const ScrollHandler = (props: any) => {
     // useEventListener(container.current, 'touchmove', handleTouchMove)
 
     useWheel(
+        // @ts-ignore
         ({ event, last, memo: wait = false }) => {
             // @ts-ignore
             if (event.target.classList.value === 'feedback-data__text' || last) return // event can be undefined as the last event is debounced
@@ -190,7 +191,7 @@ const ScrollHandler = (props: any) => {
                 // event has been detected
                 // if (!wait) setIndex((i) => clamp(i - wheelDirection, 0, slides.length - 1))
                 if (!wait && !block.current) {
-                    updateCurrentPage(wheelDirection)                   
+                    updateCurrentPage(wheelDirection)
                 }
                 return true // will set to wait to true in the next event frame
             }
