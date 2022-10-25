@@ -4,6 +4,11 @@ import Context from "../../services/Context";
 import { CONTEXT_KEYS } from "../../enum";
 import { SHOWREEL_SLIDES } from "../../constants";
 import { useEventListener } from "../../hooks";
+import { useWheel } from '@use-gesture/react'
+// @ts-ignore
+import { Lethargy } from 'lethargy'
+
+const lethargy = new Lethargy(undefined, undefined, undefined, 600)
 
 const ScrollHandler = (props: any) => {
 
@@ -25,7 +30,7 @@ const ScrollHandler = (props: any) => {
         clearTimeout(timeout)
         timeout = setTimeout(() => {
             block.current = false
-        }, 1000)
+        }, 500)
 
         return () => clearTimeout(timeout)
     }, [currentSlide])
@@ -95,11 +100,11 @@ const ScrollHandler = (props: any) => {
         }, 100)
     }
 
-    const handleMouseWheel = (event: WheelEvent) => {                
+    const handleMouseWheel = (event: WheelEvent) => {
         // @ts-ignore
-        if(event.target.classList.value !== 'feedback-data__text'){
+        if (event.target.classList.value !== 'feedback-data__text') {
             event.preventDefault()
-             // @ts-ignore
+            // @ts-ignore
             const delta = event.wheelDelta || -event.deltaY;
             if (!block.current) {
                 if (Math.abs(prevWheelDelta.current) < Math.abs(delta) || delta % 120 === 0) {
@@ -107,10 +112,10 @@ const ScrollHandler = (props: any) => {
                 }
             }
             prevWheelDelta.current = delta;
-        }       
+        }
     }
 
-    const handleKeyDown = (event: KeyboardEvent) => {        
+    const handleKeyDown = (event: KeyboardEvent) => {
         if (!block.current) {
             switch (event.key) {
                 case "ArrowUp":
@@ -138,11 +143,13 @@ const ScrollHandler = (props: any) => {
         }
     }
 
-    const updateCurrentPage = (nextPage: boolean) => {
-        if (nextPage) {
-            moveDown()
-        } else {
-            moveUp()
+    const updateCurrentPage = (direction: 1 | -1) => {
+        switch (direction) {
+            case 1:
+                return moveUp()
+            case -1:
+                return moveDown()
+            default: return;
         }
     }
 
@@ -157,19 +164,41 @@ const ScrollHandler = (props: any) => {
         return {
             height: '100%',
             position: 'relative',
-            touchAction: 'none',
             padding: 0,
             margin: 0,
             transform: `translate3d(0px, -${100 * currentPage}vh, 0px)`,
-            transition: `all 1200ms ease`,
+            transition: `all 1000ms ease`,
         } as CSSProperties
     }
 
-    useEventListener(container.current, 'wheel', handleMouseWheel)
-    useEventListener(container.current, 'DOMMouseScroll', handleMouseWheel)
-    useEventListener(container.current, 'keydown', handleKeyDown)
-    useEventListener(container.current, 'touchstart', handleTouchStart)
-    useEventListener(container.current, 'touchmove', handleTouchMove)
+    // useEventListener(container.current, 'wheel', handleMouseWheel)
+    // useEventListener(container.current, 'DOMMouseScroll', handleMouseWheel)
+    // useEventListener(container.current, 'keydown', handleKeyDown)
+    // useEventListener(container.current, 'touchstart', handleTouchStart)
+    // useEventListener(container.current, 'touchmove', handleTouchMove)
+
+    useWheel(
+        ({ event, last, memo: wait = false }) => {
+            // @ts-ignore
+            if (event.target.classList.value === 'feedback-data__text' || last) return // event can be undefined as the last event is debounced
+            event.preventDefault() // this is needed to prevent the native browser scroll
+            const wheelDirection = lethargy.check(event)
+            // wheelDirection === 0 when Lethargy thinks it's an inertia-triggered event
+            if (wheelDirection) {
+                // wait is going to switch from false to true when an intentional wheel
+                // event has been detected
+                // if (!wait) setIndex((i) => clamp(i - wheelDirection, 0, slides.length - 1))
+                if (!wait && !block.current) {
+                    updateCurrentPage(wheelDirection)                   
+                }
+                return true // will set to wait to true in the next event frame
+            }
+            return false // will set to wait to false in the next event frame
+        },
+        // we need to use a ref to be able to get non passive events and be able
+        // to trigger event.preventDefault()
+        { target: container, eventOptions: { passive: false } }
+    )
 
     return (
         <div style={getContainerStyle()}
