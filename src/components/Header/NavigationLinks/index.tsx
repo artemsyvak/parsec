@@ -1,39 +1,48 @@
+import { CONTEXT_KEYS, SECTION_NUMBER } from '../../../enum';
+import { useCustomContext } from '../../../hooks';
 import styles from './NavigationLinks.module.scss';
 
 interface LinkType{
-    label: string,
-    url: string
+    sectionNumber: number,
+    label: string
 }
 
 const Links: LinkType[] = [
     {
-        url: '#first',
-        label: 'Про Нас'
+        sectionNumber: SECTION_NUMBER.SERVICES,
+        label: 'Services'
     },
     {
-        url: '#second',
-        label: 'Роботи'
+        sectionNumber: SECTION_NUMBER.CASES,
+        label: 'Cases'
     },
     {
-        url: '#third',
-        label: 'Послуги'
+        sectionNumber: SECTION_NUMBER.CLIENTS,
+        label: 'Clients'
     },
     {
-        url: '#sasat',
-        label: 'Контакти'
+        sectionNumber: SECTION_NUMBER.FEEDBACKS,
+        label: 'Feedbacks'
     },
     {
-        url: '#',
-        label: 'Замовити Проект'
+        sectionNumber: SECTION_NUMBER.TEAM,
+        label: 'Team'
+    },
+    {
+        sectionNumber: SECTION_NUMBER.CONTACT_US,
+        label: 'Contacts'
     }
 ]
 
 const NavigationLinks = () => {
+
+    const [,setCurrentPage] = useCustomContext(CONTEXT_KEYS.PAGE)
+
     return (
         <ul className={`${styles.navigationLinks} mb-0`}>
             {Links.map((link: LinkType) => (
                 <li key={link.label}>
-                    <a href={link.url}>{link.label}</a>   
+                    <button onClick={() => setCurrentPage(link.sectionNumber)}>{link.label}</button>   
                 </li>
             ))}
         </ul>

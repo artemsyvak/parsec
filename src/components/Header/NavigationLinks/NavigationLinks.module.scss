@@ -19,7 +19,7 @@
         &:last-child{            
             margin-right: 0;
 
-            a{     
+            button{     
                 position: relative;   
                 
                 &::before, &:after{
@@ -61,7 +61,10 @@
             }
         }
 
-        & > a{ 
+        & > button{ 
+            background: transparent;
+            box-shadow: none;
+            border: none;
             height: 30px;          
             text-transform: uppercase;
             font-family: $font-Kharkiv;

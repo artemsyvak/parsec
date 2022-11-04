@@ -76,7 +76,12 @@ const Home: NextPage = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <Container fluid className="px-0">
+        <div id="mobile-prevent" className="d-xl-none d-flex justify-content-center align-items-center flex-column">
+          <img src="/logo-mini.svg"  width={120} height={100} alt="Parsec Studio Logo" />
+          <p>Responsive version of our website will be soon, we are sorry.</p>
+          <p>Please use wider screen.</p>
+        </div>
+        <Container fluid className="px-0 d-xl-block d-none">
           <Context.Provider value={{
             awsMedia,
             services,
