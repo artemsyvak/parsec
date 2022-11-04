@@ -111,26 +111,28 @@ const Cases = () => {
                                 )
                                 )}
                     </Row>
-                    <div className={styles.projectArrows}>
-                        {currentSlide !== 0 && (
-                            <button
-                                className={styles.prev}
-                                onClick={onPrevSlide}
-                            >
-                                 <FontAwesomeIcon icon={faChevronLeft} />
-                            </button>
-                        )}
+                    {!isFullProjectOpen && (
+                        <div className={styles.projectArrows}>
+                            {currentSlide !== 0 && (
+                                <button
+                                    className={styles.prev}
+                                    onClick={onPrevSlide}
+                                >
+                                    <FontAwesomeIcon icon={faChevronLeft} />
+                                </button>
+                            )}
 
-                        {currentSlide !== (projects.length - 1) && (
-                            <button
-                                className={styles.next}
-                                onClick={onNextSlide}
-                            >
-                                <FontAwesomeIcon icon={faChevronRight} />
-                            </button>
-                        )}
+                            {currentSlide !== (projects.length - 1) && (
+                                <button
+                                    className={styles.next}
+                                    onClick={onNextSlide}
+                                >
+                                    <FontAwesomeIcon icon={faChevronRight} />
+                                </button>
+                            )}
 
-                    </div>
+                        </div>
+                    )}
                 </Container>
             )}
         </Context.Consumer>

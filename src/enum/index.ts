@@ -22,6 +22,10 @@ enum SECTION_NUMBER {
     SHOWREEL,
     SERVICES,
     CASES,
+    CLIENTS,
+    FEEDBACKS,
+    TEAM,
+    CONTACT_US
 }
 
 export {

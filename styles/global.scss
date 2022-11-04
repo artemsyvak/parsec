@@ -18,6 +18,18 @@ main{
   flex-direction: column;
 }
 
+#mobile-prevent{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  background-color: $black;
+  color: $white;
+  font-family: $font-Kharkiv;
+}
+
 * {
   padding: 0;
   margin: 0;
