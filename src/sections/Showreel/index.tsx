@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
 import Slider from "react-slick";
@@ -73,9 +73,10 @@ const Showreel = () => {
 
     const slider = useRef(null)
     const sliderContainer = useRef(null)
+    const [isShowreelPlaying, setIsShowreelPlaying] = useState(false)
 
     const playShowreel = () => {
-        return 'hello';
+        setIsShowreelPlaying(true)
     }
 
     const [currentPage, setCurrentPage] = useCustomContext(CONTEXT_KEYS.PAGE)
@@ -108,19 +109,34 @@ const Showreel = () => {
             {() => {
                 return (
                     <div className={`${styles.showreel} DNASlider`}>
-                        <Header />
-                        <span className={styles.showreelBackground}>                            
+                        {
+                            !isShowreelPlaying && (
+                                <Header />
+                            )
+                        }
+                        <span className={styles.showreelBackground}>
                             {currentPage === 0 && showreel && (
-                                <VideoPlayer source={showreel?.fileURL}/>
+                                <VideoPlayer
+                                    controls={isShowreelPlaying}
+                                    source={showreel?.fileURL}
+                                    onCloseFullProject={() => setIsShowreelPlaying(false)}
+                                    isShowreelPlayer
+                                />
                             )}
                         </span>
-                        <span className={styles.shadow}></span>
+
+                        {
+                            !isShowreelPlaying && (
+                                <span className={styles.shadow}></span>
+                            )
+                        }
 
                         <Transition in={currentSlide < 0} timeout={0}>
                             {(state) => (
                                 <div className={styles.showreelControls} style={{
                                     // @ts-ignore
                                     ...transitionShowreelControlsStyles[state],
+                                    display: isShowreelPlaying ? 'none' : 'flex',
                                 }}>
                                     <img style={{ marginLeft: '32px' }} src="/logo.svg" className={styles.showreelLogo} alt="" />
                                     <Button
@@ -133,35 +149,41 @@ const Showreel = () => {
                             )}
                         </Transition>
 
-                        <Transition in={currentSlide >= 0} timeout={0} ref={sliderContainer}>
-                            {state => (
-                                <div className={styles.showreelSliderContainer} style={{
-                                    // @ts-ignore
-                                    ...transitionSliderContainerStyles[state],
-                                }}>
-                                    <span className={styles.DNAtitle}>наш днк</span>
-                                    <Slider ref={slider} {...sliderSettings} >
-                                        {DNA_LIST.map((dna, index) => (
-                                            <ShowreelDNA key={`${dna.title}`} {...dna} index={index + 1} />
-                                        ))}
-                                    </Slider>
-                                </div>
-                            )}
-                        </Transition>
+                        {
+                            !isShowreelPlaying && (
+                                <>
 
-                        <div className={`${styles.footer} container gx-0`}>
-                            <p>
-                                Ми допомагаємо брендам говорити з людьми,
-                                а молодим артистам — доповнювати музичні
-                                ідеї картинкою.
-                            </p>
-                            <div className={styles.skipButton} onClick={() => setCurrentPage(currentPage + 1)}></div>
-                            <ul className={styles.tags}>
-                                <li><a href="#">Реклама</a></li>
-                                <li><a href="#">Анімація</a></li>
-                                <li><a href="#">Кліпи</a></li>
-                            </ul>
-                        </div>
+                                    <Transition in={currentSlide >= 0} timeout={0} ref={sliderContainer}>
+                                        {state => (
+                                            <div className={styles.showreelSliderContainer} style={{
+                                                // @ts-ignore
+                                                ...transitionSliderContainerStyles[state],
+                                            }}>
+                                                <span className={styles.DNAtitle}>наш днк</span>
+                                                <Slider ref={slider} {...sliderSettings} >
+                                                    {DNA_LIST.map((dna, index) => (
+                                                        <ShowreelDNA key={`${dna.title}`} {...dna} index={index + 1} />
+                                                    ))}
+                                                </Slider>
+                                            </div>
+                                        )}
+                                    </Transition>
+                                    <div className={`${styles.footer} container gx-0`}>
+                                        <p>
+                                            Ми допомагаємо брендам говорити з людьми,
+                                            а молодим артистам — доповнювати музичні
+                                            ідеї картинкою.
+                                        </p>
+                                        <div className={styles.skipButton} onClick={() => setCurrentPage(currentPage + 1)}></div>
+                                        <ul className={styles.tags}>
+                                            <li><a href="#">Реклама</a></li>
+                                            <li><a href="#">Анімація</a></li>
+                                            <li><a href="#">Кліпи</a></li>
+                                        </ul>
+                                    </div>
+                                </>
+                            )
+                        }
                     </div>
                 )
             }}

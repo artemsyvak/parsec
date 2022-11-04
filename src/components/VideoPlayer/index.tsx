@@ -15,6 +15,7 @@ type Props = {
     onCloseFullProject?: () => void,
     onDetailedInfoOpen?: () => void,
     isFullProjectOpen?: boolean,
+    isShowreelPlayer?: boolean
 }
 
 const transitionStylesVideo = {
@@ -59,6 +60,7 @@ const VideoPlayer = ({
     onCloseFullProject,
     onDetailedInfoOpen,
     isFullProjectOpen,
+    isShowreelPlayer = false
 }: Props) => {
     const [isPlaying, setIsPlaying] = useState<boolean>(true)
     const [currentTime, setCurrentTime] = useState<number>(0)
@@ -112,7 +114,7 @@ const VideoPlayer = ({
             setIsSourceChanged(false)
             player?.current.pause()
             player?.current.load()
-            player?.current.play() 
+            player?.current.play()
 
 
             // player?.current.pause()
@@ -224,13 +226,20 @@ const VideoPlayer = ({
                         {controls && !isControlsHidden && (
                             <>
                                 <button className={styles.backButton} onClick={onCloseFullProject}>
-                                    back to projects
+
+                                    {!isShowreelPlayer && ('back to projects')}
                                     <FontAwesomeIcon icon={faXmark} size="lg" />
                                 </button>
-                                <button className={styles.openDetailsButton} onClick={onDetailedInfoOpen}>
-                                    more about project
-                                    <span className={styles.arrows}></span>
-                                </button>
+
+                                {
+                                    !isShowreelPlayer && (
+                                        <button className={styles.openDetailsButton} onClick={onDetailedInfoOpen}>
+                                            more about project
+                                            <span className={styles.arrows}></span>
+                                        </button>
+                                    )
+                                }
+
                             </>
                         )}
 
