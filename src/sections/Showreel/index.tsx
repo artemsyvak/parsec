@@ -123,6 +123,7 @@ const Showreel = () => {
                                     source={showreel?.fileURL}
                                     onCloseFullProject={() => setIsShowreelPlaying(false)}
                                     isShowreelPlayer
+                                    isFullProjectOpen={isShowreelPlaying}
                                 />
                             )}
                         </span>
