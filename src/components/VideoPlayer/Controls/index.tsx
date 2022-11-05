@@ -11,7 +11,7 @@ type Props = {
     volume: number,
     totalDuration: number,
     currentProgress: number,
-    currentTime: number,
+    currentTime?: number,
     onPlayToggle: () => void,
     onProgressChange: (e: any) => void,
     onFullScreen: () => void,
@@ -57,14 +57,14 @@ const Controls = ({
                     <div
                         className={styles.currentProgress}
                         style={{ width: `${currentProgress}%` }}
-                    />
+                    /> 
                     <input
                         className={styles.videoProgressInput}
                         type="range"
                         min={0}
                         max={totalDuration}
                         step="0.01"
-                        value={currentTime}
+                        // value={currentTime}
                         onChange={onProgressChange}
                     />
                 </div>

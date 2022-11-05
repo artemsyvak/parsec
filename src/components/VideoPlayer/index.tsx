@@ -71,7 +71,6 @@ const VideoPlayer = ({
     const [isControlsHidden, setIsControlsHidden] = useState(false)
 
     const player = useRef<HTMLVideoElement>(null)
-    const playerSrc = useRef<HTMLSourceElement>(null)
     const [isSourceChanged, setIsSourceChanged] = useState<boolean>(true)
 
     const onVolumeChange = (e: any) => {
@@ -115,36 +114,6 @@ const VideoPlayer = ({
             player?.current.pause()
             player?.current.load()
             player?.current.play()
-
-
-            // player?.current.pause()
-            // player?.current.load()
-            // window.caches.open('prefetch-cache-v2')
-            //     .then((cache: Cache) => fetchAndCache(source, cache))
-            //     .then(response => response.arrayBuffer())
-            //     .then(buffer => {
-            //         console.log(buffer)
-            //         const mediaSource = new MediaSource();
-            //         playerSrc.current.src = URL.createObjectURL(mediaSource);
-            //         console.log(player.current.src)
-            //         mediaSource.addEventListener('sourceopen', sourceOpen, { once: true });
-
-            //         function sourceOpen() {         
-            //             URL.revokeObjectURL(playerSrc.current.src);
-
-            //             //   'video/webm; codecs="vp09.00.10.08"'
-            //             // 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
-            //             const sourceBuffer = mediaSource.addSourceBuffer('video/quicktime');
-            //             sourceBuffer.appendBuffer(buffer);
-
-            //             player?.current.play().then(() => {
-            //                 console.log('played!')
-            //                 // TODO: Fetch the rest of the video when user starts playing video.
-            //             });
-            //         }
-            //     });
-
-
         }, 0)
 
         let durationTimeout: any = null
@@ -166,7 +135,6 @@ const VideoPlayer = ({
 
     useEffect(() => {
         let playerUpdateInterval: any = null;
-
         if (controls && isPlaying) {
             playerUpdateInterval = setInterval(() => {
                 setCurrentTime(player.current?.currentTime);
@@ -197,19 +165,24 @@ const VideoPlayer = ({
         player.current.volume = volume
     }, [volume])
 
-    // useEffect(() => {
-    //     let closeControlsTimeout: any = null
-    //     if (isFullProjectOpen && !isControlsHidden) {
-    //         clearTimeout(closeControlsTimeout)
-    //         closeControlsTimeout = setTimeout(() => {
-    //             setIsControlsHidden(true)
-    //         }, 2000)
-    //     }
-    //     return () => {
-    //         clearTimeout(closeControlsTimeout)
-    //     }
-    // }, [isFullProjectOpen, isControlsHidden])
+    useEffect(() => {
+        let closeControlsTimeout: any = null
+        if (isFullProjectOpen && !isControlsHidden) {
+            clearTimeout(closeControlsTimeout)
+            closeControlsTimeout = setTimeout(() => {
+                setIsControlsHidden(true)
+            }, 2000)
+        }
+        return () => {
+            clearTimeout(closeControlsTimeout)
+        }
+    }, [isFullProjectOpen, isControlsHidden])
 
+
+    const onDetailedInfoOpenHandler = () => {
+        onPlayToggle()
+        onDetailedInfoOpen?.()
+    }
 
     return (
         <Transition in={isSourceChanged} timeout={0}>
@@ -223,35 +196,48 @@ const VideoPlayer = ({
                                 : ''}`}
                         onMouseMove={() => setIsControlsHidden(false)}
                     >
-                        {controls && !isControlsHidden && (
-                            <>
-                                <button className={styles.backButton} onClick={onCloseFullProject}>
-
-                                    {!isShowreelPlayer && ('back to projects')}
-                                    <FontAwesomeIcon icon={faXmark} size="lg" />
-                                </button>
-
-                                {
-                                    !isShowreelPlayer && (
-                                        <button className={styles.openDetailsButton} onClick={onDetailedInfoOpen}>
-                                            more about project
-                                            <span className={styles.arrows}></span>
-                                        </button>
-                                    )
-                                }
-
-                            </>
-                        )}
-
                         <div
                             className={styles.changeBackgroundContainer}
                             // @ts-ignore
                             style={{ ...transitionStylesVideoChangeBackground[state] }}
                         />
+
+                        {controls && (
+                            <Transition in={isControlsHidden} timeout={0}>
+                                {(controlsState) => {
+                                    return (
+                                        <>
+                                            <button className={styles.backButton} onClick={onCloseFullProject}
+                                                // @ts-ignore
+                                                style={{ ...transitionStylesVideoChangeBackground[controlsState] }}
+                                            >
+
+                                                {!isShowreelPlayer && ('back to projects')}
+                                                <FontAwesomeIcon icon={faXmark} size="lg" />
+                                            </button>
+
+                                            {
+                                                !isShowreelPlayer && (
+                                                    <button className={styles.openDetailsButton} onClick={onDetailedInfoOpenHandler}
+                                                        // @ts-ignore
+                                                        style={{ ...transitionStylesVideoChangeBackground[controlsState] }}
+                                                    >
+                                                        more about project
+                                                        <span className={styles.arrows}></span>
+                                                    </button>
+                                                )
+                                            }
+                                        </>
+                                    )
+                                }}
+                            </Transition>
+
+                        )}
+
                         <video
                             ref={player}
                             loop={loop}
-                            // autoPlay={isPlaying}                            
+                            autoPlay={isPlaying}                            
                             style=
                             {{
                                 width: '100%',
@@ -263,24 +249,37 @@ const VideoPlayer = ({
                             }}
                             muted={volume === 0}
                         >
-                            <source ref={playerSrc} src={source} type={type} />
+                            <source src={source} type={type} />
                         </video>
-                        {controls && !isControlsHidden && (
-                            <Controls
-                                isMuted={volume === 0}
-                                isPlaying={isPlaying}
-                                isFullScreen={isFullScreen}
-                                currentTime={currentTime}
-                                currentProgress={currentProgress}
-                                totalDuration={totalDuration}
-                                onPlayToggle={onPlayToggle}
-                                onFullScreen={() => setIsFullScreen(!isFullScreen)}
-                                onMuteToogle={onMuteToogle}
-                                onProgressChange={onProgressChange}
-                                onVolumeChange={onVolumeChange}
-                                volume={volume}
-                            />
-                        )}
+
+                        {controls && (
+                            <Transition in={isControlsHidden} timeout={0}>
+                                {(controlsState) => {
+                                    return (
+                                        <div
+                                            // @ts-ignore
+                                            style={{ ...transitionStylesVideoChangeBackground[controlsState] }}
+                                        >
+                                            <Controls
+                                                isMuted={volume === 0}
+                                                isPlaying={isPlaying}
+                                                isFullScreen={isFullScreen}
+                                                currentTime={currentTime}
+                                                currentProgress={currentProgress}
+                                                totalDuration={totalDuration}
+                                                onPlayToggle={onPlayToggle}
+                                                onFullScreen={() => setIsFullScreen(!isFullScreen)}
+                                                onMuteToogle={onMuteToogle}
+                                                onProgressChange={onProgressChange}
+                                                onVolumeChange={onVolumeChange}
+                                                volume={volume}
+                                            />
+                                        </div>
+
+                                    )
+                                }}
+                            </Transition>
+                        )}                        
                     </div>
                 )
             }}

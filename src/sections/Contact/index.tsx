@@ -16,7 +16,7 @@ const ContactForm = () => {
         <Container className="h-100">
             <Row className="h-75 justify-content-center align-items-center">
                 <Col xl={6} className={styles.contactInfo}>
-                    <a className={styles.email} href="mailto:parsec.corporate@gmail.com">parsec.corporate@gmail.com</a>
+                    <a className={styles.email} href="mailto:parsec.corporative@gmail.com">parsec.corporative@gmail.com</a>
                     <a className={styles.phone} href="tel:+380631241466">+38 063 12 41 466</a>
 
                     <p className={`${styles.socialLinksTitle} mt-4 pt-4`}>Follow us:</p>
