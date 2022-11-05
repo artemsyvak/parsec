@@ -7,8 +7,8 @@ import styles from './Feedbacks.module.scss'
 
 const Feedbacks = () => {
     const feedbacks: Feedback[] = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].feedbacks
-    // TODO: update when all feedbacks will be added
-    const copiedFeedbacks = [...feedbacks, ...feedbacks, ...feedbacks, ...feedbacks, ...feedbacks, ...feedbacks]
+     // TODO: update when all feedbacks will be added
+     const copiedFeedbacks = [...feedbacks, ...feedbacks, ...feedbacks, ...feedbacks, ...feedbacks, ...feedbacks]
     return (
         <Container className={`${styles.feedbacksContainer} px-0`}>
             <Slider settings={{
@@ -27,8 +27,12 @@ const Feedbacks = () => {
                         </div>
 
                         <div className={styles.feedbackFooter}>
-                            <img className={styles.avatar} src={feedback.avatar} alt={feedback.name} />
-                            <img className={styles.company_avatar} src={feedback.company_avatar} alt={feedback.name} />
+                            {feedback.avatar && (
+                                <img className={styles.avatar} src={feedback.avatar} alt={feedback.name} />
+                            )}
+                            {feedback.company_avatar && (
+                                <img className={styles.company_avatar} src={feedback.company_avatar} alt={feedback.name} />
+                            )}
                             <h4 className={styles.name}>{feedback.name}</h4>
                             <p className={styles.position}>{feedback.position}</p>
                         </div>
