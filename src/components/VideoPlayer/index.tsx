@@ -21,14 +21,14 @@ type Props = {
 const transitionStylesVideo = {
     entering: {
         opacity: 0,
-        transition: '.2s linear'
+        transition: '.1s linear'
     },
     entered: {
         opacity: 1,
     },
     exiting: {
         opacity: 0,
-        transition: '.5s linear'
+        transition: '.3s linear'
     },
     exited: {
         opacity: 0,
@@ -38,11 +38,11 @@ const transitionStylesVideo = {
 const transitionStylesVideoChangeBackground = {
     entering: {
         opacity: 0,
-        transition: '.5s linear'
+        transition: '.2s linear'
     },
     entered: {
         opacity: 0,
-        transition: '.5s linear',
+        transition: '.2s linear',
     },
     exiting: {
         opacity: 1,
@@ -125,7 +125,7 @@ const VideoPlayer = ({
                 player.current.volume = volume
             }
             setIsSourceChanged(true)
-        }, 600)
+        }, 150)
 
         return () => {
             clearTimeout(playerTimeout)
