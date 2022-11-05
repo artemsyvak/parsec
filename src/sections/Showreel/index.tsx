@@ -69,10 +69,12 @@ const transitionSliderContainerStyles = {
     },
 };
 
+// TODO: add currentSlider logic for Ukrainian locale.
+
 const Showreel = () => {
 
-    const slider = useRef(null)
-    const sliderContainer = useRef(null)
+    // const slider = useRef(null)
+    // const sliderContainer = useRef(null)
     const [isShowreelPlaying, setIsShowreelPlaying] = useState(false)
 
     const playShowreel = () => {
@@ -80,29 +82,29 @@ const Showreel = () => {
     }
 
     const [currentPage, setCurrentPage] = useCustomContext(CONTEXT_KEYS.PAGE)
-    const [currentSlide,] = useCustomContext(CONTEXT_KEYS.SLIDE)
+    // const [currentSlide,] = useCustomContext(CONTEXT_KEYS.SLIDE)
     const showreel = getShowreelSource(useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].awsMedia)
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const sliderRef = sliderContainer.current.props.children().props.children[1].ref.current;
+    //     const sliderRef = sliderContainer.current.props.children().props.children[1].ref.current;
 
-        if (!sliderRef) {
-            return
-        }
+    //     if (!sliderRef) {
+    //         return
+    //     }
 
-        if (currentSlide === -1) {
-            return sliderRef.slickGoTo(0)
-        }
+    //     if (currentSlide === -1) {
+    //         return sliderRef.slickGoTo(0)
+    //     }
 
-        if (currentSlide < SHOWREEL_SLIDES) {
-            sliderRef.slickGoTo(currentSlide)
-        } else {
-            setCurrentPage(currentPage + 1)
-        }
+    //     if (currentSlide < SHOWREEL_SLIDES) {
+    //         sliderRef.slickGoTo(currentSlide)
+    //     } else {
+    //         setCurrentPage(currentPage + 1)
+    //     }
 
 
-    }, [currentSlide])
+    // }, [currentSlide])
 
     return (
         <Context.Consumer>
@@ -131,29 +133,29 @@ const Showreel = () => {
                             )
                         }
 
-                        <Transition in={currentSlide < 0} timeout={0}>
-                            {(state) => (
+                        {/* <Transition in={currentSlide < 0} timeout={0}>
+                            {(state) => ( */}
                                 <div className={styles.showreelControls} style={{
                                     // @ts-ignore
-                                    ...transitionShowreelControlsStyles[state],
+                                    // ...transitionShowreelControlsStyles[state],
                                     display: isShowreelPlaying ? 'none' : 'flex',
                                 }}>
-                                    <img style={{ marginLeft: '32px' }} src="/logo.svg" className={styles.showreelLogo} alt="" />
+                                    <img src="/logo.svg" className={styles.showreelLogo} alt="" />
                                     <Button
-                                        style={{ margin: '20px 0 0 35px' }}
+                                        style={{ margin: '20px 0 0 -12px' }}
                                         icon="/play-icon.svg"
                                         label='Watch showreel'
                                         onClick={playShowreel}
                                     />
                                 </div>
-                            )}
-                        </Transition>
+                            {/* )}
+                        </Transition> */}
 
                         {
                             !isShowreelPlaying && (
                                 <>
 
-                                    <Transition in={currentSlide >= 0} timeout={0} ref={sliderContainer}>
+                                    {/* <Transition in={currentSlide >= 0} timeout={0} ref={sliderContainer}>
                                         {state => (
                                             <div className={styles.showreelSliderContainer} style={{
                                                 // @ts-ignore
@@ -167,18 +169,16 @@ const Showreel = () => {
                                                 </Slider>
                                             </div>
                                         )}
-                                    </Transition>
+                                    </Transition> */}
                                     <div className={`${styles.footer} container gx-0`}>
                                         <p>
-                                            Ми допомагаємо брендам говорити з людьми,
-                                            а молодим артистам — доповнювати музичні
-                                            ідеї картинкою.
+                                        Ukrainian Full-cycle Video Production
                                         </p>
                                         <div className={styles.skipButton} onClick={() => setCurrentPage(currentPage + 1)}></div>
                                         <ul className={styles.tags}>
-                                            <li><a href="#">Реклама</a></li>
-                                            <li><a href="#">Анімація</a></li>
-                                            <li><a href="#">Кліпи</a></li>
+                                            <li><a href="#">Video Production</a></li>
+                                            <li><a href="#">2D Animation</a></li>
+                                            <li><a href="#">3D Animation</a></li>
                                         </ul>
                                     </div>
                                 </>

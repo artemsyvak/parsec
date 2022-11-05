@@ -11,6 +11,8 @@ import { Lethargy } from 'lethargy'
 
 const lethargy = new Lethargy(undefined, undefined, undefined, 600)
 
+// TODO: add currentSlider logic for Ukrainian locale.
+
 const ScrollHandler = (props: any) => {
 
     let touchStart = useRef(0)
@@ -18,57 +20,61 @@ const ScrollHandler = (props: any) => {
     let block = useRef(false)
     const container = useRef(null)
     const [currentPage, setCurrentPage] = useState(0)
-    const [currentSlide, setCurrentSlide] = useState(-1)
+    // const [currentSlide, setCurrentSlide] = useState(-1)
 
     const sanityData = useContext(Context)
 
-    useEffect(() => {
-        resetInitialPositionOfShowreelSlider()
-    }, [currentPage])
+    // useEffect(() => {
+    //     resetInitialPositionOfShowreelSlider()
+    // }, [currentPage])
 
-    useEffect(() => {
-        let timeout: any = null
-        clearTimeout(timeout)
-        timeout = setTimeout(() => {
-            block.current = false
-        }, 500)
+    // useEffect(() => {
+    //     let timeout: any = null
+    //     clearTimeout(timeout)
+    //     timeout = setTimeout(() => {
+    //         block.current = false
+    //     }, 500)
 
-        return () => clearTimeout(timeout)
-    }, [currentSlide])
+    //     return () => clearTimeout(timeout)
+    // }, [currentSlide])
 
     const moveUp = () => {
         if (currentPage !== 0) {
             setCurrentPage(currentPage - 1)
             block.current = true
         }
-        if (currentPage === 0 && currentSlide <= SHOWREEL_SLIDES && currentSlide !== -1) {
-            setCurrentSlide(currentSlide - 1)
-            block.current = true
-        }
+        // if (currentPage === 0 && currentSlide <= SHOWREEL_SLIDES && currentSlide !== -1) {
+        //     setCurrentSlide(currentSlide - 1)
+        //     block.current = true
+        // }
     }
 
     const moveDown = () => {
-        if (currentPage === 0 && currentSlide < SHOWREEL_SLIDES) {
-            setCurrentSlide(currentSlide + 1)
-            block.current = true
-        } else if (currentPage < props.children.length - 1) {
+        if (currentPage < props.children.length - 1) {
             setCurrentPage(currentPage + 1)
             block.current = true
         }
+        // if (currentPage === 0 && currentSlide < SHOWREEL_SLIDES) {
+        //     setCurrentSlide(currentSlide + 1)
+        //     block.current = true
+        // } else if (currentPage < props.children.length - 1) {
+        //     setCurrentPage(currentPage + 1)
+        //     block.current = true
+        // }
     }
 
     // back to initial state of showreel screen after leave from it
-    const resetInitialPositionOfShowreelSlider = () => {
-        if (currentPage === 1) {
-            let timemout
-            clearTimeout(timemout)
-            timemout = setTimeout(() => {
-                setCurrentSlide(0)
-                setCurrentSlide(-1)
-                block.current = true
-            }, 500)
-        }
-    }
+    // const resetInitialPositionOfShowreelSlider = () => {
+    //     if (currentPage === 1) {
+    //         let timemout
+    //         clearTimeout(timemout)
+    //         timemout = setTimeout(() => {
+    //             setCurrentSlide(0)
+    //             setCurrentSlide(-1)
+    //             block.current = true
+    //         }, 500)
+    //     }
+    // }
 
     const scrollBackAfterPageReload = () => {
         let timeout;
@@ -210,7 +216,7 @@ const ScrollHandler = (props: any) => {
         >
             <Context.Provider value={{
                 [CONTEXT_KEYS.PAGE]: [currentPage, setCurrentPage],
-                [CONTEXT_KEYS.SLIDE]: [currentSlide, setCurrentSlide],
+                // [CONTEXT_KEYS.SLIDE]: [currentSlide, setCurrentSlide],
                 [CONTEXT_KEYS.SANITY_DATA]: [sanityData, () => { }]
             }}
             >

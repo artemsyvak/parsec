@@ -15,6 +15,7 @@ const Team = () => {
                 className: 'screenSlider',
                 slidesToShow: 4,
                 slidesToScroll: 1,
+                dots: false
             }}
             >
                 {doubleTeam.map((teammate: Teammate, index: number) => (
