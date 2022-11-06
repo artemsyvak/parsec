@@ -50,6 +50,7 @@
                 line-height: 24px;
                 font-family: $font-Light;
                 white-space: break-spaces;
+                text-align: center;
             }
         }
 
@@ -62,20 +63,16 @@
             height: calc(100% - 270px);
 
             img {
-                position: absolute;
-                width: 60px;
-                height: 60px;
-                border-radius: 50%;
+                width: 100px;
+                // &.avatar{
+                //     left: 0px;
+                //     z-index: 1;
+                // }
 
-                &.avatar{
-                    left: 0px;
-                    z-index: 1;
-                }
-
-                &.company_avatar{
-                    left: 56px;
-                    z-index: 2;
-                }
+                // &.company_avatar{
+                //     left: 56px;
+                //     z-index: 2;
+                // }
             }
     
             .name {
