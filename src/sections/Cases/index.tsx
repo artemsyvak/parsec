@@ -20,7 +20,7 @@ const Cases = () => {
     let projects: Project[] = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].projects.map((project: Project) => {
         return {
             ...project,
-            videoUrl: projectsSources.find((source: any) => source.title === project.title).fileURL
+            videoUrl: projectsSources.find((source: any) => source._id === project.videoId)?.fileURL
         }
     })
 
