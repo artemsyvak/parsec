@@ -6,7 +6,7 @@ import { Feedback } from "../../types";
 import styles from './Feedbacks.module.scss'
 
 const Feedbacks = () => {
-    const feedbacks: Feedback[] = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].feedbacks
+    const feedbacks: Feedback[] = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].feedbacks    
     return (
         <Container className={`${styles.feedbacksContainer} px-0`}>
             <Slider settings={{
@@ -25,14 +25,14 @@ const Feedbacks = () => {
                         </div>
 
                         <div className={styles.feedbackFooter}>
-                            {feedback?.avatar && (
+                            {/* {feedback.avatar && (
                                 <img className={styles.avatar} src={feedback.avatar} alt={feedback.name} />
-                            )}
-                            {feedback?.company_avatar && (
+                            )} */}
+                            {feedback.company_avatar && (
                                 <img className={styles.company_avatar} src={feedback.company_avatar} alt={feedback.name} />
                             )}
-                            <h4 className={styles.name}>{feedback.name}</h4>
-                            <p className={styles.position}>{feedback.position}</p>
+                            {/* <h4 className={styles.name}>{feedback.name}</h4>
+                            <p className={styles.position}>{feedback.position}</p> */}
                         </div>
 
 
