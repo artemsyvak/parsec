@@ -93,7 +93,7 @@ const Cases = () => {
                     }
 
                     <Row className={`${styles.casesList}`}>
-                        {projects.length > 0 &&
+                        {projects.length > 0 && 
                             projects
                                 .slice(currentSlide, currentSlide + PROJECTS_PER_PAGE)
                                 .map((project: Project) => (
@@ -122,7 +122,7 @@ const Cases = () => {
                                 </button>
                             )}
 
-                            {currentSlide !== (projects.length - 1) && (
+                            {currentSlide !== (projects.length - 1) || !(projects.length <= PROJECTS_PER_PAGE) && (
                                 <button
                                     className={styles.next}
                                     onClick={onNextSlide}

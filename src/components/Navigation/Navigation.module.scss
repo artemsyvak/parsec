@@ -1,0 +1,19 @@
+
+@import '../../../styles/variables.scss';
+
+.navigationContainer{
+    position: fixed;
+    width: 100px;
+    height: 300px;
+    top: 100px;
+    transition: all 1000ms ease;
+    background: red;
+
+    ul{
+        padding: 0;
+
+        li{
+            color: $white;
+        }
+    }
+}
