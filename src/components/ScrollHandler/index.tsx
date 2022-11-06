@@ -2,8 +2,6 @@ import React, { CSSProperties, useContext, useEffect, WheelEvent } from "react";
 import { useState, useRef } from "react";
 import Context from "../../services/Context";
 import { CONTEXT_KEYS } from "../../enum";
-import { SHOWREEL_SLIDES } from "../../constants";
-import { useEventListener } from "../../hooks";
 // @ts-ignore
 import { useWheel } from '@use-gesture/react'
 // @ts-ignore
@@ -15,8 +13,8 @@ const lethargy = new Lethargy(undefined, undefined, undefined, 600)
 
 const ScrollHandler = (props: any) => {
 
-    let touchStart = useRef(0)
-    let prevWheelDelta = useRef(0)
+    // let touchStart = useRef(0)
+    // let prevWheelDelta = useRef(0)
     let block = useRef(false)
     const container = useRef(null)
     const [currentPage, setCurrentPage] = useState(0)
@@ -40,8 +38,8 @@ const ScrollHandler = (props: any) => {
 
     const moveUp = () => {
         if (currentPage !== 0) {
-            setCurrentPage(currentPage - 1)
             block.current = true
+            setCurrentPage(currentPage - 1)            
         }
         // if (currentPage === 0 && currentSlide <= SHOWREEL_SLIDES && currentSlide !== -1) {
         //     setCurrentSlide(currentSlide - 1)
@@ -51,8 +49,8 @@ const ScrollHandler = (props: any) => {
 
     const moveDown = () => {
         if (currentPage < props.children.length - 1) {
-            setCurrentPage(currentPage + 1)
             block.current = true
+            setCurrentPage(currentPage + 1)           
         }
         // if (currentPage === 0 && currentSlide < SHOWREEL_SLIDES) {
         //     setCurrentSlide(currentSlide + 1)
@@ -107,49 +105,6 @@ const ScrollHandler = (props: any) => {
         }, 100)
     }
 
-    // const handleMouseWheel = (event: WheelEvent) => {
-    //     // @ts-ignore
-    //     if (event.target.classList.value !== 'feedback-data__text') {
-    //         event.preventDefault()
-    //         // @ts-ignore
-    //         const delta = event.wheelDelta || -event.deltaY;
-    //         if (!block.current) {
-    //             if (Math.abs(prevWheelDelta.current) < Math.abs(delta) || delta % 120 === 0) {
-    //                 updateCurrentPage(delta < 0);
-    //             }
-    //         }
-    //         prevWheelDelta.current = delta;
-    //     }
-    // }
-
-    // const handleKeyDown = (event: KeyboardEvent) => {
-    //     if (!block.current) {
-    //         switch (event.key) {
-    //             case "ArrowUp":
-    //                 updateCurrentPage(false);
-    //                 break;
-    //             case "ArrowDown":
-    //                 updateCurrentPage(true);
-    //                 break;
-    //         }
-    //     }
-    // }
-
-    const handleTouchStart = (event: any) => {
-        touchStart.current = event.touches[0].pageY;
-    }
-
-    // const handleTouchMove = (event: any) => {
-    //     event.preventDefault();
-    //     if (!block.current) {
-    //         const touchDelta = event.touches[0].pageY - touchStart.current;
-    //         if (Math.abs(touchDelta) > 30) {
-    //             updateCurrentPage(touchDelta < 0);
-    //             touchStart.current = event.touches[0].pageY;
-    //         }
-    //     }
-    // }
-
     const updateCurrentPage = (direction: 1 | -1) => {
         switch (direction) {
             case 1:
@@ -177,12 +132,6 @@ const ScrollHandler = (props: any) => {
             transition: `all 1000ms ease`,
         } as CSSProperties
     }
-
-    // useEventListener(container.current, 'wheel', handleMouseWheel)
-    // useEventListener(container.current, 'DOMMouseScroll', handleMouseWheel)
-    // useEventListener(container.current, 'keydown', handleKeyDown)
-    // useEventListener(container.current, 'touchstart', handleTouchStart)
-    // useEventListener(container.current, 'touchmove', handleTouchMove)
 
     useWheel(
         // @ts-ignore
