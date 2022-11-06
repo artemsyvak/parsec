@@ -6,11 +6,13 @@ export type DNA_ITEM = {
 
 export type Project = {
     title: string,
+    serviceType: string,
     projectType: string,
     detailedInfoTitle: string,
     detailedInfoDescription: any,
     screenshots: any,
     videoUrl: any,
+    videoId: string,
 }
 
 export type Client = {
