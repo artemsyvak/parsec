@@ -7,8 +7,6 @@ import styles from './Team.module.scss'
 
 const Team = () => {
     const team: Teammate[] = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].team
-    // TODO: update when all team will be added
-    const doubleTeam = [...team, ...team]
     return (
         <Container className={`${styles.teamContainer} px-0`}>
             <Slider settings={{
@@ -18,7 +16,7 @@ const Team = () => {
                 dots: false
             }}
             >
-                {doubleTeam.map((teammate: Teammate, index: number) => (
+                {team.map((teammate: Teammate, index: number) => (
                     <div className={`${styles.sliderImageContainer}`} key={index}>
                         <img src={teammate.avatar} alt={teammate.name} />                        
                         <h4 className={styles.name}>{teammate.name}</h4>
