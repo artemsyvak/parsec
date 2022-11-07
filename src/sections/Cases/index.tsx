@@ -122,7 +122,7 @@ const Cases = () => {
                                 </button>
                             )}
 
-                            {currentSlide !== (projects.length - 1) || !(projects.length <= PROJECTS_PER_PAGE) && (
+                            {currentSlide !== (projects.length - 1) && (
                                 <button
                                     className={styles.next}
                                     onClick={onNextSlide}
