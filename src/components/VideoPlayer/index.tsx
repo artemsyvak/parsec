@@ -193,10 +193,10 @@ const VideoPlayer = ({
     }, [isFullProjectOpen])
 
     useEffect(() => {
-        if(isProjectDetailsOpen !== undefined && !isProjectDetailsOpen){
+        if(isProjectDetailsOpen !== undefined && isProjectDetailsOpen && isPlaying){
             onPlayToggle()
         }
-    }, [isProjectDetailsOpen])
+    }, [isProjectDetailsOpen, isPlaying])
 
 
     const onDetailedInfoOpenHandler = () => {

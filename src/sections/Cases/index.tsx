@@ -71,11 +71,12 @@ const Cases = () => {
         setSelectedProject(projects[currentSlide])
     }, [currentSlide])
 
-    // useEffect(() => {
-    //     if(currentPage !== SECTION_NUMBER.CASES && isFullProjectOpen){
-    //         setIsFullProjectOpen(false)
-    //     }
-    // }, [currentPage, isFullProjectOpen])
+    useEffect(() => {
+        if(currentPage !== SECTION_NUMBER.CASES && isFullProjectOpen){
+            onCloseFullProject()
+            setIsDetailsOpen(false)
+        }
+    }, [currentPage, isFullProjectOpen])
 
     return (
         <Context.Consumer>
