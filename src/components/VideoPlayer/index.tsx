@@ -4,7 +4,7 @@ import { Transition } from 'react-transition-group'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import Controls from './Controls'
-import { fetchAndCache } from '../../services/VideoPrecache'
+import Spinner from '../Spinner'
 
 
 type Props = {
@@ -14,6 +14,7 @@ type Props = {
     type?: string,
     onCloseFullProject?: () => void,
     onDetailedInfoOpen?: () => void,
+    isProjectDetailsOpen?: boolean,
     isFullProjectOpen?: boolean,
     isShowreelPlayer?: boolean
 }
@@ -60,7 +61,8 @@ const VideoPlayer = ({
     onCloseFullProject,
     onDetailedInfoOpen,
     isFullProjectOpen,
-    isShowreelPlayer = false
+    isShowreelPlayer = false,
+    isProjectDetailsOpen = undefined
 }: Props) => {
     const [isPlaying, setIsPlaying] = useState<boolean>(true)
     const [currentTime, setCurrentTime] = useState<number>(0)
@@ -80,18 +82,20 @@ const VideoPlayer = ({
         player.current.volume = volume
     }
 
-    const onProgressChange = (e: any) => {
-        const progress = e.target.value
+    const onProgressChange = async (e: any) => {       
+        const progress = parseFloat(e.target.value)
+        player.current.pause()
         setCurrentTime(progress)
         setCurrentProgress((progress / player.current.duration) * 100)
         // @ts-ignore
         player.current.currentTime = progress
+        await player.current.play()
     }
 
-    const onPlayToggle = () => {
+    const onPlayToggle = async () => {
         setIsPlaying(!isPlaying)
         if (!isPlaying) {
-            player.current.play()
+            await player.current.play()
         } else {
             player.current.pause()
         }
@@ -105,33 +109,37 @@ const VideoPlayer = ({
         }
     }
 
-    useEffect(() => {
+    useEffect(() => {        
+
+        if(isProjectDetailsOpen) return
+
         let playerTimeout: any = null
-        clearTimeout(playerTimeout)
+        clearTimeout(playerTimeout)            
 
         playerTimeout = setTimeout(() => {
-            setIsSourceChanged(false)
             player?.current.pause()
-            player?.current.load()
-            player?.current.play()
+            player?.current.load() 
+            setIsSourceChanged(false)                      
         }, 0)
 
         let durationTimeout: any = null
         clearTimeout(durationTimeout)
 
-        durationTimeout = setTimeout(() => {
-            setTotalDuration(player?.current?.duration)
-            if (player?.current) {
-                player.current.volume = volume
+        durationTimeout = setTimeout(async() => {                        
+                       
+            if(player?.current?.duration !== NaN){
+                setTotalDuration(player?.current?.duration)
+                setIsSourceChanged(true) 
+                await player?.current.play()                          
+                setIsPlaying(true)
             }
-            setIsSourceChanged(true)
-        }, 150)
+        }, 1000)
 
         return () => {
             clearTimeout(playerTimeout)
             clearTimeout(durationTimeout)
         }
-    }, [source])
+    }, [source, isProjectDetailsOpen])
 
     useEffect(() => {
         let playerUpdateInterval: any = null;
@@ -139,7 +147,7 @@ const VideoPlayer = ({
             playerUpdateInterval = setInterval(() => {
                 setCurrentTime(player.current?.currentTime);
                 setCurrentProgress((player.current?.currentTime / player?.current.duration) * 100);
-            }, 0);
+            }, 100);
         }
 
         return () => {
@@ -165,7 +173,7 @@ const VideoPlayer = ({
         player.current.volume = volume
     }, [volume])
 
-    useEffect(() => {
+    useEffect(() => {        
         let closeControlsTimeout: any = null
         if (isFullProjectOpen && !isControlsHidden) {
             clearTimeout(closeControlsTimeout)
@@ -178,10 +186,27 @@ const VideoPlayer = ({
         }
     }, [isFullProjectOpen, isControlsHidden])
 
+    useEffect(() => {
+        if(isFullProjectOpen){
+            onProgressChange({target: {value: '0'}})
+        }
+    }, [isFullProjectOpen])
+
+    useEffect(() => {
+        if(isProjectDetailsOpen !== undefined && !isProjectDetailsOpen){
+            onPlayToggle()
+        }
+    }, [isProjectDetailsOpen])
+
 
     const onDetailedInfoOpenHandler = () => {
         onPlayToggle()
         onDetailedInfoOpen?.()
+    }
+
+    const onCloseFullProjectHandler = () => {
+        setIsPlaying(true)
+        onCloseFullProject?.()
     }
 
     return (
@@ -199,15 +224,16 @@ const VideoPlayer = ({
                         <div
                             className={styles.changeBackgroundContainer}
                             // @ts-ignore
-                            style={{ ...transitionStylesVideoChangeBackground[state] }}
-                        />
+                            style={{ ...transitionStylesVideoChangeBackground[state] }}>
+                                <Spinner />
+                            </div>                        
 
                         {controls && (
                             <Transition in={isControlsHidden} timeout={0}>
                                 {(controlsState) => {
                                     return (
                                         <>
-                                            <button className={styles.backButton} onClick={onCloseFullProject}
+                                            <button className={styles.backButton} onClick={onCloseFullProjectHandler}
                                                 // @ts-ignore
                                                 style={{ ...transitionStylesVideoChangeBackground[controlsState] }}
                                             >
@@ -237,7 +263,7 @@ const VideoPlayer = ({
                         <video
                             ref={player}
                             loop={loop}
-                            autoPlay={isPlaying}                            
+                            autoPlay={isPlaying}
                             style=
                             {{
                                 width: '100%',

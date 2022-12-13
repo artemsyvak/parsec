@@ -12,6 +12,11 @@ const ICON_SIZE_LG = 'lg';
 
 const ContactForm = () => {
     const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORMSPREE_ID);
+
+    const openSocialLink = (link: string) => {
+        window.open(link, '_blank')
+    }
+
     return (
         <Container className="h-100">
             <Row className="h-75 justify-content-center align-items-center">
@@ -22,34 +27,28 @@ const ContactForm = () => {
                     <p className={`${styles.socialLinksTitle} mt-4 pt-4`}>Follow us:</p>
                     <Row>
                         <Col xl={4}>
-                            <div className={styles.socialLink}>
-                                <a href="https://www.instagram.com/parsec_studio/" target={"_blank"}>
-                                    <div className={styles.linkIconContainer}>
-                                        <FontAwesomeIcon size={ICON_SIZE_LG} icon={faInstagram as IconProp} />
-                                    </div>
-                                    Intagram
-                                </a>
-                            </div>
+                            <a href="https://www.instagram.com/parsec_studio/" target={"_blank"} className={styles.socialLink}>
+                                <div className={styles.linkIconContainer}>
+                                    <FontAwesomeIcon size={ICON_SIZE_LG} icon={faInstagram as IconProp} />
+                                </div>
+                                Intagram
+                            </a>
                         </Col>
                         <Col xl={4}>
-                            <div className={styles.socialLink}>
-                                <a href="https://www.facebook.com/parsec.studio/" target={"_blank"}>
-                                    <div className={styles.linkIconContainer}>
-                                        <FontAwesomeIcon size={ICON_SIZE_LG} icon={faFacebookF as IconProp} />
-                                    </div>
-                                    Facebook
-                                </a>
-                            </div>
+                            <a href="https://www.facebook.com/parsec.studio/" target={"_blank"} className={styles.socialLink}>
+                                <div className={styles.linkIconContainer}>
+                                    <FontAwesomeIcon size={ICON_SIZE_LG} icon={faFacebookF as IconProp} />
+                                </div>
+                                Facebook
+                            </a>
                         </Col>
                         <Col xl={4}>
-                            <div className={styles.socialLink}>
-                                <a href="https://vimeo.com/parsecagency" target={"_blank"}>
-                                    <div className={styles.linkIconContainer}>
-                                        <FontAwesomeIcon size={ICON_SIZE_LG} icon={faVimeoV as IconProp} />
-                                    </div>
-                                    Vimeo
-                                </a>
-                            </div>
+                            <a href="https://vimeo.com/parsecagency" target={"_blank"} className={styles.socialLink}>
+                                <div className={styles.linkIconContainer}>
+                                    <FontAwesomeIcon size={ICON_SIZE_LG} icon={faVimeoV as IconProp} />
+                                </div>
+                                Vimeo
+                            </a>
                         </Col>
                     </Row>
                 </Col>
@@ -94,7 +93,7 @@ const ContactForm = () => {
                                     id="message"
                                     name="message"
                                     placeholder="Your Message"
-                                    rows={1}
+                                    rows={5}
                                 />
                                 <ValidationError
                                     prefix="Message"
@@ -112,9 +111,9 @@ const ContactForm = () => {
                         </form>
                     }
                 </Col>
-                <p style={{color: 'white'}}>©{new Date().getFullYear()} Parsec studio</p>
+                <p style={{ color: 'white' }}>©{new Date().getFullYear()} Parsec studio</p>
             </Row>
-           
+
         </Container>
     );
 }

@@ -71,18 +71,25 @@ const Cases = () => {
         setSelectedProject(projects[currentSlide])
     }, [currentSlide])
 
+    // useEffect(() => {
+    //     if(currentPage !== SECTION_NUMBER.CASES && isFullProjectOpen){
+    //         setIsFullProjectOpen(false)
+    //     }
+    // }, [currentPage, isFullProjectOpen])
+
     return (
         <Context.Consumer>
             {() => (
                 <Container className={styles.casesContainer} style={{ height: casesContainerHeight }}>
 
                     <div className={styles.video}>
-                        {currentPage === SECTION_NUMBER.CASES && selectedProject && (
+                        {currentPage === SECTION_NUMBER.CASES && selectedProject && (                           
                             <VideoPlayer
                                 source={selectedProject.videoUrl}
                                 controls={isFullProjectOpen}
-                                onCloseFullProject={onCloseFullProject}
+                                onCloseFullProject={onCloseFullProject}                                
                                 isFullProjectOpen={isFullProjectOpen}
+                                isProjectDetailsOpen={isDetailsOpen}
                                 onDetailedInfoOpen={() => setIsDetailsOpen(true)}
                             />
                         )}

@@ -77,7 +77,7 @@ const Home: NextPage = ({
       </Head>
       <main>
         <div id="mobile-prevent" className="d-xl-none d-flex justify-content-center align-items-center flex-column">
-          <img src="/logo-mini.svg"  width={120} height={100} alt="Parsec Studio Logo" />
+          <img src="/logo-mini.svg" width={120} height={100} alt="Parsec Studio Logo" />
           <p>Responsive version of our website will be soon, we are sorry.</p>
           <p>Please use wider screen.</p>
         </div>
@@ -110,7 +110,7 @@ const Home: NextPage = ({
                 <Team />
               </Page>
               <Page id="contact-us" sectionTitle={SECTION_TITLES.CONTACT_US} background={SECTION_BACKGROUND.BLACK}>
-               <Contact />
+                <Contact />
               </Page>
             </ScrollHandler>
           </Context.Provider>

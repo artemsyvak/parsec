@@ -13,7 +13,7 @@ type Props = {
     currentProgress: number,
     currentTime?: number,
     onPlayToggle: () => void,
-    onProgressChange: (e: any) => void,
+    onProgressChange?: (e: any) => void,
     onFullScreen: () => void,
     onMuteToogle: () => void,
     onVolumeChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
@@ -33,7 +33,7 @@ const Controls = ({
     onMuteToogle,
     onVolumeChange,
 }: Props) => {
-
+    
     const volumeIcon = useMemo(() => {
         if (volume == 0) {
             return faVolumeXmark
@@ -63,7 +63,6 @@ const Controls = ({
                         type="range"
                         min={0}
                         max={totalDuration}
-                        step="0.01"
                         // value={currentTime}
                         onChange={onProgressChange}
                     />

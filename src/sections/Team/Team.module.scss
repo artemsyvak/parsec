@@ -33,3 +33,14 @@
 
     }
 }
+
+@media (max-width: 1200px) {
+    .teamContainer{
+        .sliderImageContainer{
+            img{
+                width: 250px!important;
+                height: 350px!important;
+            }
+        }
+    }
+}
