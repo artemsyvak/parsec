@@ -85,6 +85,12 @@ const Showreel = () => {
     // const [currentSlide,] = useCustomContext(CONTEXT_KEYS.SLIDE)
     const showreel = getShowreelSource(useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].awsMedia)
 
+    useEffect(() => {
+        if(currentPage !== 0 && isShowreelPlaying){
+            setIsShowreelPlaying(false)
+        }
+    }, [currentPage, isShowreelPlaying])
+
     // useEffect(() => {
 
     //     const sliderRef = sliderContainer.current.props.children().props.children[1].ref.current;
@@ -116,8 +122,8 @@ const Showreel = () => {
                                 <Header />
                             )
                         }
-                        <span className={styles.showreelBackground}>
-                            {currentPage === 0 && showreel && (
+                        <span className={`${styles.showreelBackground} showreel-video`}>
+                            {currentPage === 0 && showreel ? (
                                 <VideoPlayer
                                     controls={isShowreelPlaying}
                                     source={showreel?.fileURL}
@@ -125,7 +131,7 @@ const Showreel = () => {
                                     isShowreelPlayer
                                     isFullProjectOpen={isShowreelPlaying}
                                 />
-                            )}
+                            ): null}
                         </span>
 
                         {

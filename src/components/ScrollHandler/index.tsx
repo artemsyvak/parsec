@@ -6,6 +6,8 @@ import { CONTEXT_KEYS } from "../../enum";
 import { useWheel } from '@use-gesture/react'
 // @ts-ignore
 import { Lethargy } from 'lethargy'
+import Spinner from "../Spinner";
+import styles from './ScrollHandler.module.scss'
 
 const lethargy = new Lethargy(undefined, undefined, undefined, 600)
 
@@ -13,11 +15,10 @@ const lethargy = new Lethargy(undefined, undefined, undefined, 600)
 
 const ScrollHandler = (props: any) => {
 
-    // let touchStart = useRef(0)
-    // let prevWheelDelta = useRef(0)
     let block = useRef(false)
     const container = useRef(null)
     const [currentPage, setCurrentPage] = useState(0)
+    // const [isPageLoading, setIsPageLoading] = useState(false)
     // const [currentSlide, setCurrentSlide] = useState(-1)
 
     const sanityData = useContext(Context)
@@ -39,7 +40,7 @@ const ScrollHandler = (props: any) => {
     const moveUp = () => {
         if (currentPage !== 0) {
             block.current = true
-            setCurrentPage(currentPage - 1)            
+            setCurrentPage(currentPage - 1)
         }
         // if (currentPage === 0 && currentSlide <= SHOWREEL_SLIDES && currentSlide !== -1) {
         //     setCurrentSlide(currentSlide - 1)
@@ -50,7 +51,7 @@ const ScrollHandler = (props: any) => {
     const moveDown = () => {
         if (currentPage < props.children.length - 1) {
             block.current = true
-            setCurrentPage(currentPage + 1)           
+            setCurrentPage(currentPage + 1)
         }
         // if (currentPage === 0 && currentSlide < SHOWREEL_SLIDES) {
         //     setCurrentSlide(currentSlide + 1)
@@ -75,6 +76,7 @@ const ScrollHandler = (props: any) => {
     // }
 
     const scrollBackAfterPageReload = () => {
+
         let timeout;
         clearTimeout(timeout)
 
@@ -83,13 +85,18 @@ const ScrollHandler = (props: any) => {
             const windowHeight = window.innerHeight;
             const scrollY = window.scrollY
             const sectionNumber = scrollY / windowHeight
-
             if (scrollY >= windowHeight && sectionNumber !== 0) {
-                // enable body scrolling
+                const loaderEl = document.getElementById('loader')
+                loaderEl.style.display = 'flex'
+            
                 document.body.style.overflow = 'scroll'
 
                 // scroll page to first page
-                window.scroll(0, -windowHeight * sectionNumber)
+                window.scrollBy({
+                    left: 0,
+                    top: -windowHeight * sectionNumber,
+                    behavior: 'auto'
+                })
                 document.body.style.overflow = 'hidden'
 
                 let setCurrentPageTimeout
@@ -97,9 +104,11 @@ const ScrollHandler = (props: any) => {
 
                 // scroll page to section that was before reload
                 setCurrentPageTimeout = setTimeout(() => {
-                    document.body.style.overflow = 'hidden'
-                    setCurrentPage(sectionNumber)
-                }, 0)
+                    document.body.style.overflow = 'hidden'                   
+                    setCurrentPage(sectionNumber)                    
+                    loaderEl.style.display = 'none'                    
+                }, 1000)
+
             }
 
         }, 100)
@@ -157,6 +166,10 @@ const ScrollHandler = (props: any) => {
         { target: container, eventOptions: { passive: false } }
     )
 
+    useEffect(() => {
+        scrollBackAfterPageReload()
+    }, [])
+
     return (
         <div style={getContainerStyle()}
             ref={container}
@@ -169,6 +182,14 @@ const ScrollHandler = (props: any) => {
                 [CONTEXT_KEYS.SANITY_DATA]: [sanityData, () => { }]
             }}
             >
+
+                <div id="loader" className={styles.screenLoader}>
+                    <Spinner />
+                </div>
+                {/* {isPageLoading ?
+                    : null
+                } */}
+
                 {props.children}
             </Context.Provider>
         </div>
