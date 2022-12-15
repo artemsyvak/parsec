@@ -77,11 +77,15 @@ const Service = ({
               id="services"
               // @ts-ignore
               sectionTitle={getSectionTitleByService(serviceId)}
-              background={SECTION_BACKGROUND.WHITE}              
-              >
-              <div className="back-to-home">
-                <Link href="/"><FontAwesomeIcon size='lg' icon={faChevronLeft} /></Link>
-              </div>  
+              background={SECTION_BACKGROUND.WHITE}
+            >
+
+              <Link href="/">
+                <div className="back-to-home">
+                  <FontAwesomeIcon size='lg' icon={faChevronLeft} />
+                </div>
+              </Link>
+
               <ServiceDescription description={getServiceDescription(services)} />
               <Cases />
             </Page>
