@@ -13,6 +13,7 @@ import VideoPlayer from '../../components/VideoPlayer';
 
 import styles from './Showreel.module.scss';
 import { getShowreelSource } from '../../services/SanityDataProvider';
+import Link from 'next/link';
 
 const sliderSettings = {
     dots: false,
@@ -183,9 +184,9 @@ const Showreel = () => {
                                         </p>
                                         <div className={styles.skipButton} onClick={() => setCurrentPage(currentPage + 1)}></div>
                                         <ul className={styles.tags}>
-                                            <li><a href="#">Video Production</a></li>
-                                            <li><a href="#">2D Animation</a></li>
-                                            <li><a href="#">3D Animation</a></li>
+                                            <li><Link href="/services/video-production">Video Production</Link></li>
+                                            <li><Link href="/services/2d-animation">2D Animation</Link></li>
+                                            <li><Link href="/services/3d-animation">3D Animation</Link></li>
                                         </ul>
                                     </div>
                                 </>

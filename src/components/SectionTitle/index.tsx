@@ -3,7 +3,7 @@ import styles from './SectionTitle.module.scss'
 type Props = {
     id: string
     title: string
-    subtitle: string
+    subtitle?: string
     index: string
 }
 
@@ -12,7 +12,7 @@ const SectionTitle = ({
     subtitle,
     index
 }: Props) => {
-    return(
+    return (
         <div className={styles.sectionTitleContainer}>
 
             <h2>
@@ -21,8 +21,10 @@ const SectionTitle = ({
                 <span className={styles.index}>{index}</span>
                 <span className={styles.bottomLine}></span>
                 <span className={styles.topCircle}></span>
-                <span className={styles.bottomCircle}></span> 
-                <span className={styles.subtitle}>{subtitle}</span>               
+                <span className={styles.bottomCircle}></span>
+                {subtitle && (
+                    <span className={styles.subtitle}>{subtitle}</span>
+                )}
             </h2>
         </div>
     )

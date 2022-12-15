@@ -7,7 +7,7 @@ import styles from './Page.module.scss';
 type SectionTitleProps = {
     id: string
     title: string
-    subtitle: string
+    subtitle?: string
     index: string
 }
 
