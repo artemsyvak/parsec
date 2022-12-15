@@ -12,6 +12,7 @@ type ServiceItem = {
     description: string,
     videoSource: string,
     videoId: string,
+    serviceType: string,
 }
 
 type AWS_DATA_ITEM = {

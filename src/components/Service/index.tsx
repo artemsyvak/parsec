@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { CONTEXT_KEYS } from '../../enum'
 import { useCustomContext } from '../../hooks'
 import VideoPlayer from '../VideoPlayer'
@@ -8,31 +9,35 @@ type Props = {
     title: string
     description: string
     index: number
-    videoSource?: string
+    videoSource?: string,
+    serviceType: string
 }
 
 const Service = ({
-    title,    
+    title,
     description,
     index,
-    videoSource
+    videoSource,
+    serviceType,
 }: Props) => {
 
     const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
-    
+
     return (
-        <div className={styles.service}>
-            <h3>{title}</h3>
-            <p>{description}</p>
-            <span>[ 0{index} ]</span>            
-            <div className={styles.video}>
-                {
-                    currentPage === 1 && (
-                        <VideoPlayer source={videoSource}/>                
-                    )
-                }
-            </div> 
-        </div>
+        <Link href={`/services/${serviceType}`}>
+            <div className={styles.service}>
+                <h3>{title}</h3>
+                <p>{description}</p>
+                <span>[ 0{index} ]</span>
+                <div className={styles.video}>
+                    {
+                        currentPage === 1 && (
+                            <VideoPlayer source={videoSource} />
+                        )
+                    }
+                </div>
+            </div>
+        </Link>
     )
 }
 

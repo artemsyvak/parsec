@@ -1,12 +1,18 @@
 const SANITY_QUERY = {
     GET_AWS_MEDIA: `*[_type == "s3-dam.storedFile"] {title, fileURL, _id}`,
-    GET_SERVICES: `*[_type == "service"] | order(_createdAt desc) {title, description, videoId}`,
+    GET_SERVICES: `*[_type == "service"] | order(_createdAt desc) {
+        title,
+        description,
+        videoId,
+        serviceType,
+        'detailedInfoDescription': detailedInfoDescription[].children[].text
+    }`,
     GET_PROJECTS: `*[_type == "project"] | order(_createdAt asc) {
         title, 
         projectType,
         serviceType,
         detailedInfoTitle,
-        videoId,
+        videoId,        
         'detailedInfoDescription': detailedInfoDescription[].children[].text,
         'screenshots': screenshots[].asset->url
     }`,

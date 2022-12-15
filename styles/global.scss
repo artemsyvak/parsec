@@ -237,6 +237,31 @@ p, ul{
   }
 }
 
+.back-to-home{
+	position: absolute;
+	top: 50px;
+	right: 50px;
+	cursor: pointer;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	border: 1px solid $purple-dark;
+	color: $purple-dark;
+	transition: .25s linear;
+
+	&:hover{
+		background-color: $purple-dark;
+		color: $white;
+		transition: .25s linear;
+	}
+}
+
+
+
 :root {
 	// --hue: 223;
 	--hue: 10;

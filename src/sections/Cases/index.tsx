@@ -10,11 +10,16 @@ import Details from './Details'
 import { Project } from '../../types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { useRouter } from 'next/router'
 
 const sectionTitleHeight = '238px'
+const serviceDescriptionHeight = '225px'
 const PROJECTS_PER_PAGE = 4
 
 const Cases = () => {
+    const router = useRouter()
+    const { serviceId } = router.query
+
     const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
     const projectsSources = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].awsMedia
     let projects: Project[] = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].projects.map((project: Project) => {
@@ -24,26 +29,44 @@ const Cases = () => {
         }
     })
 
+    if (serviceId) {
+        projects = projects.filter((project: Project) => project.serviceType === serviceId)
+    }
+
     const [currentSlide, setCurrentSlide] = useState<number>(0)
     const [selectedProject, setSelectedProject] = useState<Project>(projects[0])
     const [isFullProjectOpen, setIsFullProjectOpen] = useState<boolean>(false)
     const [isDetailsOpen, setIsDetailsOpen] = useState<boolean>(false)
 
+    const toggleServiceDescriptionDisplay = (display: boolean) => {
+        const serviceDescriptionEl = document.getElementById('service-description')
+        serviceDescriptionEl.style.display = display ? 'block' : 'none'
+    }
+
     const casesContainerHeight = useMemo(() => {
-        return isFullProjectOpen ? '100vh' : `calc(100vh - ${sectionTitleHeight})`
+        return isFullProjectOpen ? '100vh' : `calc(100vh - ${sectionTitleHeight} - ${serviceId ? serviceDescriptionHeight : '0px'})`
     }, [isFullProjectOpen])
 
     const openFullProject = (project: Project) => {
         setSelectedProject(project)
         setIsFullProjectOpen(true)
-        const sectionTitleEl = document.getElementById(SECTION_TITLES[SECTION_NAMES.CASES].id)
-        sectionTitleEl.style.height = '0'
+        const sectionTitleEl = document.getElementById(serviceId ? 'services-title' : SECTION_TITLES[SECTION_NAMES.CASES].id)
+        sectionTitleEl.style.display = 'none'
+
+        if (serviceId) {
+            toggleServiceDescriptionDisplay(false)
+        }
+
     }
 
     const onCloseFullProject = () => {
         setIsFullProjectOpen(false)
-        const sectionTitleEl = document.getElementById(SECTION_TITLES[SECTION_NAMES.CASES].id)
-        sectionTitleEl.style.height = sectionTitleHeight
+        const sectionTitleEl = document.getElementById(serviceId ? 'services-title' : SECTION_TITLES[SECTION_NAMES.CASES].id)
+        sectionTitleEl.style.display = 'block'
+
+        if (serviceId) {
+            toggleServiceDescriptionDisplay(true)
+        }
     }
 
     const onProjectChange = (nextProjectIndex: number) => {
@@ -72,7 +95,7 @@ const Cases = () => {
     }, [currentSlide])
 
     useEffect(() => {
-        if(currentPage !== SECTION_NUMBER.CASES && isFullProjectOpen){
+        if (currentPage !== SECTION_NUMBER.CASES && isFullProjectOpen) {
             onCloseFullProject()
             setIsDetailsOpen(false)
         }
@@ -84,11 +107,11 @@ const Cases = () => {
                 <Container className={styles.casesContainer} style={{ height: casesContainerHeight }}>
 
                     <div className={styles.video}>
-                        {currentPage === SECTION_NUMBER.CASES && selectedProject && (                           
+                        {currentPage === SECTION_NUMBER.CASES && selectedProject && (
                             <VideoPlayer
                                 source={selectedProject.videoUrl}
                                 controls={isFullProjectOpen}
-                                onCloseFullProject={onCloseFullProject}                                
+                                onCloseFullProject={onCloseFullProject}
                                 isFullProjectOpen={isFullProjectOpen}
                                 isProjectDetailsOpen={isDetailsOpen}
                                 onDetailedInfoOpen={() => setIsDetailsOpen(true)}
@@ -101,9 +124,8 @@ const Cases = () => {
                     }
 
                     <Row className={`${styles.casesList}`}>
-                        {projects.length > 0 && 
-                            projects
-                                .slice(currentSlide, currentSlide + PROJECTS_PER_PAGE)
+                        {projects.length > 0 &&
+                            projects.slice(currentSlide, currentSlide + PROJECTS_PER_PAGE)
                                 .map((project: Project) => (
                                     <Col
                                         key={project.title}
@@ -130,7 +152,7 @@ const Cases = () => {
                                 </button>
                             )}
 
-                            {currentSlide !== (projects.length - 1) && (
+                            {currentSlide !== (projects.length - 1) && projects.length > (currentSlide + PROJECTS_PER_PAGE) && (
                                 <button
                                     className={styles.next}
                                     onClick={onNextSlide}
