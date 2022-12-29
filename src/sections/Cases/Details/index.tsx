@@ -45,7 +45,7 @@ const Details = ({ project, onClose, onProjectChange }: Props) => {
                     )
                 }
 
-                <Row className={`${styles.bottomNavigation} mx-0`}>
+                {/* <Row className={`${styles.bottomNavigation} mx-0`}>
                     <Col sm={6} className="d-flex justify-content-start align-items-center pl-2">
                         <button onClick={() => onProjectChange(-1)}>
                             Prev project
@@ -57,7 +57,7 @@ const Details = ({ project, onClose, onProjectChange }: Props) => {
                             Next project
                         </button>
                     </Col>
-                </Row>
+                </Row> */}
 
             </Container>
         </div>

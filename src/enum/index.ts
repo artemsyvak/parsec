@@ -2,6 +2,7 @@ enum CONTEXT_KEYS {
     PAGE = 'page',
     SLIDE = 'slide',
     SANITY_DATA = 'sanity_data',
+    SCROLL_ENABLE = 'scroll_enable'
 }
 
 enum SECTION_NAMES {

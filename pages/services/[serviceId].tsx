@@ -71,7 +71,8 @@ const Service = ({
               awsMedia,
               services,
               projects,
-            }, () => { }]
+            }, () => { }],
+            [CONTEXT_KEYS.SCROLL_ENABLE]: [undefined, () => {}]
           }}>
             <Page
               id="services"

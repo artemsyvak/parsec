@@ -1,51 +1,46 @@
-import React, { CSSProperties, useContext, useEffect, WheelEvent } from "react";
+import React, { CSSProperties, useContext, useEffect } from "react";
 import { useState, useRef } from "react";
 import Context from "../../services/Context";
-import { CONTEXT_KEYS } from "../../enum";
+import { CONTEXT_KEYS, SECTION_NUMBER } from "../../enum";
 // @ts-ignore
 import { useWheel } from '@use-gesture/react'
 // @ts-ignore
 import { Lethargy } from 'lethargy'
 import Spinner from "../Spinner";
 import styles from './ScrollHandler.module.scss'
+import { useRouter } from "next/router";
 
 const lethargy = new Lethargy(undefined, undefined, undefined, 600)
-
-// TODO: add currentSlider logic for Ukrainian locale.
 
 const ScrollHandler = (props: any) => {
 
     let block = useRef(false)
     const container = useRef(null)
     const [currentPage, setCurrentPage] = useState(0)
-    // const [isPageLoading, setIsPageLoading] = useState(false)
-    // const [currentSlide, setCurrentSlide] = useState(-1)
+    const [scrollEnabled, setScrollEnable] = useState(true)
+    const router = useRouter()
+
+    useEffect(() => {
+        const routeChangeComplete = (url: any, { shallow }: any) => {
+            if (url === '/') {
+                setCurrentPage(SECTION_NUMBER.SERVICES)
+            }
+        }
+
+        router.events.on('routeChangeComplete', routeChangeComplete)
+
+        return () => {
+            router.events.off('routeChangeComplete', routeChangeComplete)
+        }
+    }, [])
 
     const sanityData = useContext(Context)
-
-    // useEffect(() => {
-    //     resetInitialPositionOfShowreelSlider()
-    // }, [currentPage])
-
-    // useEffect(() => {
-    //     let timeout: any = null
-    //     clearTimeout(timeout)
-    //     timeout = setTimeout(() => {
-    //         block.current = false
-    //     }, 500)
-
-    //     return () => clearTimeout(timeout)
-    // }, [currentSlide])
 
     const moveUp = () => {
         if (currentPage !== 0) {
             block.current = true
             setCurrentPage(currentPage - 1)
         }
-        // if (currentPage === 0 && currentSlide <= SHOWREEL_SLIDES && currentSlide !== -1) {
-        //     setCurrentSlide(currentSlide - 1)
-        //     block.current = true
-        // }
     }
 
     const moveDown = () => {
@@ -53,27 +48,7 @@ const ScrollHandler = (props: any) => {
             block.current = true
             setCurrentPage(currentPage + 1)
         }
-        // if (currentPage === 0 && currentSlide < SHOWREEL_SLIDES) {
-        //     setCurrentSlide(currentSlide + 1)
-        //     block.current = true
-        // } else if (currentPage < props.children.length - 1) {
-        //     setCurrentPage(currentPage + 1)
-        //     block.current = true
-        // }
     }
-
-    // back to initial state of showreel screen after leave from it
-    // const resetInitialPositionOfShowreelSlider = () => {
-    //     if (currentPage === 1) {
-    //         let timemout
-    //         clearTimeout(timemout)
-    //         timemout = setTimeout(() => {
-    //             setCurrentSlide(0)
-    //             setCurrentSlide(-1)
-    //             block.current = true
-    //         }, 500)
-    //     }
-    // }
 
     const scrollBackAfterPageReload = () => {
 
@@ -88,7 +63,7 @@ const ScrollHandler = (props: any) => {
             if (scrollY >= windowHeight && sectionNumber !== 0) {
                 const loaderEl = document.getElementById('loader')
                 loaderEl.style.display = 'flex'
-            
+
                 document.body.style.overflow = 'scroll'
 
                 // scroll page to first page
@@ -104,9 +79,9 @@ const ScrollHandler = (props: any) => {
 
                 // scroll page to section that was before reload
                 setCurrentPageTimeout = setTimeout(() => {
-                    document.body.style.overflow = 'hidden'                   
-                    setCurrentPage(sectionNumber)                    
-                    loaderEl.style.display = 'none'                    
+                    document.body.style.overflow = 'hidden'
+                    setCurrentPage(sectionNumber)
+                    loaderEl.style.display = 'none'
                 }, 1000)
 
             }
@@ -145,24 +120,20 @@ const ScrollHandler = (props: any) => {
     useWheel(
         // @ts-ignore
         ({ event, last, memo: wait = false }) => {
+            if (!scrollEnabled) return
             // @ts-ignore
-            if (event.target.classList.value === 'feedback-data__text' || last) return // event can be undefined as the last event is debounced
-            event.preventDefault() // this is needed to prevent the native browser scroll
+            if (event.target.classList.value === 'feedback-data__text' || last) return
+            event.preventDefault()
             const wheelDirection = lethargy.check(event)
-            // wheelDirection === 0 when Lethargy thinks it's an inertia-triggered event
+
             if (wheelDirection) {
-                // wait is going to switch from false to true when an intentional wheel
-                // event has been detected
-                // if (!wait) setIndex((i) => clamp(i - wheelDirection, 0, slides.length - 1))
                 if (!wait && !block.current) {
                     updateCurrentPage(wheelDirection)
                 }
-                return true // will set to wait to true in the next event frame
+                return true
             }
-            return false // will set to wait to false in the next event frame
+            return false
         },
-        // we need to use a ref to be able to get non passive events and be able
-        // to trigger event.preventDefault()
         { target: container, eventOptions: { passive: false } }
     )
 
@@ -178,17 +149,15 @@ const ScrollHandler = (props: any) => {
         >
             <Context.Provider value={{
                 [CONTEXT_KEYS.PAGE]: [currentPage, setCurrentPage],
-                // [CONTEXT_KEYS.SLIDE]: [currentSlide, setCurrentSlide],
-                [CONTEXT_KEYS.SANITY_DATA]: [sanityData, () => { }]
+                [CONTEXT_KEYS.SANITY_DATA]: [sanityData, () => { }],
+                [CONTEXT_KEYS.SCROLL_ENABLE]: [scrollEnabled, setScrollEnable]
             }}
             >
+                {/* @TODO: StickyNavigation */}
 
                 <div id="loader" className={styles.screenLoader}>
                     <Spinner />
                 </div>
-                {/* {isPageLoading ?
-                    : null
-                } */}
 
                 {props.children}
             </Context.Provider>
