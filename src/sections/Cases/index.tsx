@@ -21,6 +21,7 @@ const Cases = () => {
     const { serviceId } = router.query
 
     const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
+    const [,setScrollEnable] = useCustomContext(CONTEXT_KEYS.SCROLL_ENABLE)
     const projectsSources = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].awsMedia
     let projects: Project[] = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].projects.map((project: Project) => {
         return {
@@ -90,6 +91,17 @@ const Cases = () => {
         setCurrentSlide(currentSlide + PROJECTS_PER_PAGE)
     }
 
+    const onDetailsOpen = () => {
+        setIsDetailsOpen(true)
+        setScrollEnable(false)
+    }
+
+    const onDetailsClose = () => {
+        setIsDetailsOpen(false)
+        setScrollEnable(true)
+        onCloseFullProject?.()
+    } 
+
     useEffect(() => {
         setSelectedProject(projects[currentSlide])
     }, [currentSlide])
@@ -114,13 +126,13 @@ const Cases = () => {
                                 onCloseFullProject={onCloseFullProject}
                                 isFullProjectOpen={isFullProjectOpen}
                                 isProjectDetailsOpen={isDetailsOpen}
-                                onDetailedInfoOpen={() => setIsDetailsOpen(true)}
+                                onDetailedInfoOpen={onDetailsOpen}
                             />
                         )}
                     </div>
 
                     {
-                        isDetailsOpen && <Details onClose={() => setIsDetailsOpen(false)} onProjectChange={onProjectChange} project={selectedProject} />
+                        isDetailsOpen && <Details onClose={onDetailsClose} onProjectChange={onProjectChange} project={selectedProject} />
                     }
 
                     <Row className={`${styles.casesList}`}>
