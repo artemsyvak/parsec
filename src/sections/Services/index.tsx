@@ -21,7 +21,11 @@ type AWS_DATA_ITEM = {
     fileURL: string,
 }
 
-const Services = () => {
+type IProps = {
+    inView?: boolean
+}
+
+const Services = ({inView}: IProps) => {
     const serviceSources =useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].awsMedia
     let services = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].services
     services = services.map((service: ServiceItem) => {
@@ -38,7 +42,7 @@ const Services = () => {
                     <Container className="px-0">
                         {services && services.length > 0 && (
                             services.map((service: ServiceItem, index: number) => (
-                                <Service key={service.title} {...service} index={index + 1} />
+                                <Service key={service.title} {...service} index={index + 1} inView={inView} />
                             ))
                         )}
                     </Container>

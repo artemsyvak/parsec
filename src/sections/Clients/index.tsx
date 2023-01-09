@@ -4,8 +4,11 @@ import { useCustomContext } from '../../hooks'
 import { CONTEXT_KEYS } from '../../enum'
 import { Client } from '../../types'
 
+type IProps = {
+    inView?: boolean
+}
 
-const Clients = () => {
+const Clients = ({inView}: IProps) => {
 
     const clients: Client = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].clients[0]
 
@@ -15,6 +18,10 @@ const Clients = () => {
                 {clients?.images.length > 0 &&
                     clients.images.map((image: string, index: number) => (
                         <Col
+                            style={{                                                               
+                                opacity: inView ? 1 : 0,
+                                transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) ${((index + 1) * .1) - .5}s`
+                            }}
                             xl={3}
                             key={index}
                             className={`my-1 px-1`}>

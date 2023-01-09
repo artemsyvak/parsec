@@ -55,12 +55,12 @@
         font-family: $font-Light;
     }
 
-    &:hover {
-        .video {
-            opacity: 1;
-            transition: .25s linear;
-        }
-    }
+    // &:hover {
+    //     .video {
+    //         opacity: 1!important;
+    //         transition: .25s linear;
+    //     }
+    // }
 }
 
 .video {
