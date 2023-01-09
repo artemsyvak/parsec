@@ -72,7 +72,11 @@ const transitionSliderContainerStyles = {
 
 // TODO: add currentSlider logic for Ukrainian locale.
 
-const Showreel = () => {
+type IProps = {
+    inView?: boolean
+}
+
+const Showreel = ({ inView }: IProps) => {
 
     // const slider = useRef(null)
     // const sliderContainer = useRef(null)
@@ -87,7 +91,7 @@ const Showreel = () => {
     const showreel = getShowreelSource(useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].awsMedia)
 
     useEffect(() => {
-        if(currentPage !== 0 && isShowreelPlaying){
+        if (currentPage !== 0 && isShowreelPlaying) {
             setIsShowreelPlaying(false)
         }
     }, [currentPage, isShowreelPlaying])
@@ -120,7 +124,7 @@ const Showreel = () => {
                     <div className={`${styles.showreel} DNASlider`}>
                         {
                             !isShowreelPlaying && (
-                                <Header />
+                                <Header inView={inView} />
                             )
                         }
                         <span className={`${styles.showreelBackground} showreel-video`}>
@@ -132,7 +136,7 @@ const Showreel = () => {
                                     isShowreelPlayer
                                     isFullProjectOpen={isShowreelPlaying}
                                 />
-                            ): null}
+                            ) : null}
                         </span>
 
                         {
@@ -143,20 +147,31 @@ const Showreel = () => {
 
                         {/* <Transition in={currentSlide < 0} timeout={0}>
                             {(state) => ( */}
-                                <div className={styles.showreelControls} style={{
-                                    // @ts-ignore
-                                    // ...transitionShowreelControlsStyles[state],
-                                    display: isShowreelPlaying ? 'none' : 'flex',
-                                }}>
-                                    <img src="/logo.svg" className={styles.showreelLogo} alt="" />
-                                    <Button
-                                        style={{ margin: '20px 0 0 -12px' }}
-                                        icon="/play-icon.svg"
-                                        label='Watch showreel'
-                                        onClick={playShowreel}
-                                    />
-                                </div>
-                            {/* )}
+                        <div className={styles.showreelControls} style={{
+                            // @ts-ignore
+                            // ...transitionShowreelControlsStyles[state],
+                            display: isShowreelPlaying ? 'none' : 'flex',
+                        }}>
+                            <img src="/logo.svg"
+                                style={{
+                                    transform: inView ? "none" : "translateY(-20px)",
+                                    opacity: inView ? 1 : 0,
+                                    transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .1s"
+                                }}
+                                className={styles.showreelLogo} alt="logo" />
+                            <Button
+                                style={{
+                                    margin: '20px 0 0 -12px',
+                                    transform: inView ? "none" : "translateY(20px)",
+                                    opacity: inView ? 1 : 0,
+                                    transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .2s"
+                                }}
+                                icon="/play-icon.svg"
+                                label='Watch showreel'
+                                onClick={playShowreel}
+                            />
+                        </div>
+                        {/* )}
                         </Transition> */}
 
                         {
@@ -179,14 +194,38 @@ const Showreel = () => {
                                         )}
                                     </Transition> */}
                                     <div className={`${styles.footer} container gx-0`}>
-                                        <p>
-                                        Ukrainian Full-cycle Video Production
+                                        <p
+                                            style={{
+                                                transform: inView ? "none" : "translateY(20px)",
+                                                opacity: inView ? 1 : 0,
+                                                transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .4s"
+                                            }}
+                                        >
+                                            Ukrainian Full-cycle Video Production
                                         </p>
                                         <div className={styles.skipButton} onClick={() => setCurrentPage(currentPage + 1)}></div>
                                         <ul className={styles.tags}>
-                                            <li><Link href="/services/video-production">Video Production</Link></li>
-                                            <li><Link href="/services/2d-animation">2D Animation</Link></li>
-                                            <li><Link href="/services/3d-animation">3D Animation</Link></li>
+                                            <li
+                                                style={{
+                                                    transform: inView ? "none" : "translateY(20px)",
+                                                    opacity: inView ? 1 : 0,
+                                                    transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .5s"
+                                                }}
+                                            ><Link href="/services/video-production">Video Production</Link></li>
+                                            <li
+                                                style={{
+                                                    transform: inView ? "none" : "translateY(20px)",
+                                                    opacity: inView ? 1 : 0,
+                                                    transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .6s"
+                                                }}
+                                            ><Link href="/services/2d-animation">2D Animation</Link></li>
+                                            <li
+                                                style={{
+                                                    transform: inView ? "none" : "translateY(20px)",
+                                                    opacity: inView ? 1 : 0,
+                                                    transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .7s"
+                                                }}
+                                            ><Link href="/services/3d-animation">3D Animation</Link></li>
                                         </ul>
                                     </div>
                                 </>

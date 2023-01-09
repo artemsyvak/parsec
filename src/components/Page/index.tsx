@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import SectionTitle from '../SectionTitle'
 import { InView } from "react-intersection-observer";
 import styles from './Page.module.scss';
+import { Children, cloneElement } from "react";
 
 type SectionTitleProps = {
     id: string
@@ -29,7 +30,7 @@ const Page: Props = ({
     sectionTitle,
     withGridBackground = false
 }) => (
-    <InView threshold={1}>
+    <InView threshold={0.65}>
         {({ inView, ref, entry }) => (
             <div
                 ref={ref}
@@ -40,16 +41,28 @@ const Page: Props = ({
                     {withGridBackground && (
                         <Row className={`${styles.backgroundGridContainer} px-0 mx-0 container`}>
                             {[1, 2, 3, 4].map((_, index) => (
-                                <Col xl={3} key={index} className={styles.gridItem}></Col>
+                                <Col
+                                    style={{
+                                        height: inView ? '100vh' : 0,
+                                        opacity: inView ? 1 : 0,
+                                        transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1)`
+                                    }}
+                                    xl={3}
+                                    key={index}
+                                    className={styles.gridItem}>
+                                </Col>
                             ))}
                         </Row>
                     )}
                     {sectionTitle && (
                         <Container className="px-0" id={sectionTitle.id}>
-                            <SectionTitle {...sectionTitle} />
+                            <SectionTitle {...sectionTitle} inView={inView} />
                         </Container>
                     )}
-                    {children}
+                    {Children.map(children, child => {
+                        // @ts-ignore
+                        return cloneElement(child, { inView })
+                    })}
                 </Container>
             </div>
         )}

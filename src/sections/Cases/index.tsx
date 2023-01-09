@@ -16,12 +16,16 @@ const sectionTitleHeight = '238px'
 const serviceDescriptionHeight = '225px'
 const PROJECTS_PER_PAGE = 4
 
-const Cases = () => {
+type IProps = {
+    inView?: boolean
+}
+
+const Cases = ({ inView }: IProps) => {
     const router = useRouter()
     const { serviceId } = router.query
 
     const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
-    const [,setScrollEnable] = useCustomContext(CONTEXT_KEYS.SCROLL_ENABLE)
+    const [, setScrollEnable] = useCustomContext(CONTEXT_KEYS.SCROLL_ENABLE)
     const projectsSources = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].awsMedia
     let projects: Project[] = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].projects.map((project: Project) => {
         return {
@@ -100,7 +104,7 @@ const Cases = () => {
         setIsDetailsOpen(false)
         setScrollEnable(true)
         onCloseFullProject?.()
-    } 
+    }
 
     useEffect(() => {
         setSelectedProject(projects[currentSlide])
@@ -138,11 +142,16 @@ const Cases = () => {
                     <Row className={`${styles.casesList}`}>
                         {projects.length > 0 &&
                             projects.slice(currentSlide, currentSlide + PROJECTS_PER_PAGE)
-                                .map((project: Project) => (
+                                .map((project: Project, index: number) => (
                                     <Col
+                                        style={{
+                                            zIndex: isFullProjectOpen ? 0 : 1,
+                                            transform: inView ? "none" : "translateX(-50px)",
+                                            opacity: inView ? 1 : 0,
+                                            transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .${index + 2}s`
+                                        }}
                                         key={project.title}
                                         xl={3}
-                                        style={{ zIndex: isFullProjectOpen ? 0 : 1 }}
                                         className={`${styles.caseItem} ${selectedProject?.title === project.title ? styles.active : ''}`}
                                         onClick={() => openFullProject(project)}
                                         onMouseEnter={() => setSelectedProject(project)}
