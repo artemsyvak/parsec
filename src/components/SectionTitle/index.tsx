@@ -1,4 +1,6 @@
 import { motion } from 'framer-motion'
+import { CONTEXT_KEYS } from '../../enum'
+import { useCustomContext } from '../../hooks'
 import styles from './SectionTitle.module.scss'
 
 type Props = {
@@ -16,17 +18,19 @@ const SectionTitle = ({
     inView,
 }: Props) => {
 
+    const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
+
     return (
         <motion.div
             key={title}
             className={styles.sectionTitleContainer}>
             <h2>
                 <span className={styles.title}
-                 style={{
-                    transform: inView ? "none" : "translateY(-200px)",
-                    opacity: inView ? 1 : 0,
-                    transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1)"
-                }}
+                    style={{
+                        transform: inView ? "none" : "translateY(-200px)",
+                        opacity: inView ? 1 : 0,
+                        transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1)"
+                    }}
                 >{title}</span>
 
                 <span className={styles.topLine}
@@ -46,9 +50,9 @@ const SectionTitle = ({
                 >{index}</span>
                 <span className={styles.bottomLine}
                     style={{
-                        transform: inView ? "none" : "translateX(-200px) rotate(360deg)",
+                        transform: inView ? `translateY(${(currentPage * 24) - 8}px)` : "translateY(-50px) rotate(360deg)",
                         opacity: inView ? 1 : 0,
-                        transition: "all .8s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s"
+                        transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1) 0.2s"
                     }}
                 ></span>
                 <span className={styles.topCircle}

@@ -1,10 +1,10 @@
 @import '../../../../styles/variables.scss';
 @import '../../../../styles/mixins.scss';
 
-.projectDetails{
+.projectDetails {
     padding-top: 50px;
     position: absolute;
-    z-index: 10;
+    z-index: 101;
     width: 100vw;
     height: 100vw;
     top: 0;
@@ -13,7 +13,7 @@
     background-color: $white;
     color: black;
 
-    .closeButton{
+    .closeButton {
         position: absolute;
         background-color: transparent;
         outline: none;
@@ -24,39 +24,37 @@
         right: 50px;
     }
 
-    .title{
+    .title {
         font-family: $font-neue-Regular;
         font-size: 36px;
     }
 
-    .descriptionContainer{
+    .descriptionContainer {
         flex-direction: column;
 
-        p{
+        p {
             padding-top: 15px;
             font-family: $font-Regular;
         }
     }
 
-    .sliderImageContainer{
-        width: 630px!important;
+    .sliderImageContainer {
+        width: 630px !important;
         height: 315px;
-        background-color:black;
-        color: $white;
 
-        img{
+        img {
             max-width: 100%;
             max-height: 100%;
         }
     }
 
-    .bottomNavigation{
+    .bottomNavigation {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding-top: 50px;
 
-        button{
+        button {
             background: none;
             border: none;
             font-family: $font-Kharkiv;
@@ -65,10 +63,10 @@
 
             @include link-hover-effect;
 
-            &::after{
+            &::after {
                 bottom: 30px;
             }
         }
     }
-    
+
 }

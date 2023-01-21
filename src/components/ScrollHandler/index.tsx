@@ -9,8 +9,9 @@ import { Lethargy } from 'lethargy'
 import Spinner from "../Spinner";
 import styles from './ScrollHandler.module.scss'
 import { useRouter } from "next/router";
+import Navigation from "../Navigation";
 
-const lethargy = new Lethargy(undefined, undefined, undefined, 600)
+const lethargy = new Lethargy(undefined, 10, undefined, 200)
 
 const ScrollHandler = (props: any) => {
 
@@ -102,7 +103,11 @@ const ScrollHandler = (props: any) => {
     const onTransitionEnd = (event: any) => {
         const { target } = event
         if (target.id === 'scroll-handler-container') {
-            block.current = false
+            let timeout = null
+            clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                block.current = false
+            }, 500)
         }
     }
 
@@ -153,7 +158,7 @@ const ScrollHandler = (props: any) => {
                 [CONTEXT_KEYS.SCROLL_ENABLE]: [scrollEnabled, setScrollEnable]
             }}
             >
-                {/* @TODO: StickyNavigation */}
+                <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />                  
 
                 <div id="loader" className={styles.screenLoader}>
                     <Spinner />
