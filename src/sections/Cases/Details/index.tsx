@@ -6,6 +6,7 @@ import Slider from '../../../components/Slider';
 import { Project } from '../../../types'
 
 import styles from './Details.module.scss'
+import { url } from 'inspector';
 
 type Props = {
     project: Project
@@ -26,7 +27,7 @@ const Details = ({ project, onClose, onProjectChange }: Props) => {
                 </Row>
 
                 <Row className={`${styles.descriptionContainer} mx-0`}>
-                    {project.detailedInfoDescription.map((paragraph: string, index: number) => (
+                    {project.detailedInfoDescription?.map((paragraph: string, index: number) => (
                         <Col sm={6} className="px-2" key={index}>
                             <p>{paragraph}</p>
                         </Col>
@@ -35,30 +36,28 @@ const Details = ({ project, onClose, onProjectChange }: Props) => {
 
                 {
                     project?.screenshots?.length > 0 && (
-                        <Slider settings={{className: 'screenSlider'}}>
+                        <Slider settings={{ className: 'screenSlider' }}>
                             {project.screenshots.map((screenshot: string, index: number) => (
-                                <div className={styles.sliderImageContainer} key={index}>
-                                    <img src={screenshot} alt={project.title} />
+                                <div className={styles.sliderImageContainer} key={index}
+
+                                >
+                                    <div
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <img src={screenshot} alt={project.title} />
+                                    </div>
+                                   
                                 </div>
                             ))}
                         </Slider>
                     )
                 }
-
-                {/* <Row className={`${styles.bottomNavigation} mx-0`}>
-                    <Col sm={6} className="d-flex justify-content-start align-items-center pl-2">
-                        <button onClick={() => onProjectChange(-1)}>
-                            Prev project
-                        </button>
-                    </Col>
-
-                    <Col sm={6} className="d-flex justify-content-end align-items-center pr-2">
-                        <button onClick={() => onProjectChange(1)}>
-                            Next project
-                        </button>
-                    </Col>
-                </Row> */}
-
             </Container>
         </div>
     )

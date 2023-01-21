@@ -145,10 +145,10 @@ const Cases = ({ inView }: IProps) => {
                                 .map((project: Project, index: number) => (
                                     <Col
                                         style={{
-                                            zIndex: isFullProjectOpen ? 0 : 1,
-                                            transform: inView ? "none" : "translateX(-50px)",
-                                            opacity: inView ? 1 : 0,
-                                            transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .${index + 2}s`
+                                            zIndex: isFullProjectOpen ? 0 : 102,
+                                            // transform: inView ? "none" : "translateX(-50px)",
+                                            // opacity: inView ? 1 : 0,
+                                            // transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .${index + 2}s`
                                         }}
                                         key={project.title}
                                         xl={3}
