@@ -7,8 +7,9 @@
     h2 {
         position: relative;
         height: 90px;
+
         .title {
-           
+
             position: absolute;
             font-size: 96px;
             width: fit-content;
@@ -27,7 +28,7 @@
         .bottomLine {
             position: absolute;
             height: 1px;
-            width: 20px;           
+            width: 20px;
             right: 0;
         }
 
@@ -85,4 +86,44 @@
         z-index: 1;
         cursor: default;
     }
+}
+
+
+@media screen and (max-width: $mobile-view-width) {
+    .sectionTitleContainer {
+        padding: 100px 15px 30px;
+
+        h2 {
+            height: 56px;
+
+            .title {
+                font-size: 32px;
+            }
+
+            .subtitle{
+                display: none;
+            }
+
+            .index{
+                top: 15px;
+            }
+
+            .topLine{
+                top: -15px;
+            }
+
+            .bottomLine{
+                width: 100px;   
+                top: 65px;
+            }
+
+            .topCircle, .bottomCircle{
+                bottom: 0;
+            }
+
+        }
+
+        
+    }
+
 }

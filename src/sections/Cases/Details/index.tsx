@@ -36,7 +36,19 @@ const Details = ({ project, onClose, onProjectChange }: Props) => {
 
                 {
                     project?.screenshots?.length > 0 && (
-                        <Slider settings={{ className: 'screenSlider' }}>
+                        <Slider settings={{
+                            className: 'screenSlider',
+                            responsive: [
+                                {
+                                    breakpoint: 960,
+                                    settings: {
+                                        slidesToShow: 1,
+                                        arrows: false,
+                                        dots: true,
+                                    }
+                                }
+                            ]
+                        }}>
                             {project.screenshots.map((screenshot: string, index: number) => (
                                 <div className={styles.sliderImageContainer} key={index}
 
@@ -52,7 +64,7 @@ const Details = ({ project, onClose, onProjectChange }: Props) => {
                                     >
                                         <img src={screenshot} alt={project.title} />
                                     </div>
-                                   
+
                                 </div>
                             ))}
                         </Slider>

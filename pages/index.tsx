@@ -15,6 +15,9 @@ import SANITY_QUERY from '../src/sanity/queries';
 import Context from '../src/services/Context'
 import Feedbacks from '../src/sections/Feedbacks'
 import Contact from '../src/sections/Contact'
+import Header from '../src/components/Header';
+import useMobileDetect from '../src/hooks';
+import { useEffect, useState } from 'react';
 
 
 export async function getServerSideProps() {
@@ -47,6 +50,16 @@ const Home: NextPage = ({
 }: any) => {
 
 
+  const { isMobile } = useMobileDetect()
+
+  const [renderMobile, setRenderMobile] = useState(false)
+
+  useEffect(() => {
+    if (isMobile()) {
+      setRenderMobile(true)
+    }
+  }, [])
+
   return (
     <div>
       <Head>
@@ -55,12 +68,7 @@ const Home: NextPage = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div id="mobile-prevent" className="d-xl-none d-flex justify-content-center align-items-center flex-column">
-          <img src="/logo-mini.svg" width={120} height={100} alt="Parsec Studio Logo" />
-          <p>Responsive version of our website will be soon, we are sorry.</p>
-          <p>Please use wider screen.</p>
-        </div>
-        <Container fluid className="px-0 d-xl-block d-none">
+        <Container fluid className="px-0">
           <Context.Provider value={{
             awsMedia,
             services,
@@ -70,6 +78,9 @@ const Home: NextPage = ({
             team,
           }}>
             <ScrollHandler>
+              {renderMobile ? (
+                <Header inView={true} />
+              ) : null}
               <Page id="showreel" fluid={false}>
                 <Showreel />
               </Page>

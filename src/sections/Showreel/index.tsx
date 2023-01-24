@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import Button from '../../components/Button';
 import Slider from "react-slick";
 import Context from '../../services/Context';
-import { useCustomContext } from '../../hooks';
+import useMobileDetect, { useCustomContext } from '../../hooks';
 import { CONTEXT_KEYS } from '../../enum';
 import { SHOWREEL_SLIDES } from '../../constants';
 import ShowreelDNA from './ShowreelDNA';
@@ -115,18 +115,30 @@ const Showreel = ({ inView }: IProps) => {
     //     }
 
 
-    // }, [currentSlide])
+    // }, [currentSlide])    
+
+    const { isMobile } = useMobileDetect()
+
+    const [renderMobile, setRenderMobile ] = useState(false)
+
+    useEffect(() => {
+        if(isMobile()){
+            setRenderMobile(true)
+        }
+    }, [])
 
     return (
         <Context.Consumer>
             {() => {
                 return (
-                    <div className={`${styles.showreel} DNASlider`}>
-                        {
-                            !isShowreelPlaying && (
-                                <Header inView={inView} />
-                            )
-                        }
+                    <div className={`${styles.showreel} DNASlider`}>    
+                                        
+                            {
+                                !isShowreelPlaying && !renderMobile ? (
+                                    <Header inView={inView} />
+                                ) : null
+                            }                       
+
                         <span className={`${styles.showreelBackground} showreel-video`}>
                             {currentPage === 0 && showreel ? (
                                 <VideoPlayer
@@ -195,6 +207,7 @@ const Showreel = ({ inView }: IProps) => {
                                     </Transition> */}
                                     <div className={`${styles.footer} container gx-0`}>
                                         <p
+                                            className="d-none d-lg-inline-block"
                                             style={{
                                                 transform: inView ? "none" : "translateY(20px)",
                                                 opacity: inView ? 1 : 0,

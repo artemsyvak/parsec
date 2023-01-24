@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import { CONTEXT_KEYS } from '../../enum'
-import { useCustomContext } from '../../hooks'
+import useMobileDetect, { useCustomContext } from '../../hooks'
 import styles from './SectionTitle.module.scss'
 
 type Props = {
@@ -8,7 +9,8 @@ type Props = {
     title: string
     subtitle?: string
     index: string
-    inView: boolean
+    inView: boolean,
+    backgroundColor: 'white' | 'black'
 }
 
 const SectionTitle = ({
@@ -16,20 +18,37 @@ const SectionTitle = ({
     subtitle,
     index,
     inView,
+    backgroundColor
 }: Props) => {
 
     const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
 
+    const { isMobile } = useMobileDetect()
+
+    const [renderMobile, setRenderMobile] = useState(false)
+
+    useEffect(() => {
+        if (isMobile()) {
+            setRenderMobile(true)
+        }
+    }, [])
+
     return (
         <motion.div
             key={title}
-            className={styles.sectionTitleContainer}>
+            className={styles.sectionTitleContainer}
+            style={{
+                background: renderMobile && backgroundColor === 'white'
+                    ? 'linear-gradient(180deg,rgba(199,172,254,1) 30%, rgba(255,255,255,1) 100%)'
+                    : backgroundColor,
+            }}
+        >
             <h2>
                 <span className={styles.title}
                     style={{
                         transform: inView ? "none" : "translateY(-200px)",
                         opacity: inView ? 1 : 0,
-                        transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1)"
+                        transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1)",
                     }}
                 >{title}</span>
 

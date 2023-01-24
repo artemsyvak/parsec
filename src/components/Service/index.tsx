@@ -24,9 +24,7 @@ const Service = ({
     inView
 }: Props) => {
 
-    const videoRef = useRef(null)
-
-    const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
+    const videoRef = useRef(null)   
 
     const onServiceMouseEnter = () => {
         videoRef.current.style.opacity = 1
@@ -77,7 +75,7 @@ const Service = ({
                 >[ 0{index} ]</span>
                 <div className={styles.video} ref={videoRef}>
                     {
-                        currentPage === 1 && (
+                        inView && (
                             <VideoPlayer source={videoSource} />
                         )
                     }

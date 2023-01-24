@@ -39,7 +39,7 @@ const Services = ({inView}: IProps) => {
         <Context.Consumer>
             {() => (
                 <div className={styles.services}>
-                    <Container className="px-0">
+                    <Container className="px-2 px-lg-0">
                         {services && services.length > 0 && (
                             services.map((service: ServiceItem, index: number) => (
                                 <Service key={service.title} {...service} index={index + 1} inView={inView} />

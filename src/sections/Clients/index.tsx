@@ -22,7 +22,8 @@ const Clients = ({inView}: IProps) => {
                                 opacity: inView ? 1 : 0,
                                 transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) ${((index + 1) * .1) - .5}s`
                             }}
-                            xl={3}
+                            lg={3}
+                            xs={6}
                             key={index}
                             className={`my-1 px-1`}>
                             <div className={styles.client}>

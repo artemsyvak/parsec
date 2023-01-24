@@ -59,12 +59,7 @@ const Service = ({
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div id="mobile-prevent" className="d-xl-none d-flex justify-content-center align-items-center flex-column">
-          <img src="/logo-mini.svg" width={120} height={100} alt="Parsec Studio Logo" />
-          <p>Responsive version of our website will be soon, we are sorry.</p>
-          <p>Please use wider screen.</p>
-        </div>
-        <Container fluid className="px-0 d-xl-block d-none">
+        <Container fluid className="px-0">
           <Context.Provider value={{
             [CONTEXT_KEYS.PAGE]: [SECTION_NUMBER.CASES, () => { }],
             [CONTEXT_KEYS.SANITY_DATA]: [{
@@ -72,10 +67,10 @@ const Service = ({
               services,
               projects,
             }, () => { }],
-            [CONTEXT_KEYS.SCROLL_ENABLE]: [undefined, () => {}]
-          }}>
+            [CONTEXT_KEYS.SCROLL_ENABLE]: [undefined, () => { }]
+          }}>            
             <Page
-              id="services"
+              id="services-detailed-page"
               // @ts-ignore
               sectionTitle={getSectionTitleByService(serviceId)}
               background={SECTION_BACKGROUND.WHITE}

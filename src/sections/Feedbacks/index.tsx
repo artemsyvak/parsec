@@ -12,7 +12,7 @@ type IProps = {
 const Feedbacks = ({ inView }: IProps) => {
     const feedbacks: Feedback[] = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].feedbacks
     return (
-        <Container className={`${styles.feedbacksContainer} px-0`}
+        <Container className={`${styles.feedbacksContainer} px-2 px-lg-0`}
         style={{
             opacity: inView ? 1 : 0,
             transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .2s`
@@ -22,6 +22,15 @@ const Feedbacks = ({ inView }: IProps) => {
                 className: 'screenSlider',
                 slidesToShow: 3,
                 slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 960,
+                        settings: {
+                            slidesToShow: 1,
+                            arrows: false,
+                        }
+                    }
+                ]
             }}
             >
                 {feedbacks.map((feedback: Feedback, index: number) => (

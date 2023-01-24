@@ -1,22 +1,23 @@
 @import "../../../styles/variables.scss";
 
 
-.contactInfo{
+.contactInfo {
     display: flex;
     flex-direction: column;
-    
-    a:hover{
+
+    a:hover {
         color: $white;
     }
 
-    .email, .phone{
+    .email,
+    .phone {
         font-family: $font-Kharkiv;
         font-size: 28px;
         color: $white;
         margin-bottom: 35px;
     }
 
-    .socialLinksTitle{
+    .socialLinksTitle {
         color: $white;
         font-family: $font-Light;
         font-size: 18px;
@@ -24,24 +25,24 @@
         margin-bottom: 15px;
     }
 
-    .socialLink{    
+    .socialLink {
         position: relative;
         padding: 12px 4px;
-        text-align: center; 
+        text-align: center;
         color: $white;
         font-family: $font-Light;
-        font-size: 16px;  
+        font-size: 16px;
         background: rgba(255, 255, 255, 0.2);
         background: transparent;
-        border-radius: 35px;          
+        border-radius: 35px;
         transition: $default-hover-transition;
         font-family: $font-Light;
         font-size: 14px;
         letter-spacing: 1px;
         display: block;
         cursor: pointer;
-       
-        .linkIconContainer{
+
+        .linkIconContainer {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -52,17 +53,17 @@
             background-color: $purple-dark;
             width: 35px;
             height: 35px;
-            border-radius: 50%;           
+            border-radius: 50%;
         }
-    }
+    }   
 
     @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
         .socialLink {
-          -webkit-backdrop-filter: saturate(180%) blur(10px);
-          backdrop-filter: saturate(180%) blur(10px);
-          background-color: rgba(255, 255, 255, 0.2);  
-        }        
-      }
+            -webkit-backdrop-filter: saturate(180%) blur(10px);
+            backdrop-filter: saturate(180%) blur(10px);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+    }
 }
 
 .contactForm {
@@ -154,8 +155,45 @@
     }
 }
 
-.succededMessage{
+.footerYear {
+    position: absolute;
+    bottom: 25px;
+}
+
+.succededMessage {
     color: $white;
     font-family: $font-Kharkiv;
     letter-spacing: 1px;
+}
+
+@media screen and (max-width: $mobile-view-width) {
+    
+    .contantFormRow{
+        height: 100%!important;
+    }
+
+
+    .contactInfo{
+        .email, .phone{
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .socialLink{
+            padding: 8px 0px 8px 10px;
+            font-size: 12px;
+
+            .linkIconContainer{
+                width: 25px;
+                height: 25px;
+                left: 5px;
+            }
+        }
+    }
+
+    .contactForm {
+        .inputContainer {
+            margin-bottom: 25px;
+        }
+    }
 }

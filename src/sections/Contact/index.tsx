@@ -19,8 +19,8 @@ const ContactForm = ({ inView }: IProps) => {
 
     return (
         <Container className="h-100">
-            <Row className="h-75 justify-content-center align-items-center">
-                <Col xl={6} className={styles.contactInfo}>
+            <Row className={`${styles.contantFormRow} h-75 pt-5 pt-lg-0 justify-content-start justify-lg-content-center align-items-center flex-column flex-lg-row px-2 px-lg-0`}>
+                <Col xl={6} md={12} className={`${styles.contactInfo} order-2 order-lg-1 mt-5 mt-lg-0 pt-5 pt-lg-0`}>
                     <a
                         style={{
                             transform: inView ? 'none' : 'translateY(-20px)',
@@ -42,9 +42,9 @@ const ContactForm = ({ inView }: IProps) => {
                             opacity: inView ? 1 : 0,
                             transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .5s`
                         }}
-                        className={`${styles.socialLinksTitle} mt-4 pt-4`}>Follow us:</p>
+                        className={`${styles.socialLinksTitle} mt-3 pt-0 mt-lg-4 pt-lg-4`}>Follow us:</p>
                     <Row>
-                        <Col xl={4}>
+                        <Col sm={4} xs={4} className="px-0 px-lg-3">
                             <a
                                 style={{
                                     transform: inView ? 'none' : 'translateY(-20px)',
@@ -58,7 +58,7 @@ const ContactForm = ({ inView }: IProps) => {
                                 Intagram
                             </a>
                         </Col>
-                        <Col xl={4}>
+                        <Col sm={4} xs={4} className="px-1 px-lg-3">
                             <a
                                 style={{
                                     transform: inView ? 'none' : 'translateY(-20px)',
@@ -72,7 +72,7 @@ const ContactForm = ({ inView }: IProps) => {
                                 Facebook
                             </a>
                         </Col>
-                        <Col xl={4}>
+                        <Col sm={4} xs={4} className="px-0 px-lg-3">
                             <a
                                 style={{
                                     transform: inView ? 'none' : 'translateY(-20px)',
@@ -88,7 +88,7 @@ const ContactForm = ({ inView }: IProps) => {
                         </Col>
                     </Row>
                 </Col>
-                <Col xl={6}>
+                <Col xl={6} md={12} className={`order-1 order-lg-2`}>
                     {state.succeeded
                         ? <p className={styles.succededMessage}>Thanks for submitting! We'll contact you soon!</p>
                         :
@@ -172,6 +172,7 @@ const ContactForm = ({ inView }: IProps) => {
                     }
                 </Col>
                 <p
+                    className={styles.footerYear}
                     style={{
                         color: 'white',
                         transform: inView ? 'none' : 'translateY(20px)',

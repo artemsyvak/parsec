@@ -7,7 +7,7 @@ type Props = {
 }
 const ServiceDescription = ({ description }: Props) => {
     return (
-        <Container id="service-description" className={`${styles.descriptionText} px-0`}>
+        <Container id="service-description" className={`${styles.descriptionText} px-2 px-lg-0`}>
             {description.map((text: string, index: number) => (
                 <p key={index}>{text}</p>
             ))}

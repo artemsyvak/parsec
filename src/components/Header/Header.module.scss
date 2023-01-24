@@ -1,25 +1,32 @@
 @import '../../../styles/variables.scss';
 
-.header{
+.header {
     position: absolute;
     top: $showreel-y-space;
     z-index: 1;
     height: 80px;
-    padding: 0 0; 
+    padding: 0 0;
     background-color: transparent;
 
-    // .logo{
-    //     width: 120px;
-    //     height: 100px;
-    //     position: absolute;
-    //     top: -37px;
-    // }
+    .logo {
+        width: 350px;
+        height: 250px;
+        position: absolute;
+        top: -185px;
+        left: -185px;
+    }    
 
-    .logo{
-        width: 400px;
-    height: 400px;
-    position: absolute;
-    top: -185px;
-    left: -125px;
+}
+
+@media screen and (max-width: $mobile-view-width){
+    .header{
+        top: 30px;
+
+        .logo{
+            top: -200px;
+            width: 350px;
+            height: 250px;
+            left: -175px;
+        }
     }
 }
