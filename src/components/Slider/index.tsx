@@ -2,6 +2,11 @@
 import Slider from "react-slick"
 import styles from "./Slider.module.scss"
 
+type ResponsiveSettingsType = {
+    breakpoint: number,
+    settings: SettingsType
+}
+
 type SettingsType = {
     className?: string,
     dots?: boolean,
@@ -13,6 +18,7 @@ type SettingsType = {
     cssEase?: string,
     nextArrow?: JSX.Element,
     prevArrow?: JSX.Element,
+    responsive?: ResponsiveSettingsType[],
 }
 
 type SliderProps = {

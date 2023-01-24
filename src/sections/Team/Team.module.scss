@@ -34,12 +34,23 @@
     }
 }
 
-@media (max-width: 1200px) {
+@media screen and (max-width: $desktop-view-width) {
     .teamContainer{
         .sliderImageContainer{
             img{
                 width: 250px!important;
                 height: 350px!important;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $mobile-view-width){
+    .teamContainer{
+        .sliderImageContainer{
+            img{
+                width: 305px !important;
+                height: 455px!important;
             }
         }
     }

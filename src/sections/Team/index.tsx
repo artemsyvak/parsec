@@ -23,7 +23,17 @@ const Team = ({ inView }: IProps) => {
                 className: 'screenSlider',
                 slidesToShow: 4,
                 slidesToScroll: 1,
-                dots: false
+                dots: false,
+                responsive: [
+                    {
+                        breakpoint: 960,
+                        settings: {
+                            slidesToShow: 1,
+                            arrows: false,
+                            dots: true,
+                        }
+                    }
+                ]
             }}
             >
                 {team.map((teammate: Teammate, index: number) => (

@@ -11,6 +11,8 @@
     background-color: black;
     z-index: 99999;
     display: none;
+    left: 50%;
+    transform: translateX(-50%);
     justify-content: center;
     align-items: center;
 }

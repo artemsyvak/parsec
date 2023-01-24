@@ -30,7 +30,7 @@
             height: 100vh;
             top: 0;
             left: 0;
-            z-index: 1;            
+            z-index: 1;
         }
     }
 
@@ -144,11 +144,8 @@
         background-color: black;
         z-index: 2;
         display: flex;
-        // justify-content: flex-end;
         justify-content: center;
-        // align-items:center;
-        align-items:flex-end;
-        // padding-bottom: 400px;
+        align-items: flex-end;
 
         .changeBackground {
             position: absolute;
@@ -162,4 +159,18 @@
     }
 
 
+}
+
+@media screen and (max-width: $mobile-view-width){
+    .videoPlayer{
+        .backButton{
+            top: 120px;
+            right: 20px;
+        }
+
+        .openDetailsButton{
+            right: 20px;
+            transform: translateY(-50%);
+        }
+    }
 }

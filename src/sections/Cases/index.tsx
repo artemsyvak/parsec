@@ -2,7 +2,7 @@ import styles from './Cases.module.scss'
 import { Container, Row, Col } from 'react-bootstrap'
 import VideoPlayer from '../../components/VideoPlayer'
 import Context from '../../services/Context'
-import { useCustomContext } from '../../hooks'
+import useMobileDetect, { useCustomContext } from '../../hooks'
 import { CONTEXT_KEYS, SECTION_NUMBER } from '../../enum'
 import { useState, useMemo, useEffect } from 'react'
 import { SECTION_TITLES, SECTION_NAMES } from '../../constants/sectionTitles'
@@ -12,7 +12,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/router'
 
-const sectionTitleHeight = '238px'
 const serviceDescriptionHeight = '225px'
 const PROJECTS_PER_PAGE = 4
 
@@ -23,6 +22,17 @@ type IProps = {
 const Cases = ({ inView }: IProps) => {
     const router = useRouter()
     const { serviceId } = router.query
+    const { isMobile } = useMobileDetect()
+
+    const [sectionTitleHeight, setSectionTitleHeight] = useState('238px')
+    const [projectsPerPage, setProjectsPerPage] = useState(PROJECTS_PER_PAGE)
+
+    useEffect(() => {
+        if (isMobile()) {
+            setSectionTitleHeight('194px')            
+            setProjectsPerPage(PROJECTS_PER_PAGE / 2)           
+        }
+    }, [])
 
     const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
     const [, setScrollEnable] = useCustomContext(CONTEXT_KEYS.SCROLL_ENABLE)
@@ -50,7 +60,7 @@ const Cases = ({ inView }: IProps) => {
 
     const casesContainerHeight = useMemo(() => {
         return isFullProjectOpen ? '100vh' : `calc(100vh - ${sectionTitleHeight} - ${serviceId ? serviceDescriptionHeight : '0px'})`
-    }, [isFullProjectOpen])
+    }, [isFullProjectOpen, sectionTitleHeight, serviceDescriptionHeight, serviceId])
 
     const openFullProject = (project: Project) => {
         setSelectedProject(project)
@@ -86,13 +96,13 @@ const Cases = ({ inView }: IProps) => {
     }
 
     const onPrevSlide = () => {
-        if (currentSlide === 0 || (currentSlide - PROJECTS_PER_PAGE) < 0) return
-        setCurrentSlide(currentSlide - PROJECTS_PER_PAGE)
+        if (currentSlide === 0 || (currentSlide - projectsPerPage) < 0) return
+        setCurrentSlide(currentSlide - projectsPerPage)
     }
 
     const onNextSlide = () => {
-        if (currentSlide === projects.length || (currentSlide + PROJECTS_PER_PAGE) > (projects.length - 1)) return
-        setCurrentSlide(currentSlide + PROJECTS_PER_PAGE)
+        if (currentSlide === projects.length || (currentSlide + projectsPerPage) > (projects.length - 1)) return
+        setCurrentSlide(currentSlide + projectsPerPage)
     }
 
     const onDetailsOpen = () => {
@@ -111,11 +121,11 @@ const Cases = ({ inView }: IProps) => {
     }, [currentSlide])
 
     useEffect(() => {
-        if (currentPage !== SECTION_NUMBER.CASES && isFullProjectOpen) {
+        if (!inView && isFullProjectOpen) {
             onCloseFullProject()
             setIsDetailsOpen(false)
         }
-    }, [currentPage, isFullProjectOpen])
+    }, [inView, isFullProjectOpen])
 
     return (
         <Context.Consumer>
@@ -123,7 +133,7 @@ const Cases = ({ inView }: IProps) => {
                 <Container className={styles.casesContainer} style={{ height: casesContainerHeight }}>
 
                     <div className={styles.video}>
-                        {currentPage === SECTION_NUMBER.CASES && selectedProject && (
+                        {(currentPage === SECTION_NUMBER.CASES || inView) && selectedProject && (
                             <VideoPlayer
                                 source={selectedProject.videoUrl}
                                 controls={isFullProjectOpen}
@@ -140,8 +150,8 @@ const Cases = ({ inView }: IProps) => {
                     }
 
                     <Row className={`${styles.casesList}`}>
-                        {projects.length > 0 &&
-                            projects.slice(currentSlide, currentSlide + PROJECTS_PER_PAGE)
+                        {
+                            projects.length > 0 && projects?.slice(currentSlide, currentSlide + projectsPerPage)
                                 .map((project: Project, index: number) => (
                                     <Col
                                         style={{
@@ -151,7 +161,8 @@ const Cases = ({ inView }: IProps) => {
                                             // transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .${index + 2}s`
                                         }}
                                         key={project.title}
-                                        xl={3}
+                                        lg={3}
+                                        xs={6}
                                         className={`${styles.caseItem} ${selectedProject?.title === project.title ? styles.active : ''}`}
                                         onClick={() => openFullProject(project)}
                                         onMouseEnter={() => setSelectedProject(project)}
@@ -160,7 +171,10 @@ const Cases = ({ inView }: IProps) => {
                                         <p>{project.projectType}</p>
                                     </Col>
                                 )
-                                )}
+
+                                )
+
+                        }                        
                     </Row>
                     {!isFullProjectOpen && (
                         <div className={styles.projectArrows}>
@@ -173,7 +187,7 @@ const Cases = ({ inView }: IProps) => {
                                 </button>
                             )}
 
-                            {currentSlide !== (projects.length - 1) && projects.length > (currentSlide + PROJECTS_PER_PAGE) && (
+                            {currentSlide !== (projects.length - 1) && projects.length > (currentSlide + projectsPerPage) && (
                                 <button
                                     className={styles.next}
                                     onClick={onNextSlide}

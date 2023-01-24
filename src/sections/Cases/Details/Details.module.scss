@@ -6,7 +6,7 @@
     position: absolute;
     z-index: 101;
     width: 100vw;
-    height: 100vw;
+    height: 100vh;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
@@ -69,4 +69,14 @@
         }
     }
 
+}
+
+@media screen and (max-width: $mobile-view-width) {
+    .projectDetails{
+        .descriptionContainer{
+            p{
+                padding-top: 5px;
+            }
+        }
+    }
 }

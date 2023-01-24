@@ -56,7 +56,7 @@ const Page: Props = ({
                     )}
                     {sectionTitle && (
                         <Container className="px-0" id={sectionTitle.id}>
-                            <SectionTitle {...sectionTitle} inView={inView} />
+                            <SectionTitle {...sectionTitle} inView={inView} backgroundColor={background}/>
                         </Container>
                     )}
                     {Children.map(children, child => {

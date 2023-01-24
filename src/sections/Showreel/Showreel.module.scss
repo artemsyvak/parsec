@@ -1,53 +1,53 @@
 @import '../../../styles/variables.scss';
 
-.showreelSliderContainer{
-    width: 100%;    
+.showreelSliderContainer {
+    width: 100%;
     transition: .5s ease;
     position: absolute;
 }
 
-.showreel{
+.showreel {
     width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;    
+    flex-direction: column;
 
-    &Logo{
+    &Logo {
         z-index: 1;
         width: 400px;
     }
 
-    .shadow{
+    .shadow {
         position: absolute;
         top: 0;
         left: 50%;
-        transform: translateX(-50%);        
+        transform: translateX(-50%);
         width: 100vw;
         height: 100vh;
         background: rgba(0, 0, 0, 0.55);
-    }    
-
-    h1{      
-        text-transform: uppercase;  
-        z-index: 1;
-        color: $white;        
     }
 
-    .footer{
+    h1 {
+        text-transform: uppercase;
+        z-index: 1;
+        color: $white;
+    }
+
+    .footer {
         z-index: 4;
         position: absolute;
-        bottom: $showreel-y-space;       
+        bottom: $showreel-y-space;
         width: 100vw;
         height: 115px;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
 
-        p{
+        p {
             max-width: 500px;
-            color: $white;           
+            color: $white;
             font-family: $font-Kharkiv;
             font-size: 18px;
             letter-spacing: 1px;
@@ -55,21 +55,20 @@
 
         .tags {
             padding: 0;
-            // max-width: 500px;
             display: flex;
             list-style: none;
 
-            li{
+            li {
                 margin-right: 5px;
 
-                &:last-child{
+                &:last-child {
                     margin-right: 0;
                 }
             }
 
-            li>a{
+            li>a {
                 height: 40px;
-                padding: 8px 16px;               
+                padding: 8px 16px;
                 letter-spacing: 1px;
                 color: $white;
                 font-family: $font-Kharkiv;
@@ -84,7 +83,7 @@
 
 }
 
-.showreelBackground{
+.showreelBackground {
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -94,7 +93,7 @@
     background-color: $black;
 }
 
-.showreelControls{
+.showreelControls {
     width: 100%;
     height: 100%;
     display: flex;
@@ -104,7 +103,7 @@
     transition: .5s;
 }
 
-.DNAtitle{
+.DNAtitle {
     position: relative;
     font-family: $font-Kharkiv;
     font-style: normal;
@@ -115,7 +114,7 @@
     top: -5px;
     text-transform: uppercase;
 
-    &:before{
+    &:before {
         content: '';
         position: absolute;
         height: 1px;
@@ -127,7 +126,7 @@
     }
 }
 
-.skipButton{
+.skipButton {
     padding: 0 30px;
     position: relative;
     width: 2px;
@@ -135,73 +134,115 @@
     cursor: pointer;
     overflow: hidden;
 
-    &::before{
+    &::before {
         content: '';
         position: absolute;
         width: 2px;
         top: 0;
         opacity: 0;
-        height: 100%;        
+        height: 100%;
         background-color: $white;
-        animation: skipDown 3s cubic-bezier(.25,0,.25,1) infinite forwards;
+        animation: skipDown 3s cubic-bezier(.25, 0, .25, 1) infinite forwards;
     }
 
-    &::after{
+    &::after {
         content: '';
         position: absolute;
         width: 2px;
         top: 0;
         opacity: 0;
-        height: 100%;        
+        height: 100%;
         background-color: $white;
-        animation: skipUp 3s cubic-bezier(.25,0,.25,1) infinite forwards ;
+        animation: skipUp 3s cubic-bezier(.25, 0, .25, 1) infinite forwards;
     }
 
 }
 
-@keyframes skipDown {
-    0%{  
-        width: 2px;    
-        opacity: 1; 
-        transform: translateY(-60px);        
+
+@media screen and (max-width: $mobile-view-width) {
+    .showreelLogo {
+        width: 300px;
     }
-    50%{
+
+    .skipButton {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .footer {
+        .tags {
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 15px;
+
+            li {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            li:first-child {
+                align-self: flex-start;
+            }
+
+            li:last-child {
+                align-self: flex-end;
+            }
+        }
+    }
+}
+
+
+@keyframes skipDown {
+    0% {
         width: 2px;
         opacity: 1;
-        transform: translateY(0px); 
+        transform: translateY(-60px);
     }
-    51%{ 
-        width: 0;  
+
+    50% {
+        width: 2px;
+        opacity: 1;
+        transform: translateY(0px);
+    }
+
+    51% {
+        width: 0;
         opacity: 0;
     }
 
-    100%{ 
-        width: 0;  
+    100% {
+        width: 0;
         opacity: 0;
     }
 }
 
 @keyframes skipUp {
-    0%{    
-        width: 0;    
-        opacity: 0;        
-        transform: translateY(0px);        
+    0% {
+        width: 0;
+        opacity: 0;
+        transform: translateY(0px);
     }
-    49%{ 
-        width: 0;      
+
+    49% {
+        width: 0;
         opacity: 0;
     }
-    50%{
+
+    50% {
         width: 2px;
         opacity: 1;
     }
-    51%{
+
+    51% {
         transform: translateY(0px);
-    }    
-    100%{
+    }
+
+    100% {
         width: 2px;
         opacity: 1;
-        transform: translateY(60px); 
+        transform: translateY(60px);
     }
 }
-

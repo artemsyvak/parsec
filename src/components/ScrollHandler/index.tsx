@@ -1,7 +1,7 @@
 import React, { CSSProperties, useContext, useEffect } from "react";
 import { useState, useRef } from "react";
 import Context from "../../services/Context";
-import { CONTEXT_KEYS, SECTION_NUMBER } from "../../enum";
+import { CONTEXT_KEYS, SECTION_NAMES, SECTION_NUMBER } from "../../enum";
 // @ts-ignore
 import { useWheel } from '@use-gesture/react'
 // @ts-ignore
@@ -10,11 +10,15 @@ import Spinner from "../Spinner";
 import styles from './ScrollHandler.module.scss'
 import { useRouter } from "next/router";
 import Navigation from "../Navigation";
+import useMobileDetect from "../../hooks";
+import { SECTION_TITLES } from "../../constants/sectionTitles";
 
 const lethargy = new Lethargy(undefined, 10, undefined, 200)
 
 const ScrollHandler = (props: any) => {
 
+    const { isMobile } = useMobileDetect()
+    
     let block = useRef(false)
     const container = useRef(null)
     const [currentPage, setCurrentPage] = useState(0)
@@ -23,8 +27,13 @@ const ScrollHandler = (props: any) => {
 
     useEffect(() => {
         const routeChangeComplete = (url: any, { shallow }: any) => {
+            
             if (url === '/') {
-                setCurrentPage(SECTION_NUMBER.SERVICES)
+                if(isMobile()){
+                    router.push(`/#services`)
+                }else{
+                    setCurrentPage(SECTION_NUMBER.SERVICES)
+                }
             }
         }
 
@@ -45,7 +54,7 @@ const ScrollHandler = (props: any) => {
     }
 
     const moveDown = () => {
-        if (currentPage < props.children.length - 1) {
+        if (currentPage < props.children.length - 1 && currentPage !== SECTION_NUMBER.CONTACT_US) {
             block.current = true
             setCurrentPage(currentPage + 1)
         }
@@ -118,14 +127,14 @@ const ScrollHandler = (props: any) => {
             padding: 0,
             margin: 0,
             transform: `translate3d(0px, -${100 * currentPage}vh, 0px)`,
-            transition: `all 1000ms ease`,
+            transition: `all 1000ms ease`
         } as CSSProperties
     }
 
     useWheel(
         // @ts-ignore
         ({ event, last, memo: wait = false }) => {
-            if (!scrollEnabled) return
+            if (!scrollEnabled || isMobile()) return
             // @ts-ignore
             if (event.target.classList.value === 'feedback-data__text' || last) return
             event.preventDefault()
@@ -143,7 +152,12 @@ const ScrollHandler = (props: any) => {
     )
 
     useEffect(() => {
-        scrollBackAfterPageReload()
+        if (isMobile()) {
+            document.body.style.overflowY = 'scroll'
+        }else{
+            scrollBackAfterPageReload()
+        }
+
     }, [])
 
     return (
@@ -158,7 +172,7 @@ const ScrollHandler = (props: any) => {
                 [CONTEXT_KEYS.SCROLL_ENABLE]: [scrollEnabled, setScrollEnable]
             }}
             >
-                <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />                  
+                <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
 
                 <div id="loader" className={styles.screenLoader}>
                     <Spinner />
