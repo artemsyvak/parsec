@@ -164,6 +164,10 @@
         width: 300px;
     }
 
+    .showreelControls{
+        padding-bottom: calc(2 * $section-xs-padding);
+    }
+
     .skipButton {
         position: absolute;
         left: 50%;
