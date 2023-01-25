@@ -55,7 +55,7 @@
             height: 35px;
             border-radius: 50%;
         }
-    }   
+    }
 
     @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
         .socialLink {
@@ -167,23 +167,25 @@
 }
 
 @media screen and (max-width: $mobile-view-width) {
-    
-    .contantFormRow{
-        height: 100%!important;
+
+    .contantFormRow {
+        height: 100% !important;
     }
 
 
-    .contactInfo{
-        .email, .phone{
+    .contactInfo {
+
+        .email,
+        .phone {
             font-size: 16px;
             margin: 5px 0;
         }
 
-        .socialLink{
+        .socialLink {
             padding: 8px 0px 8px 10px;
             font-size: 12px;
 
-            .linkIconContainer{
+            .linkIconContainer {
                 width: 25px;
                 height: 25px;
                 left: 5px;
@@ -195,5 +197,11 @@
         .inputContainer {
             margin-bottom: 25px;
         }
+    }
+
+    .footerYear {
+        position: absolute;
+        bottom: 195px;
+        text-align: end;
     }
 }
