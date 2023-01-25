@@ -577,6 +577,11 @@ ul {
 }
 
 @media screen and (max-width: $mobile-view-width) {
+
+	.section{
+		padding-bottom: $section-xs-padding;
+	}
+
 	.showreel-video .lp {
 		margin: 0;
 	}
