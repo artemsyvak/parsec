@@ -12,8 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { useRouter } from 'next/router'
 
-const serviceDescriptionHeight = '225px'
 const PROJECTS_PER_PAGE = 4
+const SECTION_XS_PADDING = '9.5vh'
 
 type IProps = {
     inView?: boolean
@@ -23,14 +23,18 @@ const Cases = ({ inView }: IProps) => {
     const router = useRouter()
     const { serviceId } = router.query
     const { isMobile } = useMobileDetect()
+    const [renderMobile, setRenderMobile] = useState(false)
 
     const [sectionTitleHeight, setSectionTitleHeight] = useState('238px')
+    const [serviceDescriptionHeight, setServiceDescriptionHeight] = useState('225px')
     const [projectsPerPage, setProjectsPerPage] = useState(PROJECTS_PER_PAGE)
 
     useEffect(() => {
         if (isMobile()) {
-            setSectionTitleHeight('194px')            
-            setProjectsPerPage(PROJECTS_PER_PAGE / 2)           
+            setSectionTitleHeight(`calc(190px + ${SECTION_XS_PADDING})`)
+            setServiceDescriptionHeight(`calc(225px + ${SECTION_XS_PADDING})`)
+            setProjectsPerPage(PROJECTS_PER_PAGE / 2)
+            setRenderMobile(true)
         }
     }, [])
 
@@ -59,8 +63,8 @@ const Cases = ({ inView }: IProps) => {
     }
 
     const casesContainerHeight = useMemo(() => {
-        return isFullProjectOpen ? '100vh' : `calc(100vh - ${sectionTitleHeight} - ${serviceId ? serviceDescriptionHeight : '0px'})`
-    }, [isFullProjectOpen, sectionTitleHeight, serviceDescriptionHeight, serviceId])
+        return isFullProjectOpen ? !renderMobile ? '100vh' : '91vh' : `calc(100vh - ${sectionTitleHeight} - ${serviceId ? serviceDescriptionHeight : '0px'})`
+    }, [isFullProjectOpen, sectionTitleHeight, serviceDescriptionHeight, serviceId, renderMobile])
 
     const openFullProject = (project: Project) => {
         setSelectedProject(project)
@@ -174,7 +178,7 @@ const Cases = ({ inView }: IProps) => {
 
                                 )
 
-                        }                        
+                        }
                     </Row>
                     {!isFullProjectOpen && (
                         <div className={styles.projectArrows}>
