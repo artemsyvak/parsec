@@ -32,7 +32,6 @@ const Cases = ({ inView }: IProps) => {
     useEffect(() => {
         if (isMobile()) {
             setSectionTitleHeight(`calc(190px + ${SECTION_XS_PADDING})`)
-            setServiceDescriptionHeight(`calc(225px + ${SECTION_XS_PADDING})`)
             setProjectsPerPage(PROJECTS_PER_PAGE / 2)
             setRenderMobile(true)
         }

@@ -6,6 +6,8 @@ import { faUser, faEnvelope, faMessage } from '@fortawesome/free-regular-svg-ico
 
 import styles from './Contact.module.scss';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { useState, useEffect } from 'react';
+import useMobileDetect from '../../hooks';
 
 const ICON_SIZE_SM = 'sm';
 const ICON_SIZE_LG = 'lg';
@@ -17,10 +19,21 @@ type IProps = {
 const ContactForm = ({ inView }: IProps) => {
     const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORMSPREE_ID);
 
+
+    const { isMobile } = useMobileDetect()
+
+    const [renderMobile, setRenderMobile] = useState(false)
+
+    useEffect(() => {
+        if (isMobile()) {
+            setRenderMobile(true)
+        }
+    }, [])
+
     return (
         <Container className="h-100">
-            <Row className={`${styles.contantFormRow} h-75 pt-5 pt-lg-0 justify-content-start justify-lg-content-center align-items-center flex-column flex-lg-row px-2 px-lg-0`}>
-                <Col xl={6} md={12} className={`${styles.contactInfo} order-2 order-lg-1 mt-5 mt-lg-0 pt-5 pt-lg-0`}>
+            <Row className={`${styles.contantFormRow} h-75 pt-2 pt-lg-0 justify-content-start justify-lg-content-center align-items-center flex-column flex-lg-row px-2 px-lg-0`}>
+                <Col xl={6} md={12} className={`${styles.contactInfo} order-2 order-lg-1 mt-3 mt-lg-0`}>
                     <a
                         style={{
                             transform: inView ? 'none' : 'translateY(-20px)',
@@ -147,7 +160,7 @@ const ContactForm = ({ inView }: IProps) => {
                                     id="message"
                                     name="message"
                                     placeholder="Your Message"
-                                    rows={5}
+                                    rows={renderMobile ? 2 : 5}
                                 />
                                 <ValidationError
                                     prefix="Message"
