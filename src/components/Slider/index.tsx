@@ -19,6 +19,7 @@ type SettingsType = {
     nextArrow?: JSX.Element,
     prevArrow?: JSX.Element,
     responsive?: ResponsiveSettingsType[],
+    autoplay?: boolean,
 }
 
 type SliderProps = {
@@ -30,10 +31,11 @@ const defaultSettings: SettingsType = {
     dots: true,
     arrows: true,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: 2,
     slidesToScroll: 2,
     cssEase: 'ease',
+    autoplay: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />
 }

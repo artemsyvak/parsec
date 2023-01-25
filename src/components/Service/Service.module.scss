@@ -126,9 +126,11 @@
 @media screen and (max-width: $mobile-view-width){
     .service{        
         height: calc(((100vh - 194px) - $section-xs-padding) / 3);
+        justify-content: flex-start;
 
         h3{
             font-size: 24px;
+            line-height: 24px;
         }
         p{
             font-size: 16px;
