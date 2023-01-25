@@ -117,9 +117,19 @@ const Showreel = ({ inView }: IProps) => {
 
     // }, [currentSlide])    
 
+    
+
     const { isMobile } = useMobileDetect()
 
     const [renderMobile, setRenderMobile ] = useState(false)
+
+    const onSkipButtonHandler = () => {
+        if(isMobile()){
+            window.location.href += '#/services'
+        }else{
+            setCurrentPage(currentPage + 1)
+        }
+    }
 
     useEffect(() => {
         if(isMobile()){
@@ -216,7 +226,7 @@ const Showreel = ({ inView }: IProps) => {
                                         >
                                             Ukrainian Full-cycle Video Production
                                         </p>
-                                        <div className={styles.skipButton} onClick={() => setCurrentPage(currentPage + 1)}></div>
+                                        <div className={styles.skipButton} onClick={onSkipButtonHandler}></div>
                                         <ul className={styles.tags}>
                                             <li
                                                 style={{
