@@ -17,3 +17,9 @@
         // border: 1px solid $grey-dark;
     }
 }
+
+@media screen and (max-width: $mobile-view-width ) {
+    .clientsContainer{
+        height: calc((100vh - $section-title-height) - $section-xs-padding);
+    }
+}
