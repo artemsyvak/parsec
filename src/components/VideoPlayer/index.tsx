@@ -274,6 +274,9 @@ const VideoPlayer = ({
                                 ...transitionStylesVideo[state]
                             }}
                             muted={volume === 0}
+                            webkit-playsinline="true"
+                            // @ts-ignore
+                            playsinline="true"
                         >
                             <source src={source} type={type} />
                         </video>
