@@ -275,9 +275,9 @@ const VideoPlayer = ({
                             }}
                             muted={volume === 0}
                             // @ts-ignore
-                            webkitPlaysInline="true"
+                            webkitPlaysInline={true}
                             // @ts-ignore
-                            playsInline="true"
+                            playsInline={true}
                         >
                             <source src={source} type={type} />
                         </video>

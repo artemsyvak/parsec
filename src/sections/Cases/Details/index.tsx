@@ -6,7 +6,6 @@ import Slider from '../../../components/Slider';
 import { Project } from '../../../types'
 
 import styles from './Details.module.scss'
-import { url } from 'inspector';
 
 type Props = {
     project: Project

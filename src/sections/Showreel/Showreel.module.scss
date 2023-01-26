@@ -168,6 +168,10 @@
         padding-bottom: calc(2 * $section-xs-padding);
     }
 
+    .showreelBackground{
+        height: calc(100vh - $section-xs-padding);
+    }    
+
     .skipButton {
         position: absolute;
         left: 50%;

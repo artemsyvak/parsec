@@ -96,6 +96,10 @@ const Showreel = ({ inView }: IProps) => {
         }
     }, [currentPage, isShowreelPlaying])
 
+    useEffect(() => {
+        if(!inView) setIsShowreelPlaying(false)
+    }, [inView])
+
     // useEffect(() => {
 
     //     const sliderRef = sliderContainer.current.props.children().props.children[1].ref.current;

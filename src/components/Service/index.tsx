@@ -46,7 +46,7 @@ const Service = ({
                 style={{
                     transform: inView ? "none" : "translateY(-20px)",
                     opacity: inView ? 1 : 0,
-                    transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) ${index}s`
+                    transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) ${index === 0 ? 0 : index - 1 }s`
                 }}
                 className={styles.service}
                 onMouseEnter={onServiceMouseEnter}
@@ -56,21 +56,21 @@ const Service = ({
                     style={{
                         transform: inView ? "none" : "translateY(-20px)",
                         opacity: inView ? 1 : 0,
-                        transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) ${index}.4s`
+                        transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) ${index === 0 ? 0 : index - 1 }.1s`
                     }}
                 >{title}</h3>
                 <p
                     style={{
                         transform: inView ? "none" : "translateY(20px)",
                         opacity: inView ? 1 : 0,
-                        transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) ${index}.5s`
+                        transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) ${index === 0 ? 0 : index - 1 }.3s`
                     }}
                 >{description}</p>
                 <span
                     style={{
                         transform: inView ? "none" : "translateX(-20px)",
                         opacity: inView ? 1 : 0,
-                        transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) ${index}.6s`
+                        transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) ${index === 0 ? 0 : index - 1 }.5s`
                     }}
                 >[ 0{index} ]</span>
                 <div className={styles.video} ref={videoRef}>
