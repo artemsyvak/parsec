@@ -1,7 +1,7 @@
 @import "../../../styles/variables.scss";
 
 .clientsContainer{    
-    height: calc(100vh - $section-title-height);
+    height: calc(100svh - $section-title-height);
 
     .client{
         display: flex;
@@ -20,6 +20,6 @@
 
 @media screen and (max-width: $mobile-view-width ) {
     .clientsContainer{
-        height: calc((100vh - $section-title-height) - $section-xs-padding);
+        height: calc((100svh - $section-title-height) - $section-xs-padding);
     }
 }

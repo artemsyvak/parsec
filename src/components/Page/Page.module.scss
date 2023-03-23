@@ -1,5 +1,6 @@
 @import '../../../styles/variables.scss';
 
+
 .backgroundGridContainer{
     position: absolute;
     height: 100vw;
@@ -14,4 +15,11 @@
         }
     }
 
+}
+
+
+$section-xs-padding: 9.5svh;
+
+:export {
+    sectionxspadding: $section-xs-padding;   
 }

@@ -4,7 +4,7 @@
 .service {
     position: relative;
     width: 100%;
-    height: calc((100vh - $section-title-height) / 3);
+    height: calc((100svh - $section-title-height) / 3);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -125,7 +125,7 @@
 
 @media screen and (max-width: $mobile-view-width){
     .service{        
-        height: calc(((100vh - 194px) - $section-xs-padding) / 3);
+        height: calc(((100svh - 194px) - $section-xs-padding) / 3);
         justify-content: flex-start;
 
         h3{

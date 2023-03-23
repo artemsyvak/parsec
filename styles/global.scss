@@ -1,5 +1,6 @@
 @import './variables.scss';
 @import './fonts.scss';
+@import './mixins.scss';
 
 
 html,
@@ -11,8 +12,8 @@ body {
 	overflow-y: hidden;
 	scroll-behavior: smooth;
 	scroll-snap-type: y mandatory;
-	width: 100vw;
-	height: 100vh;
+	width: 100svw;
+	height: 100svh;
 
 	&::-webkit-scrollbar {
 		display: none;
@@ -63,7 +64,7 @@ ul {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	height: 100svh;
 	scroll-snap-align: start;
 
 	&.black {
@@ -331,6 +332,23 @@ ul {
 	stroke-dasharray: 43.98 307.87;
 	stroke-dashoffset: -131.94;
 	transform: rotate(-90deg);
+}
+
+.nav-link{
+	color: $white;
+	font-family: $font-Kharkiv;
+	font-size: 24px;
+	letter-spacing: 1px;
+
+	@include link-hover-effect;
+
+	&.active{
+		color: $white
+	}
+
+	&:after{
+		bottom: 0;
+	}
 }
 
 

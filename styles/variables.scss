@@ -38,11 +38,15 @@ $font-neue-Ultrabold: 'NeueMachina-Ultrabold';
 
 // Spacings
 $showreel-y-space: 35px;
-$section-xs-padding: 9.5vh;
+$section-xs-padding: 0svh;
 
 // Sizes
 $section-title-height: 238px;
 
 // Transitions
 $default-hover-transition: .25s linear;
+
+:export {
+    sectionxspadding: $section-xs-padding;   
+}
 

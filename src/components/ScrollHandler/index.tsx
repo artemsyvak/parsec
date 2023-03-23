@@ -126,7 +126,7 @@ const ScrollHandler = (props: any) => {
             position: 'relative',
             padding: 0,
             margin: 0,
-            transform: `translate3d(0px, -${100 * currentPage}vh, 0px)`,
+            transform: `translate3d(0px, -${100 * currentPage}svh, 0px)`,
             transition: `all 1000ms ease`
         } as CSSProperties
     }

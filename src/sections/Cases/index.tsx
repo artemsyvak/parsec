@@ -13,7 +13,8 @@ import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons
 import { useRouter } from 'next/router'
 
 const PROJECTS_PER_PAGE = 4
-const SECTION_XS_PADDING = '9.5vh'
+// const SECTION_XS_PADDING = '9.5svh'
+const SECTION_XS_PADDING = '0svh'
 
 type IProps = {
     inView?: boolean
@@ -62,7 +63,7 @@ const Cases = ({ inView }: IProps) => {
     }
 
     const casesContainerHeight = useMemo(() => {
-        return isFullProjectOpen ? !renderMobile ? '100vh' : '91vh' : `calc(100vh - ${sectionTitleHeight} - ${serviceId ? serviceDescriptionHeight : '0px'})`
+        return isFullProjectOpen ? !renderMobile ? '100svh' : '100svh' : `calc(100svh - ${sectionTitleHeight} - ${serviceId ? serviceDescriptionHeight : '0px'})`
     }, [isFullProjectOpen, sectionTitleHeight, serviceDescriptionHeight, serviceId, renderMobile])
 
     const openFullProject = (project: Project) => {
