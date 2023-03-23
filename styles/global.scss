@@ -68,6 +68,8 @@ ul {
 	justify-content: center;
 	align-items: center;
 	height: 100svh;
+	height: webkit-fill-available;
+	min-height: -webkit-fill-available;	
 	scroll-snap-align: start;
 
 	&.black {
