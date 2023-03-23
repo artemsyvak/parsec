@@ -50,27 +50,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           `,
         }}
       />
-      <Script
-        id="open-in-native-browser"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-          var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-          var str = navigator.userAgent;
-          var instagram = str.indexOf("Instagram");
-          var facebook = str.indexOf("FB");
-  
-          if (/android/i.test(userAgent) && (instagram != -1 || facebook != -1) ) {
-              document.write("<a target=\"_blank\" href=\"https://www.parsec.studio\" download id=\"open-browser-url\">Opening in native browser...</a>");
-              window.stop();
-              let input = document.getElementById('open-browser-url');
-              if (input) {
-                  input.click();
-              }
-          }
-          `,
-        }}
-      />
       <Component {...pageProps} />
       <Analytics />
     </>
