@@ -2,8 +2,6 @@
 @import './fonts.scss';
 @import './mixins.scss';
 
-
-html,
 body {
 	padding: 0;
 	margin: 0;
@@ -12,15 +10,18 @@ body {
 	overflow-y: hidden;
 	scroll-behavior: smooth;
 	scroll-snap-type: y mandatory;
-	width: 100svw;
+	width: 100svw;	
 	min-height: 100svh;
+	/* mobile viewport bug fix */
 	min-height: -webkit-fill-available;
-	height: -webkit-fill-available;
-	height: 100svh;
 
 	&::-webkit-scrollbar {
 		display: none;
 	}
+}
+
+html{
+	height: -webkit-fill-available;
 }
 
 main {
@@ -67,9 +68,11 @@ ul {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	min-height: 100vh;
+  	/* mobile viewport bug fix */
+ 	min-height: -webkit-fill-available;
 	height: 100svh;
-	height: webkit-fill-available;
-	min-height: -webkit-fill-available;	
+	height: -webkit-fill-available;	
 	scroll-snap-align: start;
 
 	&.black {
