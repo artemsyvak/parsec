@@ -23,24 +23,25 @@ const SectionTitle = ({
 
     const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
 
-    const { isMobile } = useMobileDetect()
+    // const { isMobile } = useMobileDetect()
 
-    const [renderMobile, setRenderMobile] = useState(false)
+    // const [renderMobile, setRenderMobile] = useState(false)
 
-    useEffect(() => {
-        if (isMobile()) {
-            setRenderMobile(true)
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (isMobile()) {
+    //         setRenderMobile(true)
+    //     }
+    // }, [])
 
     return (
         <motion.div
             key={title}
             className={styles.sectionTitleContainer}
             style={{
-                background: renderMobile && backgroundColor === 'white'
-                    ? 'linear-gradient(180deg,rgba(199,172,254,1) 30%, rgba(255,255,255,1) 100%)'
-                    : backgroundColor,
+                // background: renderMobile && backgroundColor === 'white'
+                //     ? 'linear-gradient(180deg,rgba(199,172,254,1) 30%, rgba(255,255,255,1) 100%)'
+                //     : backgroundColor,
+                background: backgroundColor
             }}
         >
             <h2>

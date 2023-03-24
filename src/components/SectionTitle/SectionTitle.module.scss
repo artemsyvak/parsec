@@ -89,6 +89,24 @@
 }
 
 
+@media screen and (max-width: $desktop-view-width) {
+    .sectionTitleContainer {
+
+        h2 {
+            .index {
+                right: 30px;
+                top: -24px;
+            }
+
+            .bottomLine{
+                display: none;
+            }
+
+        }
+
+    }
+}
+
 @media screen and (max-width: $mobile-view-width) {
     .sectionTitleContainer {
         padding: 100px 15px 30px;
@@ -100,30 +118,31 @@
                 font-size: 29px;
             }
 
-            .subtitle{
+            .subtitle {
                 display: none;
             }
 
-            .index{
+            .index {
                 top: 15px;
             }
 
-            .topLine{
+            .topLine {
                 top: -15px;
             }
 
-            .bottomLine{
-                width: 100px;   
+            .bottomLine {
+                width: 100px;
                 top: 65px;
             }
 
-            .topCircle, .bottomCircle{
+            .topCircle,
+            .bottomCircle {
                 bottom: 0;
             }
 
         }
 
-        
+
     }
 
 }

@@ -36,9 +36,9 @@ const Page: Props = ({
             <div
                 ref={ref}
                 id={id}
-                className={`section ${background} ${inView ? 'active' : ''}`}
+                className={`section  ${background} ${inView ? 'active' : ''}`}
                 style={style}>
-                <Container className="px-0 h-100 position-relative" fluid={fluid}>
+                <Container className="px-0  position-relative" fluid={fluid}>
                     {withGridBackground && (
                         <Row className={`${styles.backgroundGridContainer} px-0 mx-0 container`}>
                             {[1, 2, 3, 4].map((_, index) => (

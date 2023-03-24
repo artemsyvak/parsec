@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import Controls from './Controls'
 import Spinner from '../Spinner'
+import useMobileDetect from '../../hooks'
 
 
 type Props = {
@@ -71,6 +72,17 @@ const VideoPlayer = ({
     const [totalDuration, setTotalDuration] = useState<number>(0)
     const [volume, setVolume] = useState<number>(0)
     const [isControlsHidden, setIsControlsHidden] = useState(false)
+
+    const { isMobile } = useMobileDetect()
+
+    const [renderMobile, setRenderMobile] = useState(false)
+
+
+    useEffect(() => {
+        if (isMobile()) {
+            setRenderMobile(true)
+        }
+    }, [])
 
     const player = useRef<HTMLVideoElement>(null)
     const [isSourceChanged, setIsSourceChanged] = useState<boolean>(true)
@@ -269,7 +281,7 @@ const VideoPlayer = ({
                                 width: '100%',
                                 height: '100%',
                                 position: 'absolute',
-                                objectFit: 'cover',
+                                objectFit: renderMobile && isFullProjectOpen ? 'contain' : 'cover',
                                 // @ts-ignore
                                 ...transitionStylesVideo[state]
                             }}

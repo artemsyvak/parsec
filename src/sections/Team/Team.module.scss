@@ -48,10 +48,8 @@
 @media screen and (max-width: $mobile-view-width){
     .teamContainer{
         .sliderImageContainer{
-            img{
-                // width: 255px !important;
-                // height: 355px!important;
-                width: 220px !important;
+            img{               
+                width: 200px !important;
                 height: 300px!important;
             }
         }
