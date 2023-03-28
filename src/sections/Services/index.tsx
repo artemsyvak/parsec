@@ -13,6 +13,7 @@ type ServiceItem = {
     videoSource: string,
     videoId: string,
     serviceType: string,
+    order: number
 }
 
 type AWS_DATA_ITEM = {
@@ -33,7 +34,7 @@ const Services = ({inView}: IProps) => {
             ...service,
             videoSource: serviceSources.find((source: AWS_DATA_ITEM) => source._id === service.videoId).fileURL
         }
-    })
+    }).sort((a: ServiceItem, b: ServiceItem) => a.order - b.order)
 
     return (
         <Context.Consumer>

@@ -5,6 +5,7 @@ const SANITY_QUERY = {
         description,
         videoId,
         serviceType,
+        order,
         'detailedInfoDescription': detailedInfoDescription[].children[].text
     }`,
     GET_PROJECTS: `*[_type == "project"] | order(_createdAt asc) {
