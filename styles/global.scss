@@ -67,7 +67,8 @@ ul {
 	align-items: flex-start;	
 	height: -webkit-fill-available;	
 	height: 100svh;
-	scroll-snap-align: center;
+	scroll-snap-align: start;
+	scroll-snap-stop: always;
 
 	&.black {
 		background-color: $black;
