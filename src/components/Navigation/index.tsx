@@ -74,14 +74,47 @@ const Navigation = ({ setCurrentPage, currentPage }: PropsT) => {
     const scrollToSection = (sectionId: string) => {
         const section = document.getElementById(sectionId)
         section.scrollIntoView()
+       
+        let timemout = null
+        clearTimeout(timemout)
+
+        timemout = setTimeout(() => {
+            setShowMobileNavigation(false)
+        }, 1200)
     } 
+
+    const handleOpenBurgerMenu = () => {
+        const body = document.querySelector('body')
+        body.style.scrollSnapType = 'none'
+        setShowMobileNavigation(true)
+
+        let timemout = null
+        clearTimeout(timemout)
+
+        timemout = setTimeout(() => {
+            body.style.scrollSnapType = 'y mandatory'
+        }, 300)
+    }
+
+    const handleCloseBurgerMenu = () => {
+        const body = document.querySelector('body')
+        body.style.scrollSnapType = 'none'
+        setShowMobileNavigation(false)
+
+        let timemout = null
+        clearTimeout(timemout)
+
+        timemout = setTimeout(() => {
+            body.style.scrollSnapType = 'y mandatory'
+        }, 300)
+    }
 
     return (
         <>
             {renderMobile && !showMobileNavigation ?
                 <button
                     className={styles.mobileNavigationToggleBurgerButton}
-                    onClick={() => setShowMobileNavigation(true)} >
+                    onClick={handleOpenBurgerMenu} >
                     <span style={{ backgroundColor: burgerColor }} />
                     <span style={{ backgroundColor: burgerColor }} />
                 </button>
@@ -91,7 +124,7 @@ const Navigation = ({ setCurrentPage, currentPage }: PropsT) => {
                     <div className={styles.mobileNavigation}>
                         <button
                             className={styles.mobileNavigationCloseButton}
-                            onClick={() => setShowMobileNavigation(false)}
+                            onClick={handleCloseBurgerMenu}
                         />
 
                         <Nav className="flex-column align-items-center justify-content-center h-100">
