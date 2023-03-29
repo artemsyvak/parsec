@@ -71,6 +71,11 @@ const Navigation = ({ setCurrentPage, currentPage }: PropsT) => {
 
     }, [])
 
+    const scrollToSection = (sectionId: string) => {
+        const section = document.getElementById(sectionId)
+        section.scrollIntoView()
+    } 
+
     return (
         <>
             {renderMobile && !showMobileNavigation ?
@@ -92,7 +97,8 @@ const Navigation = ({ setCurrentPage, currentPage }: PropsT) => {
                         <Nav className="flex-column align-items-center justify-content-center h-100">
                             {SECTIONS
                                 .map((section: string, index: number) =>
-                                    <Nav.Link key={section} href={`#${MOBILE_SECTIONS.get(section)}`}>
+                                    // <Nav.Link key={section} href={`#${MOBILE_SECTIONS.get(section)}`}>
+                                    <Nav.Link key={section} onClick={() => scrollToSection(MOBILE_SECTIONS.get(section))}>
                                         {section}
                                     </Nav.Link>
                                 )}

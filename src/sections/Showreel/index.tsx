@@ -129,7 +129,8 @@ const Showreel = ({ inView }: IProps) => {
 
     const onSkipButtonHandler = () => {
         if(isMobile()){
-            window.location.href += '#/services'
+            const serviceSection = document.getElementById('services')
+            serviceSection.scrollIntoView()
         }else{
             setCurrentPage(currentPage + 1)
         }

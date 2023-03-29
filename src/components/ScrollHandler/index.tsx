@@ -30,7 +30,8 @@ const ScrollHandler = (props: any) => {
             
             if (url === '/') {
                 if(isMobile()){
-                    router.push(`/#services`)
+                    const serviceSection = document.getElementById('services')
+                    serviceSection.scrollIntoView()
                 }else{
                     setCurrentPage(SECTION_NUMBER.SERVICES)
                 }

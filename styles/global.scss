@@ -344,6 +344,10 @@ ul {
 
 	@include link-hover-effect;
 
+	&:focus, &:hover{
+		color: $white
+    }
+
 	&.active{
 		color: $white
 	}
