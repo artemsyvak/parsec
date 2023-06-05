@@ -33,9 +33,9 @@ const SECTION_TITLES: SectionTitles = {
     [SECTION_NAMES.FEEDBACKS]: {
         id: 'feedbacks-title', title: 'Reviews', index: '04', subtitle: 'Reviews'
     },
-    [SECTION_NAMES.TEAM]: {
-        id: 'team-title', title: 'Team', index: '05', subtitle: 'Team'
-    },
+    // [SECTION_NAMES.TEAM]: {
+    //     id: 'team-title', title: 'Team', index: '05', subtitle: 'Team'
+    // },
     [SECTION_NAMES.CONTACT_US]: {
         id: 'contact-us-title', title: 'Contact Us', index: '06', subtitle: 'Collab'
     },

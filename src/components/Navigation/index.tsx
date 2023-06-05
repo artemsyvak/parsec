@@ -11,7 +11,7 @@ const SECTIONS = [
     'Works',
     'Clients',
     'Feedbacks',
-    'Team',
+    // 'Team',
     'Contacts'
 ];
 
@@ -23,7 +23,7 @@ MOBILE_SECTIONS.set('Services', 'services')
 MOBILE_SECTIONS.set('Works', 'cases')
 MOBILE_SECTIONS.set('Clients', 'clients')
 MOBILE_SECTIONS.set('Feedbacks', 'feedbacks')
-MOBILE_SECTIONS.set('Team', 'team')
+// MOBILE_SECTIONS.set('Team', 'team')
 MOBILE_SECTIONS.set('Contacts', 'contact-us')
 
 const SECTION_NAVIGATION_COLOR = {
@@ -32,7 +32,7 @@ const SECTION_NAVIGATION_COLOR = {
     Works: 'black',
     Clients: 'white',
     Feedbacks: 'black',
-    Team: 'black',
+    // Team: 'black',
     Contacts: 'white'
 }
 

@@ -97,9 +97,9 @@ const Home: NextPage = ({
               <Page id="feedbacks" sectionTitle={SECTION_TITLES.FEEDBACKS} background={SECTION_BACKGROUND.WHITE}>
                 <Feedbacks />
               </Page>
-              <Page id="team" sectionTitle={SECTION_TITLES.TEAM} background={SECTION_BACKGROUND.WHITE}>
+              {/* <Page id="team" sectionTitle={SECTION_TITLES.TEAM} background={SECTION_BACKGROUND.WHITE}>
                 <Team />
-              </Page>
+              </Page> */}
               <Page id="contact-us" sectionTitle={SECTION_TITLES.CONTACT_US} background={SECTION_BACKGROUND.BLACK}>
                 <Contact />
               </Page>
