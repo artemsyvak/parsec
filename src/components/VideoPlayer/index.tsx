@@ -40,17 +40,21 @@ const transitionStylesVideo = {
 const transitionStylesVideoChangeBackground = {
     entering: {
         opacity: 0,
+        visibility: 'hidden',
         transition: '.2s linear'
     },
     entered: {
         opacity: 0,
+        visibility: 'hidden',
         transition: '.2s linear',
     },
     exiting: {
         opacity: 1,
+        visibility: 'visible',
     },
     exited: {
         opacity: 1,
+        visibility: 'visible',
     },
 };
 
