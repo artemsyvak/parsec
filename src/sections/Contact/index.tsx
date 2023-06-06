@@ -17,11 +17,10 @@ type IProps = {
 }
 
 const ContactForm = ({ inView }: IProps) => {
+
     const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORMSPREE_ID);
-
-
+    const [email, setEmail] = useState('');
     const { isMobile } = useMobileDetect()
-
     const [renderMobile, setRenderMobile] = useState(false)
 
     useEffect(() => {
@@ -29,6 +28,16 @@ const ContactForm = ({ inView }: IProps) => {
             setRenderMobile(true)
         }
     }, [])
+
+    const isValidEmail = (email: string) => {
+      return /\S+@\S+\.\S+/.test(email);
+    }
+
+    const formHandler = (e:any) => {
+      if(isValidEmail) {
+        handleSubmit(e)
+      }
+    }
 
     return (
         <Container className="h-100">
@@ -101,88 +110,90 @@ const ContactForm = ({ inView }: IProps) => {
                         </Col>
                     </Row>
                 </Col>
-                <Col xl={6} md={12} className={`order-1 order-lg-2`}>
-                    {state.succeeded
-                        ? <p className={styles.succededMessage}>Thanks for submitting! We'll contact you soon!</p>
-                        :
-                        <form className={styles.contactForm} onSubmit={handleSubmit}>
+                <Col xl={6} md={12} className={`order-1 order-lg-2 ${styles.contactFormWrapper}`}>
+                  <p className={state.succeeded ? styles.succededMessageShow : styles.succededMessage}>Thanks for submitting! We'll contact you soon!</p>
+                  <form className={state.succeeded ? styles.contactFormHide : styles.contactForm}>
 
-                            <div
-                                style={{
-                                    transform: inView ? 'none' : 'translateY(20px)',
-                                    opacity: inView ? 1 : 0,
-                                    transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .3s`
-                                }}
-                                className={styles.inputContainer}>
-                                <FontAwesomeIcon size={ICON_SIZE_SM} icon={faUser as IconProp} />
-                                <input
-                                    id="name"
-                                    type="text"
-                                    placeholder="Name"
-                                    name="name" />
-                                <ValidationError
-                                    prefix="Name"
-                                    field="name"
-                                    errors={state.errors}
-                                />
-                            </div>
+                    <div
+                      style={{
+                        transform: inView ? 'none' : 'translateY(20px)',
+                        opacity: inView ? 1 : 0,
+                        transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .3s`
+                      }}
+                      className={styles.inputContainer}>
+                      <FontAwesomeIcon size={ICON_SIZE_SM} icon={faUser as IconProp} />
+                      <input
+                        id="name"
+                        type="text"
+                        placeholder="Name"
+                        name="name" />
+                      <ValidationError
+                        prefix="Name"
+                        field="name"
+                        errors={state.errors}
+                      />
+                    </div>
 
-                            <div
-                                style={{
-                                    transform: inView ? 'none' : 'translateY(20px)',
-                                    opacity: inView ? 1 : 0,
-                                    transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .5s`
-                                }}
-                                className={styles.inputContainer}>
-                                <FontAwesomeIcon size={ICON_SIZE_SM} icon={faEnvelope as IconProp} />
-                                <input
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    placeholder="Email"
-                                />
-                                <ValidationError
-                                    prefix="Email"
-                                    field="email"
-                                    errors={state.errors}
-                                />
-                            </div>
+                    <div
+                      style={{
+                        transform: inView ? 'none' : 'translateY(20px)',
+                        opacity: inView ? 1 : 0,
+                        transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .5s`
+                      }}
+                      className={styles.inputContainer}>
+                      <FontAwesomeIcon size={ICON_SIZE_SM} icon={faEnvelope as IconProp} />
+                      <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        required
+                        value={email}
+                        onChange={event => setEmail(event.target.value)}
+                      />
+                      <div className={styles.errors}>
+                        <ValidationError
+                          prefix="Email"
+                          field="email"
+                          errors={state.errors}
+                        />
+                      </div>
+                    </div>
 
-                            <div
-                                style={{
-                                    transform: inView ? 'none' : 'translateY(20px)',
-                                    opacity: inView ? 1 : 0,
-                                    transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .7s`
-                                }}
-                                className={styles.inputContainer}>
-                                <FontAwesomeIcon size={ICON_SIZE_SM} icon={faMessage as IconProp} />
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    placeholder="Your Message"
-                                    rows={renderMobile ? 2 : 5}
-                                />
-                                <ValidationError
-                                    prefix="Message"
-                                    field="message"
-                                    errors={state.errors}
-                                />
-                            </div>
+                    <div
+                      style={{
+                        transform: inView ? 'none' : 'translateY(20px)',
+                        opacity: inView ? 1 : 0,
+                        transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .7s`
+                      }}
+                      className={styles.inputContainer}>
+                      <FontAwesomeIcon size={ICON_SIZE_SM} icon={faMessage as IconProp} />
+                      <textarea
+                        id="message"
+                        name="message"
+                        placeholder="Your Message"
+                        rows={renderMobile ? 2 : 5}
+                      />
+                      <ValidationError
+                        prefix="Message"
+                        field="message"
+                        errors={state.errors}
+                      />
+                    </div>
 
-                            <Row className="justify-content-center">
-                                <button
-                                    style={{
-                                        transform: inView ? 'none' : 'translateY(20px)',
-                                        opacity: inView ? 1 : 0,
-                                        transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .9s`
-                                    }}
-                                    className={styles.sendButton} type="submit" disabled={state.submitting}>
-                                    Submit
-                                </button>
-                            </Row>
+                    <Row className="justify-content-center">
+                      <button
+                        style={{
+                          transform: inView ? 'none' : 'translateY(20px)',
+                          opacity: inView ? 1 : 0,
+                          transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .9s`
+                        }}
+                        className={styles.sendButton} type="submit" disabled={state.submitting} onSubmit={formHandler}>
+                        Submit
+                      </button>
+                    </Row>
 
-                        </form>
-                    }
+                  </form>
                 </Col>
                 <p
                     className={styles.footerYear}

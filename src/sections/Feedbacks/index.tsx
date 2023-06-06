@@ -28,6 +28,7 @@ const Feedbacks = ({ inView }: IProps) => {
                         settings: {
                             slidesToShow: 1,
                             arrows: false,
+                            autoplay: false,
                         }
                     }
                 ]

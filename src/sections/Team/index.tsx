@@ -26,6 +26,12 @@ const Team = ({ inView }: IProps) => {
                 dots: false,
                 responsive: [
                     {
+                        breakpoint: 1400,
+                        settings: {
+                            slidesToShow: 3,
+                        }
+                    },
+                    {
                         breakpoint: 960,
                         settings: {
                             slidesToShow: 1,
