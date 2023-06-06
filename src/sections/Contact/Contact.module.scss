@@ -66,8 +66,10 @@
     }
 }
 
-.contactForm {
-
+.contactForm, .contactFormHide {
+    .errors {
+        color: #dc3545;
+    }
     .inputContainer {
         display: flex;
         flex-direction: column;
@@ -154,16 +156,37 @@
         }
     }
 }
+.contactFormHide{
+    opacity: 0;
+    visibility: hidden;
+}
 
 .footerYear {
     position: absolute;
     bottom: -15px;
 }
 
-.succededMessage {
+.succededMessage, .succededMessageShow {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
     color: $white;
     font-family: $font-Kharkiv;
     letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.succededMessageShow {
+    opacity: 1;
+    visibility: visible;
+}
+
+.contactFormWrapper{
+    position: relative;
 }
 
 @media screen and (max-width: $mobile-view-width) {

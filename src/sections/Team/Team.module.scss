@@ -55,3 +55,26 @@
         }
     }
 }
+
+
+@media screen and (min-width: 992px) and (max-height: 790px){
+    .teamContainer{
+        .sliderImageContainer{
+            img{
+                height: 350px!important;
+                width: 270px !important;
+                object-fit: cover;
+            }
+        }
+    }
+}
+@media screen and (min-width: 992px) and (max-height: 690px){
+    .teamContainer{
+        .sliderImageContainer{
+            img{
+                height: 300px!important;
+                width: 200px !important;
+            }
+        }
+    }
+}

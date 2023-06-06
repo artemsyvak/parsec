@@ -107,6 +107,26 @@
     }
 }
 
+@media screen and (max-width: 1550px) {
+    .sectionTitleContainer {
+        h2 {
+            .index {
+                right: 50px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .sectionTitleContainer {
+        h2 {
+            .index {
+                right: 70px;
+            }
+        }
+    }
+}
+
 @media screen and (max-width: $mobile-view-width) {
     .sectionTitleContainer {
         padding: 100px 15px 30px;
