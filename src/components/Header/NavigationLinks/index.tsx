@@ -20,10 +20,10 @@ const Links: LinkType[] = [
         sectionNumber: SECTION_NUMBER.CLIENTS,
         label: 'Clients'
     },
-    // {
-    //     sectionNumber: SECTION_NUMBER.FEEDBACKS,
-    //     label: 'Feedbacks'
-    // },
+    {
+        sectionNumber: SECTION_NUMBER.FEEDBACKS,
+        label: 'Feedbacks'
+    },
     // {
     //     sectionNumber: SECTION_NUMBER.TEAM,
     //     label: 'Team'
