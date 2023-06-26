@@ -34,7 +34,7 @@ enum SECTION_NUMBER {
     CASES,
     CLIENTS,
     FEEDBACKS,
-    TEAM,
+    // TEAM,
     CONTACT_US
 }
 

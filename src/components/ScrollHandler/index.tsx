@@ -1,7 +1,7 @@
 import React, { CSSProperties, useContext, useEffect } from "react";
 import { useState, useRef } from "react";
 import Context from "../../services/Context";
-import { CONTEXT_KEYS, SECTION_NAMES, SECTION_NUMBER } from "../../enum";
+import { CONTEXT_KEYS, SECTION_NUMBER } from "../../enum";
 // @ts-ignore
 import { useWheel } from '@use-gesture/react'
 // @ts-ignore
@@ -11,7 +11,6 @@ import styles from './ScrollHandler.module.scss'
 import { useRouter } from "next/router";
 import Navigation from "../Navigation";
 import useMobileDetect from "../../hooks";
-import { SECTION_TITLES } from "../../constants/sectionTitles";
 
 const lethargy = new Lethargy(undefined, 10, undefined, 200)
 
