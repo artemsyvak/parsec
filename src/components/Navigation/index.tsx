@@ -52,7 +52,7 @@ const Navigation = ({setCurrentPage, currentPage}: PropsT) => {
     const body = document.querySelector('body')
 
     const handleBurgerColor = () => {
-      if ((body.scrollTop > body.clientHeight * 2 && body.scrollTop < body.clientHeight * 3) || (body.scrollTop > body.clientHeight * 4 && body.scrollTop < body.clientHeight * 6)) {
+      if ((body.scrollTop > body.clientHeight * 3 && body.scrollTop < body.clientHeight * 4) || (body.scrollTop > body.clientHeight * 5 && body.scrollTop < body.clientHeight * 6)) {
         setBurgerColor('black')
       } else {
         setBurgerColor('white')
@@ -119,7 +119,7 @@ const Navigation = ({setCurrentPage, currentPage}: PropsT) => {
         </button>
         : null}
       {renderMobile ?
-        <div className={styles.mobileNavigation} style={{display: showMobileNavigation ? 'block' : 'none'}}>
+        <div className={styles.mobileNavigation} style={{opacity: showMobileNavigation ? 1 : 0}}>
           <button
             className={styles.mobileNavigationCloseButton}
             onClick={handleCloseBurgerMenu}
