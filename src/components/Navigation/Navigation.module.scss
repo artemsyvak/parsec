@@ -107,7 +107,7 @@
     position: sticky;
     width: 100vw;
     height: calc(100svh - $section-xs-padding);
-    transition: all 1000ms ease;   
+    transition: background-color 1000ms ease;
     right: 0px;
     z-index: 200;    
     backdrop-filter: blur(10px);   
