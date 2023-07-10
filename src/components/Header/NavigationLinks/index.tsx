@@ -14,7 +14,7 @@ const Links: LinkType[] = [
     },
     {
         sectionNumber: SECTION_NUMBER.CASES,
-        label: 'Works'
+        label: 'Cases'
     },
     {
         sectionNumber: SECTION_NUMBER.CLIENTS,
@@ -22,7 +22,7 @@ const Links: LinkType[] = [
     },
     {
         sectionNumber: SECTION_NUMBER.FEEDBACKS,
-        label: 'Feedbacks'
+        label: 'Reviews'
     },
     // {
     //     sectionNumber: SECTION_NUMBER.TEAM,
