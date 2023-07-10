@@ -49,7 +49,7 @@ const ContactForm = ({ inView }: IProps) => {
                             opacity: inView ? 1 : 0,
                             transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .2s`
                         }}
-                        className={styles.email} href="mailto:parsec.corporative@gmail.com">parsec.corporative@gmail.com</a>
+                        className={styles.email} href="mailto:info@parsec.studio">info@parsec.studio</a>
                     <a
                         style={{
                             transform: inView ? 'none' : 'translateY(20px)',

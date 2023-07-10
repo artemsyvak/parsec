@@ -7,9 +7,9 @@ import styles from './Navigation.module.scss'
 const SECTIONS = [
   'Showreel',
   'Services',
-  'Works',
+  'Cases',
   'Clients',
-  'Feedbacks',
+  'Reviews',
   // 'Team',
   'Contacts'
 ];
@@ -19,18 +19,18 @@ const MOBILE_SECTIONS = new Map()
 
 MOBILE_SECTIONS.set('Showreel', 'showreel')
 MOBILE_SECTIONS.set('Services', 'services')
-MOBILE_SECTIONS.set('Works', 'cases')
+MOBILE_SECTIONS.set('Cases', 'cases')
 MOBILE_SECTIONS.set('Clients', 'clients')
-MOBILE_SECTIONS.set('Feedbacks', 'feedbacks')
+MOBILE_SECTIONS.set('Reviews', 'reviews')
 // MOBILE_SECTIONS.set('Team', 'team')
 MOBILE_SECTIONS.set('Contacts', 'contact-us')
 
 const SECTION_NAVIGATION_COLOR = {
   Showreel: 'white',
   Services: 'white',
-  Works: 'black',
+  Cases: 'black',
   Clients: 'white',
-  Feedbacks: 'black',
+  Reviews: 'black',
   // Team: 'black',
   Contacts: 'white'
 }
