@@ -119,7 +119,7 @@ const Navigation = ({setCurrentPage, currentPage}: PropsT) => {
         </button>
         : null}
       {renderMobile ?
-        <div className={styles.mobileNavigation} style={{opacity: showMobileNavigation ? 1 : 0}}>
+        <div className={styles.mobileNavigation} style={{opacity: showMobileNavigation ? 1 : 0, visibility: showMobileNavigation ? 'visible' : 'hidden'}}>
           <button
             className={styles.mobileNavigationCloseButton}
             onClick={handleCloseBurgerMenu}
