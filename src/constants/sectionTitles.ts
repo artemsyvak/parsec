@@ -37,7 +37,7 @@ const SECTION_TITLES: SectionTitles = {
     //     id: 'team-title', title: 'Team', index: '05', subtitle: 'Team'
     // },
     [SECTION_NAMES.CONTACT_US]: {
-        id: 'contact-us-title', title: 'Contact Us', index: '06', subtitle: 'Collab'
+        id: 'contact-us-title', title: 'Contact Us', index: '05', subtitle: 'Collab'
     },
 
 }
