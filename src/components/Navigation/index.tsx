@@ -110,16 +110,17 @@ const Navigation = ({setCurrentPage, currentPage}: PropsT) => {
 
   return (
     <>
-      {renderMobile && !showMobileNavigation ?
+      {renderMobile  ?
         <button
           className={styles.mobileNavigationToggleBurgerButton}
+          style={{opacity: showMobileNavigation ? 0 : 1, visibility: showMobileNavigation ? 'hidden' : 'visible'}}
           onClick={handleOpenBurgerMenu}>
           <span style={{backgroundColor: burgerColor}}/>
           <span style={{backgroundColor: burgerColor}}/>
         </button>
         : null}
       {renderMobile ?
-        <div className={styles.mobileNavigation} style={{opacity: showMobileNavigation ? 1 : 0}}>
+        <div className={styles.mobileNavigation} style={{opacity: showMobileNavigation ? 1 : 0, visibility: showMobileNavigation ? 'visible' : 'hidden'}}>
           <button
             className={styles.mobileNavigationCloseButton}
             onClick={handleCloseBurgerMenu}

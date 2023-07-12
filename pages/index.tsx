@@ -94,7 +94,7 @@ const Home: NextPage = ({
               <Page id="clients" withGridBackground sectionTitle={SECTION_TITLES.CLIENTS} background={SECTION_BACKGROUND.BLACK}>
                 <Clients />
               </Page>
-              <Page id="feedbacks" sectionTitle={SECTION_TITLES.FEEDBACKS} background={SECTION_BACKGROUND.WHITE}>
+              <Page id="reviews" sectionTitle={SECTION_TITLES.FEEDBACKS} background={SECTION_BACKGROUND.WHITE}>
                 <Feedbacks />
               </Page>
               {/*<Page id="team" sectionTitle={SECTION_TITLES.TEAM} background={SECTION_BACKGROUND.WHITE}>*/}
