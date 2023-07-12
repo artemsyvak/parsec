@@ -77,7 +77,7 @@ const ContactForm = ({ inView }: IProps) => {
                                 <div className={styles.linkIconContainer}>
                                     <FontAwesomeIcon size={ICON_SIZE_LG} icon={faInstagram as IconProp} />
                                 </div>
-                                Intagram
+                                Instagram
                             </a>
                         </Col>
                         <Col sm={4} xs={4} className="px-1 px-lg-3">
