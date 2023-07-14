@@ -30,7 +30,9 @@ const ScrollHandler = (props: any) => {
             if (url === '/') {
                 if(isMobile()){
                     const serviceSection = document.getElementById('services')
-                    serviceSection.scrollIntoView()
+                    setTimeout(()=> {
+                        serviceSection.scrollIntoView()
+                    }, 100)
                 }else{
                     setCurrentPage(SECTION_NUMBER.SERVICES)
                 }
