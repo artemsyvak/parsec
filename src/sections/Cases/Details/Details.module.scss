@@ -22,11 +22,16 @@
         cursor: pointer;
         top: 50px;
         right: 50px;
+        &+*{
+            height: 100%;
+            overflow: auto;
+        }
     }
 
     .title {
         font-family: $font-neue-Regular;
         font-size: 36px;
+        padding-right: 70px !important;
     }
 
     .descriptionContainer {

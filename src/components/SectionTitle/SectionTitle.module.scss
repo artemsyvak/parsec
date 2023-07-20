@@ -166,3 +166,13 @@
     }
 
 }
+
+@media screen and (max-width: 550px) {
+    .sectionTitleContainer {
+        h2 {
+            .index {
+                right: 0;
+            }
+        }
+    }
+}
