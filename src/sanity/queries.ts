@@ -8,7 +8,7 @@ const SANITY_QUERY = {
         order,
         'detailedInfoDescription': detailedInfoDescription[].children[].text
     }`,
-    GET_PROJECTS: `*[_type == "project"] | order(_createdAt asc) {
+    GET_PROJECTS: `*[_type == "project"] | order(_createdAt desc) {
         title, 
         projectType,
         serviceType,
