@@ -27,7 +27,7 @@ const Details = ({ project, onClose, onProjectChange }: Props) => {
 
                 <Row className={`${styles.descriptionContainer} mx-0`}>
                     {project.detailedInfoDescription?.map((paragraph: string, index: number) => (
-                        <Col sm={6} className="px-2" key={index}>
+                        <Col sm={12} className="px-2" key={index}>
                             <p>{paragraph}</p>
                         </Col>
                     ))}
