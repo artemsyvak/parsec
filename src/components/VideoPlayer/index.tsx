@@ -142,7 +142,7 @@ const VideoPlayer = ({
         clearTimeout(durationTimeout)
 
         durationTimeout = setTimeout(async() => {                        
-                       
+            //@ts-ignore    
             if(player?.current?.duration !== NaN){
                 setTotalDuration(player?.current?.duration)
                 setIsSourceChanged(true) 
