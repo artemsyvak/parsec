@@ -112,9 +112,13 @@ const Cases = ({ inView }: IProps) => {
     const onDetailsOpen = () => {
         setIsDetailsOpen(true)
         setScrollEnable(false)
+        const body = document.querySelector('body')
+        body.style.overflowY = 'hidden'
     }
 
     const onDetailsClose = () => {
+        const body = document.querySelector('body')
+        body.style.overflowY = 'scroll'
         setIsDetailsOpen(false)
         setScrollEnable(true)
         onCloseFullProject?.()

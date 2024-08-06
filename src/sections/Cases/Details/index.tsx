@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faChevronLeft, faXmark } from '@fortawesome/free-solid-svg-icons'
 import Slider from '../../../components/Slider';
 import { Project } from '../../../types'
 
 import styles from './Details.module.scss'
+import useMobileDetect from '../../../hooks';
 
 type Props = {
     project: Project
@@ -14,14 +15,30 @@ type Props = {
 }
 
 const Details = ({ project, onClose, onProjectChange }: Props) => {
+
+    const { isMobile } = useMobileDetect()
+
+    const [renderMobile, setRenderMobile] = useState(false)
+
+    useEffect(() => {
+        if (isMobile()) {
+            setRenderMobile(true)
+        }
+    }, [])
+
+
     return (
         <div className={styles.projectDetails}>
             <button className={styles.closeButton} onClick={onClose}>
-                <FontAwesomeIcon size={'lg'} icon={faXmark} />
+                {!renderMobile ?
+                    <FontAwesomeIcon size={'lg'} icon={faXmark} /> :
+                    <div className="back-to-home">
+                        <FontAwesomeIcon size='lg' icon={faChevronLeft} />
+                    </div>}
             </button>
             <Container>
 
-                <Row className="mx-0">
+                <Row className="mx-0 mt-5 mt-lg-0">
                     <h2 className={`${styles.title} px-2`}> {project.detailedInfoTitle}</h2>
                 </Row>
 

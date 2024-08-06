@@ -78,6 +78,8 @@ const ScrollHandler = (props: any) => {
 
                 document.body.style.overflow = 'scroll'
 
+                //:TODO - look at animation for services section
+
                 // scroll page to first page
                 window.scrollBy({
                     left: 0,

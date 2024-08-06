@@ -221,7 +221,7 @@ const Showreel = ({ inView }: IProps) => {
                                         )}
                                     </Transition> */}
                                     <div className={`${styles.footer} container gx-0`}>
-                                        <p
+                                        {/* <p
                                             className="d-none d-lg-inline-block"
                                             style={{
                                                 transform: inView ? "none" : "translateY(20px)",
@@ -230,9 +230,9 @@ const Showreel = ({ inView }: IProps) => {
                                             }}
                                         >
                                             Ukrainian Full-cycle Video Production
-                                        </p>
+                                        </p> */}
                                         <div className={styles.skipButton} onClick={onSkipButtonHandler}></div>
-                                        <ul className={styles.tags}>
+                                        {/* <ul className={styles.tags}>
                                             <li
                                                 style={{
                                                     transform: inView ? "none" : "translateY(20px)",
@@ -254,7 +254,7 @@ const Showreel = ({ inView }: IProps) => {
                                                     transition: "all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .7s"
                                                 }}
                                             ><Link href="/services/3d-animation">3D Animation</Link></li>
-                                        </ul>
+                                        </ul> */}
                                     </div>
                                 </>
                             )

@@ -10,8 +10,7 @@ const Spinner = () => (
 			</mask>
 		</defs>
 		<g fill="none" strokeLinecap="round" strokeWidth="1">
-			<circle className="lp__ring" r="56" cx="64" cy="64" stroke="#ddd" />
-			{/* <g stroke="hsl(183,90%,40%)"> */}
+			<circle className="lp__ring" r="56" cx="64" cy="64" stroke="#ddd" />			
 			<g stroke="hsl(0,0%,90%)">
 				<polyline className="lp__fall-line" points="64,8 64,120" />
 				<polyline className="lp__fall-line lp__fall-line--delay1" points="64,8 64,120" />
@@ -20,8 +19,7 @@ const Spinner = () => (
 				<polyline className="lp__fall-line lp__fall-line--delay4" points="64,8 64,120" />
 				<circle className="lp__drops" r="56" cx="64" cy="64" transform="rotate(90,64,64)" />
 				<circle className="lp__worm" r="56" cx="64" cy="64" transform="rotate(-90,64,64)" />
-			</g>
-			{/* <g stroke="hsl(93,90%,40%)" mask="url(#mask1)"> */}
+			</g>			
 			<g stroke="hsl(0,0%,90%)" mask="url(#mask1)">
 				<polyline className="lp__fall-line" points="64,8 64,120" />
 				<polyline className="lp__fall-line lp__fall-line--delay1" points="64,8 64,120" />

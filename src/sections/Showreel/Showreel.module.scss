@@ -43,7 +43,7 @@
         height: 115px;
         display: flex;
         align-items: flex-end;
-        justify-content: space-between;
+        justify-content: center;
 
         p {
             max-width: 500px;
@@ -131,6 +131,7 @@
     position: relative;
     width: 2px;
     height: 40px;
+    margin-left: -22px;
     cursor: pointer;
     overflow: hidden;
 
@@ -138,7 +139,9 @@
         content: '';
         position: absolute;
         width: 2px;
-        top: 0;
+        top: 0;        
+        left: 50%;
+        transform: translateX(-50%);
         opacity: 0;
         height: 100%;
         background-color: $white;
@@ -150,6 +153,8 @@
         position: absolute;
         width: 2px;
         top: 0;
+        left: 50%;
+        transform: translateX(-50%);
         opacity: 0;
         height: 100%;
         background-color: $white;
@@ -173,9 +178,7 @@
     }    
 
     .skipButton {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        margin-left: 0;
     }
 
     .footer {
