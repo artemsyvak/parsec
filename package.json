@@ -22,7 +22,6 @@
     "framer": "^2.2.1",
     "framer-motion": "^8.3.2",
     "lethargy": "^1.0.9",
-    "lodash": "^4.17.21",
     "next": "12.0.9",
     "react": "^18.2.0",
     "react-bootstrap": "^2.1.2",
