@@ -41,12 +41,14 @@ const Cases = ({ inView }: IProps) => {
     const [currentPage,] = useCustomContext(CONTEXT_KEYS.PAGE)
     const [, setScrollEnable] = useCustomContext(CONTEXT_KEYS.SCROLL_ENABLE)
     const projectsSources = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].awsMedia
+    const projectsOrder = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0]?.projectsOrder[0]?.order
+
     let projects: Project[] = useCustomContext(CONTEXT_KEYS.SANITY_DATA)[0].projects.map((project: Project) => {
         return {
             ...project,
             videoUrl: projectsSources.find((source: any) => source._id === project.videoId)?.fileURL
         }
-    })
+    }).sort((a: Project, b: Project) => projectsOrder.indexOf(a.title.trim()) - projectsOrder.indexOf(b.title.trim()))
 
     if (serviceId) {
         projects = projects.filter((project: Project) => project.serviceType === serviceId)
