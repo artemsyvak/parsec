@@ -17,6 +17,7 @@ const SANITY_QUERY = {
         'detailedInfoDescription': detailedInfoDescription[].children[].text,
         'screenshots': screenshots[].asset->url
     }`,
+    GET_PROJECTS_ORDER: `*[_type == "projectsOrder"] | order(_createdAt asc) {'order': order[]}`,
     GET_CLIENTS: `*[_type == "clients"] | order(_createdAt asc) {'images': images[].asset->url}`,
     GET_TEAM: `*[_type == "team"] | order(_createdAt asc) {name, position, 'avatar': avatar.asset->url}`,
     GET_FEEDBACKS: `*[_type == "feedbacks"] | order(_createdAt asc) {
