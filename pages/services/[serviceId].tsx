@@ -18,19 +18,22 @@ export async function getServerSideProps() {
   const fetchAwsMedia = Sanity.fetch(SANITY_QUERY.GET_AWS_MEDIA)
   const fetchServices = Sanity.fetch(SANITY_QUERY.GET_SERVICES)
   const fetchProjects = Sanity.fetch(SANITY_QUERY.GET_PROJECTS)
+  const fetchProjectsOrder = Sanity.fetch(SANITY_QUERY.GET_PROJECTS_ORDER)
 
-  const [awsMedia, services, projects] = await Promise.all([
+  const [awsMedia, services, projects, projectsOrder] = await Promise.all([
     fetchAwsMedia,
     fetchServices,
     fetchProjects,
+    fetchProjectsOrder
   ]);
-  return { props: { awsMedia, services, projects } };
+  return { props: { awsMedia, services, projects, projectsOrder} };
 }
 
 const Service = ({
   awsMedia,
   services,
   projects,
+  projectsOrder
 }: any) => {
   const router = useRouter()
   const { serviceId } = router.query
@@ -67,6 +70,7 @@ const Service = ({
               awsMedia,
               services,
               projects,
+              projectsOrder
             }, () => { }],
             [CONTEXT_KEYS.SCROLL_ENABLE]: [undefined, () => { }]
           }}>            
