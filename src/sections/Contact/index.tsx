@@ -1,7 +1,7 @@
 import { Col, Container, Row } from 'react-bootstrap';
 import { useForm, ValidationError } from '@formspree/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFacebookF, faInstagram, faVimeoV } from '@fortawesome/free-brands-svg-icons'
+import { faVimeoV, faUpwork } from '@fortawesome/free-brands-svg-icons'
 import { faUser, faEnvelope, faMessage } from '@fortawesome/free-regular-svg-icons'
 
 import styles from './Contact.module.scss';
@@ -50,13 +50,13 @@ const ContactForm = ({ inView }: IProps) => {
                             transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .2s`
                         }}
                         className={styles.email} href="mailto:info@parsec.studio">info@parsec.studio</a>
-                    <a
+                    {/* <a
                         style={{
                             transform: inView ? 'none' : 'translateY(20px)',
                             opacity: inView ? 1 : 0,
                             transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .3s`
                         }}
-                        className={styles.phone} href="tel:+380631241466">+38 063 12 41 466</a>
+                        className={styles.phone} href="tel:+380631241466">+38 063 12 41 466</a> */}
 
                     <p
                         style={{
@@ -73,11 +73,11 @@ const ContactForm = ({ inView }: IProps) => {
                                     opacity: inView ? 1 : 0,
                                     transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .6s`
                                 }}
-                                href="https://www.instagram.com/parsec_studio/" target={"_blank"} className={styles.socialLink}>
+                                href="https://www.upwork.com/agencies/1402288556994809856/" target={"_blank"} className={styles.socialLink}>
                                 <div className={styles.linkIconContainer}>
-                                    <FontAwesomeIcon size={ICON_SIZE_LG} icon={faInstagram as IconProp} />
+                                    <FontAwesomeIcon size={ICON_SIZE_LG} icon={faUpwork as IconProp} />                                    
                                 </div>
-                                Instagram
+                                Upwork
                             </a>
                         </Col>
                         <Col sm={4} xs={4} className="px-1 px-lg-3">
@@ -87,11 +87,11 @@ const ContactForm = ({ inView }: IProps) => {
                                     opacity: inView ? 1 : 0,
                                     transition: `all .7s cubic-bezier(0.17, 0.55, 0.55, 1) .8s`
                                 }}
-                                href="https://www.facebook.com/parsec.studio/" target={"_blank"} className={styles.socialLink}>
+                                href="https://clutch.co/profile/parsec-studio-0?_gl=1*twasd5*_gcl_au*NDI5NTg4MzQ3LjE3MjM4MDQ4NjQ.*FPAU*NDI5NTg4MzQ3LjE3MjM4MDQ4NjQ.*_ga*MTcxMDM0OTQ4MS4xNzIzODA0ODY0*_ga_D0WFGX8X3V*MTcyNTM1NzU1MS4zLjEuMTcyNTM1ODEyNS42MC4wLjIzMjA2OTE3Mg..*_fplc*Q20xSExGSXdEVllqRGx0Nm5sRjQxMEZWRHhPV3pRTXV6dmZqJTJGZVRLSGRMQ2NOTVloN0ZHTFZMRTFWV28xSUxWbkJwMDYzQnVhMFBJMk5scUJhZFElMkZ6eUN5akdhcUp5WkVrc3lIUEZKVXdjNGN5bnA5bGh1WTEyY05IcWtHdyUzRCUzRA..#highlights" target={"_blank"} className={styles.socialLink}>
                                 <div className={styles.linkIconContainer}>
-                                    <FontAwesomeIcon size={ICON_SIZE_LG} icon={faFacebookF as IconProp} />
+                                    <span className={styles.clutchIcon}></span>
                                 </div>
-                                Facebook
+                                Clutch
                             </a>
                         </Col>
                         <Col sm={4} xs={4} className="px-0 px-lg-3">
